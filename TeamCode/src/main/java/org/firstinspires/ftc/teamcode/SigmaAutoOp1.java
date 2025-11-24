@@ -5,9 +5,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous
-public class SigmaAutoOp extends LinearOpMode {
+public class SigmaAutoOp1 extends LinearOpMode {
 
     DcMotor backLeftMotor;
     DcMotor backRightMotor;
@@ -27,10 +28,14 @@ public class SigmaAutoOp extends LinearOpMode {
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
         platform = hardwareMap.get(Servo.class, "platform");
+        platform.scaleRange(0,1);
+
 
         // Set motor directions
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Wait for start
         waitForStart();
@@ -38,11 +43,14 @@ public class SigmaAutoOp extends LinearOpMode {
         if (isStopRequested()) return;
 
         // === Autonomous Sequence ===
-        // Example: Drive forward for 2 seconds
-        drive(0.5, 2000);
+        ElapsedTime autoTimer = new ElapsedTime();
 
-        // Stop motors
-        stopDrive();
+
+//Outtake
+
+        outtakeMotor.setPower(1);
+        sleep(1000);
+        outtakeMotor.setPower(0);
 
         // Run intake for 1 second
         intakeMotor.setPower(1);
@@ -54,26 +62,8 @@ public class SigmaAutoOp extends LinearOpMode {
         sleep(700);
         platform.setPosition(0);
 
-        // Example: Drive backward for 1 second
-        drive(-0.5, 1000);
+//  STOP AFTER 30 SECONDS      () -> autoTimer.seconds() < 30
 
-        stopDrive();
-    }
 
-    // Helper method to drive in one direction for time (ms)
-    private void drive(double power, int timeMs) {
-        frontLeftMotor.setPower(power);
-        backLeftMotor.setPower(power);
-        frontRightMotor.setPower(power);
-        backRightMotor.setPower(power);
-        sleep(timeMs);
-    }
-
-    // Helper to stop all driv e motors
-    private void stopDrive() {
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
     }
 }
