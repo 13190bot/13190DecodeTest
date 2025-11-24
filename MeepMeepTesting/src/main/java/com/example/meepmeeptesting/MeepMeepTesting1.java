@@ -7,7 +7,7 @@ import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
 
-public class MeepMeepTesting {
+public class MeepMeepTesting1 {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(600);
 
@@ -24,7 +24,7 @@ public class MeepMeepTesting {
 
         myBot.runAction(
                 myBot.getDrive()
-                        .actionBuilder(new Pose2d(62, 35, Math.toRadians(180)))
+                        .actionBuilder(new Pose2d(62, 20, Math.toRadians(180)))
 
 
 
