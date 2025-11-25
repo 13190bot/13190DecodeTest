@@ -33,9 +33,23 @@ public class SigmaTeleOp2p extends LinearOpMode {
     ServoImplEx platform;
 
 
+//for the intake and outtake toggle
+
+//boolean lastX = false;
+//boolean intakeOn = false;
+
+//boolean lastY = false;
+//boolean outtakeOn = false;
 
 
-//    boolean running;
+
+
+
+//for the platform toggle
+
+//boolean lastState;
+//boolean servoState = false;   // false = platform height is 0, true = 1
+//boolean running;
 
 
 
@@ -118,7 +132,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
-            // 2nd player
+            // 2nd player hold
             if (gamepad2.x) {
                 intakeMotor.setPower(1);
             }
@@ -131,11 +145,26 @@ public class SigmaTeleOp2p extends LinearOpMode {
             else {
                 outtakeMotor.setPower(0);
             }
-//
-//
-//
 
 
+
+            // toggle with press
+
+//            if (gamepad2.x && !lastX) {
+//                intakeOn = !intakeOn;
+//                intakeMotor.setPower(intakeOn ? 1 : 0);
+//            }
+//            lastX = gamepad2.x;
+//
+//            if (gamepad2.y && !lastY) {
+//                outtakeOn = !outtakeOn;
+//                outtakeMotor.setPower(outtakeOn ? 1 : 0);
+//            }
+//            lastY = gamepad2.y;
+
+
+
+            //hold
 
 
             if (gamepad2.left_bumper) {
@@ -165,6 +194,26 @@ public class SigmaTeleOp2p extends LinearOpMode {
             }
 
             telemetry.update();
+
+
+
+            //toggle with press
+
+//            if (gamepad2.left_bumper && !lastState) {
+//                servoState = !servoState;   // flip
+//                platform.setPosition(servoState ? 1 : 0);
+//                telemetry.addData("Servo Position", platform.getPosition());
+//            }
+//
+//            lastState = gamepad2.left_bumper;
+//
+
+//            telemetry.update();
+
+
+
+
+
 
 
 
