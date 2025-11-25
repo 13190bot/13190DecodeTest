@@ -153,14 +153,21 @@ boolean running;
             if (gamepad2.x && !lastX) {
                 intakeOn = !intakeOn;
                 intakeMotor.setPower(intakeOn ? 1 : 0);
+                telemetry.addData("intake", intakeMotor.getPower());
+
             }
             lastX = gamepad2.x;
+            telemetry.update();
+
+
 
             if (gamepad2.y && !lastY) {
                 outtakeOn = !outtakeOn;
                 outtakeMotor.setPower(outtakeOn ? 1 : 0);
+                telemetry.addData("outtake",outtakeMotor.getPower());
             }
             lastY = gamepad2.y;
+            telemetry.update();
 
 
 
