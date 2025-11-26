@@ -7,7 +7,7 @@ import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
 
-public class MeepMeepTestingSpline1 {
+public class MeepMeepTestingSpline2 {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(600);
 
@@ -24,7 +24,7 @@ public class MeepMeepTestingSpline1 {
 
         myBot.runAction(
                 myBot.getDrive()
-                        .actionBuilder(new Pose2d(62, 20, Math.toRadians(180)))
+                        .actionBuilder(new Pose2d(-52, 50, Math.toRadians(315)))
 
 
 
@@ -43,22 +43,48 @@ public class MeepMeepTestingSpline1 {
 
 
 
-//Red far from goal, head is inttake back is outtake
+//Red close to goal, head is inttake back is outtake
 //only 2 balls can fit in the robot
+//                        add a 3,5, 10 sec delay
 
                         .waitSeconds(3)
 
-                        .splineTo(new Vector2d(37, 30), Math.toRadians(90))
+
+
+                        .splineTo(new Vector2d(-15, 10), Math.toRadians(90))
                         .waitSeconds(stop)
-//                        run intake
-                        .splineTo(new Vector2d(37, 35), Math.toRadians(90))
+                        //run intake
+                        .lineToY(35)
+                        .splineTo(new Vector2d(x, y), Math.toRadians(135))
+                        .waitSeconds(shoot)
+
+                        .splineTo(new Vector2d(-15, 10), Math.toRadians(90))
                         .waitSeconds(stop)
-                        .splineToLinearHeading(new Pose2d(x, y, Math.toRadians(135)), Math.toRadians(135))
+                        // run intake
+                        .lineToY(50)
+                        .splineTo(new Vector2d(15, 15), Math.toRadians(90))
+                        .waitSeconds(stop)
+                        .lineToY(30)
+                        .splineToLinearHeading(new Pose2d(x, y, Math.toRadians(135)), Math.toRadians(0))
+                        .waitSeconds(shoot)
+
+                        .splineTo(new Vector2d(15, 15), Math.toRadians(90))
+                        .waitSeconds(stop)
+                        //run intake
+                        .lineToY(50)
+                        .splineToLinearHeading(new Pose2d(x, y, Math.toRadians(135)), Math.toRadians(90))
                         .waitSeconds(shoot)
 
                         .splineTo(new Vector2d(37, 30), Math.toRadians(90))
                         .waitSeconds(stop)
-//                        run intake
+                        //run intake
+                        .lineToY(32)
+                        .splineTo(new Vector2d(x, y), Math.toRadians(135))
+                        .waitSeconds(shoot)
+
+                        .splineTo(new Vector2d(37, 30), Math.toRadians(90))
+                        .waitSeconds(stop)
+                        //run intake
                         .lineToY(40)
                         .splineTo(new Vector2d(37, 60), Math.toRadians(0))
                         .waitSeconds(stop)
@@ -71,40 +97,16 @@ public class MeepMeepTestingSpline1 {
                         .lineToY(40)
                         .splineTo(new Vector2d(37, 60), Math.toRadians(0))
                         .waitSeconds(stop)
-//                        run intake
+                        //run intake
                         .lineToX(55)
-                        .splineTo(new Vector2d(x, y), Math.toRadians(135))
-                        .waitSeconds(shoot)
-
-                        .splineTo(new Vector2d(15, 30), Math.toRadians(90))
-                        .waitSeconds(stop)
-//                        run intake
-                        .lineToY(35)
-                        .splineToLinearHeading(new Pose2d(x, y,Math.toRadians(135)), Math.toRadians(0))
-                        .waitSeconds(shoot)
-
-                        .splineTo(new Vector2d(15, 30), Math.toRadians(90))
-                        .waitSeconds(stop)
-//                        run intake
-                        .lineToY(50)
-                        .splineTo(new Vector2d(-15, 10), Math.toRadians(90))
-                        .waitSeconds(stop)
-                        .lineToY(30)
-                        .splineTo(new Vector2d(x, y), Math.toRadians(135))
-                        .waitSeconds(shoot)
-
-                        .splineTo(new Vector2d(-15, 30), Math.toRadians(90))
-                        .waitSeconds(stop)
-//                        run intake
-                        .lineToY(50)
                         .splineTo(new Vector2d(x, y), Math.toRadians(135))
                         .waitSeconds(shoot)
 
                         .turnTo(Math.toRadians(90))
                         .waitSeconds(stop)
                         .lineToY(50)
-//
-//
+
+
 
 
 
