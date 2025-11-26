@@ -48,66 +48,63 @@ public class MeepMeepTestingSpline1 {
 
                         .waitSeconds(3)
 
-
-//                        .strafeToLinearHeading(new Vector2d(37, 30), Math.toRadians(90))
-//                        .waitSeconds(stop)
-//                        .lineToY(37)
-//                        .strafeToLinearHeading(new Vector2d(x, y), Math.toRadians(135))
-//                        .waitSeconds(shoot)
+                        .splineTo(new Vector2d(37, 30), Math.toRadians(90))
+                        .waitSeconds(stop)
+//                        run intake
+                        .splineTo(new Vector2d(37, 35), Math.toRadians(90))
+                        .waitSeconds(stop)
+                        .splineToLinearHeading(new Pose2d(x, y, Math.toRadians(135)), Math.toRadians(135))
+                        .waitSeconds(shoot)
 
                         .splineTo(new Vector2d(37, 30), Math.toRadians(90))
                         .waitSeconds(stop)
-//                        .lineToY(37)
-                        .splineTo(new Vector2d(37, 37), Math.toRadians(90))
+//                        run intake
+                        .lineToY(40)
+                        .splineTo(new Vector2d(37, 60), Math.toRadians(0))
                         .waitSeconds(stop)
-                        .splineToConstantHeading(new Vector2d(x, y), Math.toRadians(135))
+                        .lineToX(45)
+                        .splineTo(new Vector2d(x, y), Math.toRadians(135))
                         .waitSeconds(shoot)
 
+                        .splineTo(new Vector2d(37, 30), Math.toRadians(90))
+                        .waitSeconds(stop)
+                        .lineToY(40)
+                        .splineTo(new Vector2d(37, 60), Math.toRadians(0))
+                        .waitSeconds(stop)
+//                        run intake
+                        .lineToX(55)
+                        .splineTo(new Vector2d(x, y), Math.toRadians(135))
+                        .waitSeconds(shoot)
+
+                        .splineTo(new Vector2d(15, 30), Math.toRadians(90))
+                        .waitSeconds(stop)
+//                        run intake
+                        .lineToY(35)
+                        .splineTo(new Vector2d(x, y), Math.toRadians(135))
+                        .waitSeconds(shoot)
+
+                        .splineTo(new Vector2d(15, 30), Math.toRadians(90))
+                        .waitSeconds(stop)
+//                        run intake
+                        .lineToY(50)
+                        .splineTo(new Vector2d(-15, 10), Math.toRadians(90))
+                        .waitSeconds(stop)
+                        .lineToY(30)
+                        .splineTo(new Vector2d(x, y), Math.toRadians(135))
+                        .waitSeconds(shoot)
+
+                        .splineTo(new Vector2d(-15, 30), Math.toRadians(90))
+                        .waitSeconds(stop)
+//                        run intake
+                        .lineToY(50)
+                        .splineTo(new Vector2d(x, y), Math.toRadians(135))
+                        .waitSeconds(shoot)
+
+                        .turnTo(Math.toRadians(90))
+                        .waitSeconds(stop)
+                        .lineToY(50)
 //
-//                        .strafeToLinearHeading(new Vector2d(37, 30), Math.toRadians(90))
-//                        .waitSeconds(stop)
-//                        .lineToY(40)
-//                        .strafeToLinearHeading(new Vector2d(37, 60), Math.toRadians(0))
-//                        .waitSeconds(stop)
-//                        .lineToX(50)
-//                        .strafeToLinearHeading(new Vector2d(x, y), Math.toRadians(135))
-//                        .waitSeconds(shoot)
 //
-//                        .strafeToLinearHeading(new Vector2d(37, 30), Math.toRadians(90))
-//                        .waitSeconds(stop)
-//                        .lineToY(40)
-//                        .strafeToLinearHeading(new Vector2d(37, 60), Math.toRadians(0))
-//                        .waitSeconds(stop)
-//                        .lineToX(62)
-//                        .strafeToLinearHeading(new Vector2d(x, y), Math.toRadians(135))
-//                        .waitSeconds(shoot)
-//
-//                        .strafeToLinearHeading(new Vector2d(15, 30), Math.toRadians(90))
-//                        .waitSeconds(stop)
-//                        .lineToY(40)
-//                        .strafeToLinearHeading(new Vector2d(x, y), Math.toRadians(135))
-//                        .waitSeconds(shoot)
-//
-//                        .strafeToLinearHeading(new Vector2d(15, 30), Math.toRadians(90))
-//                        .waitSeconds(stop)
-//                        .lineToY(50)
-//                        .strafeToLinearHeading(new Vector2d(-15, 10), Math.toRadians(90))
-//                        .waitSeconds(stop)
-//                        .lineToY(40)
-//                        .strafeToLinearHeading(new Vector2d(x, y), Math.toRadians(135))
-//                        .waitSeconds(shoot)
-//
-//                        .strafeToLinearHeading(new Vector2d(-15, 30), Math.toRadians(90))
-//                        .waitSeconds(stop)
-//                        .lineToY(50)
-//                        .strafeToLinearHeading(new Vector2d(x, y), Math.toRadians(135))
-//                        .waitSeconds(shoot)
-//
-//                        .turnTo(Math.toRadians(90))
-//                        .waitSeconds(stop)
-//                        .lineToY(50)
-//
-////
 
 
 
