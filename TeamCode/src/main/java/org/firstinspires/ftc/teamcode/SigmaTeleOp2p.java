@@ -185,8 +185,6 @@ public class SigmaTeleOp2p extends LinearOpMode {
 //set position before telemetry data?
                 platform.setPosition(1);
             } else {
-                telemetry.addLine("LB released");
-                //telemetry.addData("Servo Position", platform.getPosition());
 
                   platform.setPosition(0);
             }
@@ -199,8 +197,6 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
                 platform.setPosition(0.5);
             } else {
-                telemetry.addLine("RB released");
-                //telemetry.addData("Servo Position", platform.getPosition());
 
                 platform.setPosition(0);
             }
