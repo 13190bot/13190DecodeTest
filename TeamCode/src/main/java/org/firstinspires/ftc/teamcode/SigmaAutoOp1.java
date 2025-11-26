@@ -29,6 +29,7 @@ public class SigmaAutoOp1 extends LinearOpMode {
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
         platform = hardwareMap.get(Servo.class, "platform");
         platform.scaleRange(0,1);
+        public ElapsedTime runtime = new ElapsedTime();
 
 
         // Set motor directions
@@ -37,32 +38,94 @@ public class SigmaAutoOp1 extends LinearOpMode {
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        // Wait for start
-        waitForStart();
+
 
         if (isStopRequested()) return;
 
+        // Wait for start
+        waitForStart();
+        runtime.reset();
+
         // === Autonomous Sequence ===
-        ElapsedTime autoTimer = new ElapsedTime();
 
 
 //Outtake
+//
 
-        outtakeMotor.setPower(1);
-        sleep(1000);
-        outtakeMotor.setPower(0);
 
-        // Run intake for 1 second
-        intakeMotor.setPower(1);
-        sleep(1000);
-        intakeMotor.setPower(0);
 
-        // Move servo platform up and down
-        platform.setPosition(1);
-        sleep(700);
-        platform.setPosition(0);
+//        outtakeMotor.setPower(1);
+//        sleep(1000);
+//        outtakeMotor.setPower(0);
+//
+//        // Run intake for 1 second
+//        intakeMotor.setPower(1);
+//        sleep(1000);
+//        intakeMotor.setPower(0);
+//
+//        // Move servo platform up and down
+//        platform.setPosition(1);
+//        sleep(700);
+//        platform.setPosition(0);
 
-//  STOP AFTER 30 SECONDS      () -> autoTimer.seconds() < 30
+
+
+//           .waitSeconds(3)
+//
+//                .strafeToLinearHeading(new Vector2d(37, 30), Math.toRadians(90))
+//                .waitSeconds(stop)
+//                .lineToY(37)
+//                .strafeToLinearHeading(new Vector2d(x, y), Math.toRadians(135))
+//                .waitSeconds(shoot)
+//
+//
+//
+//
+//                .strafeToLinearHeading(new Vector2d(37, 30), Math.toRadians(90))
+//                .waitSeconds(stop)
+//                .lineToY(40)
+//                .strafeToLinearHeading(new Vector2d(37, 60), Math.toRadians(0))
+//                .waitSeconds(stop)
+//                .lineToX(50)
+//                .strafeToLinearHeading(new Vector2d(x, y), Math.toRadians(135))
+//                .waitSeconds(shoot)
+//
+//                .strafeToLinearHeading(new Vector2d(37, 30), Math.toRadians(90))
+//                .waitSeconds(stop)
+//                .lineToY(40)
+//                .strafeToLinearHeading(new Vector2d(37, 60), Math.toRadians(0))
+//                .waitSeconds(stop)
+//                .lineToX(62)
+//                .strafeToLinearHeading(new Vector2d(x, y), Math.toRadians(135))
+//                .waitSeconds(shoot)
+//
+//                .strafeToLinearHeading(new Vector2d(15, 30), Math.toRadians(90))
+//                .waitSeconds(stop)
+//                .lineToY(40)
+//                .strafeToLinearHeading(new Vector2d(x, y), Math.toRadians(135))
+//                .waitSeconds(shoot)
+//
+//                .strafeToLinearHeading(new Vector2d(15, 30), Math.toRadians(90))
+//                .waitSeconds(stop)
+//                .lineToY(50)
+//                .strafeToLinearHeading(new Vector2d(-15, 10), Math.toRadians(90))
+//                .waitSeconds(stop)
+//                .lineToY(40)
+//                .strafeToLinearHeading(new Vector2d(x, y), Math.toRadians(135))
+//                .waitSeconds(shoot)
+//
+//                .strafeToLinearHeading(new Vector2d(-15, 30), Math.toRadians(90))
+//                .waitSeconds(stop)
+//                .lineToY(50)
+//                .strafeToLinearHeading(new Vector2d(x, y), Math.toRadians(135))
+//                .waitSeconds(shoot)
+//
+//                .turnTo(Math.toRadians(90))
+//                .waitSeconds(stop)
+//                .lineToY(50)
+
+//
+//() -> autoTimer.seconds() < 30
 
 
     }
