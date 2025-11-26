@@ -29,8 +29,13 @@ public class SigmaAutoOp1 extends LinearOpMode {
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
         platform = hardwareMap.get(Servo.class, "platform");
         platform.scaleRange(0,1);
-        public ElapsedTime runtime = new ElapsedTime();
-
+//        ElapsedTime runtime = new ElapsedTime();
+//
+// IMU imu;
+//
+//imu = hardwareMap.get(IMU.class, "imu");
+//imu.initialize();
+//double heading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
 
         // Set motor directions
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -44,7 +49,8 @@ public class SigmaAutoOp1 extends LinearOpMode {
 
         // Wait for start
         waitForStart();
-        runtime.reset();
+
+//        runtime.reset();
 
         // === Autonomous Sequence ===
 
