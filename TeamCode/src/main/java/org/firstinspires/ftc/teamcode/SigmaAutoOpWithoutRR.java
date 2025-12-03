@@ -47,7 +47,7 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
         runtime.reset();
 
 
-        // === Autonomous Sequence ===
+        // === Autonomous Sequence ==
         int stop = 500;
         int x = 1; //shooting
         int y = 1; //shooting
