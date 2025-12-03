@@ -179,29 +179,20 @@ public class SigmaTeleOp2p extends LinearOpMode {
             //hold
 
 
-            if (gamepad2.left_bumper) {
-                telemetry.addLine("LB pressed");
-                telemetry.addData("Servo Position", platform.getPosition());
-//set position before telemetry data?
-                platform.setPosition(1);
-            } else {
-
-                  platform.setPosition(0);
-            }
-
-            telemetry.update();
-
             if (gamepad2.right_bumper) {
-                telemetry.addLine("RB pressed");
+                telemetry.addLine("X pressed");
                 telemetry.addData("Servo Position", platform.getPosition());
-
+                telemetry.update();
                 platform.setPosition(0.5);
             } else {
-
+                telemetry.addLine("X released");
+                telemetry.addData("Servo Position", platform.getPosition());
+                telemetry.update();
                 platform.setPosition(0);
             }
 
-            telemetry.update();
+
+
 
 
 

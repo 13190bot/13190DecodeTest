@@ -206,17 +206,18 @@ boolean running;
 
             //toggle with press
 
-            if (gamepad2.left_bumper && !lastState) {
-                servoState = !servoState;   // flip
-                platform.setPosition(servoState ? 1 : 0);
+
+            if (gamepad2.right_bumper) {
+                telemetry.addLine("X pressed");
                 telemetry.addData("Servo Position", platform.getPosition());
+                telemetry.update();
+                platform.setPosition(0.5);
+            } else {
+                telemetry.addLine("X released");
+                telemetry.addData("Servo Position", platform.getPosition());
+                telemetry.update();
+                platform.setPosition(0);
             }
-
-            lastState = gamepad2.left_bumper;
-
-
-            telemetry.update();
-
 
 
 
