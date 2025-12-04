@@ -171,7 +171,7 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
         }
 
 
-//adb connect 192.168.43.1:5555
+//adb connect 192.168.43.1
 
 
 

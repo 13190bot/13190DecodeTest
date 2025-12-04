@@ -40,16 +40,24 @@ boolean intakeOn = false;
 
 boolean lastY = false;
 boolean outtakeOn = false;
+boolean lastRT = false;
+double outtakePower = 0;
+boolean triggerPressed = gamepad2.right_trigger > 0;
 
-
-
+//boolean triangleLast = false;
+//boolean squareLast = false;
+//boolean crossLast = false;
+//boolean circleLast = false;
+//
+//double targetPos = 0;
+//
 
 
 //for the platform toggle
 
-boolean lastState;
-boolean servoState = false;   // false = platform height is 0, true = 1
-boolean running;
+//boolean lastState;
+//boolean servoState = false;
+//boolean running;
 
 
 
@@ -135,45 +143,106 @@ boolean running;
 
             // toggle with press
 
-            if (gamepad2.x && !lastX) {
+            if (gamepad2.left_bumper && !lastX) {
                 intakeOn = !intakeOn;
                 intakeMotor.setPower(intakeOn ? 1 : 0);
                 telemetry.addData("intake", intakeMotor.getPower());
 
             }
-            lastX = gamepad2.x;
+            lastX = gamepad2.left_bumper;
             telemetry.update();
 
 
 
-            if (gamepad2.y && !lastY) {
+            if (gamepad2.right_bumper && !lastY) {
                 outtakeOn = !outtakeOn;
-                outtakeMotor.setPower(outtakeOn ? 1 : 0);
+                outtakePower = outtakeOn ? 1.0 : 0;
+                outtakeMotor.setPower(outtakePower);
                 telemetry.addData("outtake",outtakeMotor.getPower());
             }
-            lastY = gamepad2.y;
+            lastY = gamepad2.right_bumper;
             telemetry.update();
 
 
+            if (triggerPressed && !lastRT) {
+                if (outtakeOn && outtakePower == 0.5) {
+                    outtakeOn = false;
+                    outtakePower = 0;
+                } else {
+                    outtakeOn = true;
+                    outtakePower = 0.5;
+                }
+
+                outtakeMotor.setPower(outtakePower);
+            }
+
+            lastRT = triggerPressed;
 
 
 
-            //toggle with press
-
-//
-//            if (gamepad2.right_bumper) {
-//                telemetry.addLine("X pressed");
+//            if (gamepad2.left_bumper && !lastState) {
+//                servoState = !servoState;   // flip
+//                platform.setPosition(servoState ? 1 : 0);
 //                telemetry.addData("Servo Position", platform.getPosition());
-//                telemetry.update();
-//                platform.setPosition(0.5);
-//            } else {
-//                telemetry.addLine("X released");
-//                telemetry.addData("Servo Position", platform.getPosition());
-//                telemetry.update();
-//                platform.setPosition(0);
 //            }
 //
+//            lastState = gamepad2.left_bumper;
+//
+//            telemetry.update();
 
+
+
+
+
+
+
+
+//            // TRIANGLE
+//            if (gamepad2.triangle && !triangleLast) {
+//                if (targetPos == 1.0) {
+//                    targetPos = 0;
+//                } else {
+//                    targetPos = 1.0;
+//                }
+//            }
+//
+// // SQUARE
+//            if (gamepad2.square && !squareLast) {
+//                if (targetPos == 0.75) {
+//                    targetPos = 0;
+//                } else {
+//                    targetPos = 0.75;
+//                }
+//            }
+//
+// // CROSS
+//            if (gamepad2.cross && !crossLast) {
+//                if (targetPos == 0.5) {
+//                    targetPos = 0;
+//                } else {
+//                    targetPos = 0.5;
+//                }
+//            }
+//
+// // CIRCLE
+//            if (gamepad2.circle && !circleLast) {
+//                if (targetPos == 0.25) {
+//                    targetPos = 0;
+//                } else {
+//                    targetPos = 0.25;
+//                }
+//            }
+//
+//            triangleLast = gamepad2.triangle;
+//            squareLast = gamepad2.square;
+//            crossLast = gamepad2.cross;
+//            circleLast = gamepad2.circle;
+//
+//            platform.setPosition(targetPos);
+//
+//            telemetry.addData("Servo Position", targetPos);
+//            telemetry.update();
+//
 
 
 
