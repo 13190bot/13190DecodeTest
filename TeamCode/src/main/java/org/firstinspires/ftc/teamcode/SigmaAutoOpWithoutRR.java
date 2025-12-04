@@ -47,7 +47,7 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
         runtime.reset();
 
 
-        // === Autonomous Sequence ===
+        // === Autonomous Sequence ==
         int stop = 500;
         int x = 1; //shooting
         int y = 1; //shooting
@@ -89,7 +89,7 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
         shoot(3);
 
 
-        //make everything stop when runtime is > 30 seconds
+        //make everything  stop when runtime is > 30 seconds
 stopAll();
 
 
@@ -104,7 +104,7 @@ stopAll();
 
         }
 
-    // Helper to stop all drive motors
+    // Helper to stop all drive    motors
     private void stopAll() {
         frontLeftMotor.setPower(0);
         backLeftMotor.setPower(0);
