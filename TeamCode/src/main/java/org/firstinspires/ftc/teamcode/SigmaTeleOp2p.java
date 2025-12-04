@@ -68,6 +68,15 @@ public class SigmaTeleOp2p extends LinearOpMode {
         backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+
+//
+//        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+//        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+//        backLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+//        frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+
+
+
         waitForStart();
         // Put run blocks here
 
@@ -132,7 +141,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
                 outtakeMotor.setPower(0);
             }
 
-            if (gamepad2.right_trigger > 0) {
+            if (gamepad2.right_trigger > 0.5) {
                 outtakeMotor.setPower(0.5);
             }
             else {

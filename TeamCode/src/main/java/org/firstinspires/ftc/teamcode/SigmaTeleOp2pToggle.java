@@ -42,7 +42,6 @@ boolean lastY = false;
 boolean outtakeOn = false;
 boolean lastRT = false;
 double outtakePower = 0;
-boolean triggerPressed = gamepad2.right_trigger > 0;
 
 //boolean triangleLast = false;
 //boolean squareLast = false;
@@ -150,6 +149,7 @@ boolean triggerPressed = gamepad2.right_trigger > 0;
 
             }
             lastX = gamepad2.left_bumper;
+
             telemetry.update();
 
 
@@ -162,6 +162,10 @@ boolean triggerPressed = gamepad2.right_trigger > 0;
             }
             lastY = gamepad2.right_bumper;
             telemetry.update();
+
+
+            boolean triggerPressed = gamepad2.right_trigger > 0.5;
+
 
 
             if (triggerPressed && !lastRT) {
