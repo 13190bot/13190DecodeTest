@@ -228,7 +228,7 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
 
         while (frontLeftMotor.isBusy() || frontRightMotor.isBusy() ||
                 backLeftMotor.isBusy() || backRightMotor.isBusy()) {
-            // Optional: add telemetry or idle here
+            // Optional: add telemetryuyyyy or idle here
         }
 
         stopDrive();
