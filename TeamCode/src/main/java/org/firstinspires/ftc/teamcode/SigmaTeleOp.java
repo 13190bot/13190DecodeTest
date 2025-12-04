@@ -23,10 +23,6 @@ public class SigmaTeleOp extends LinearOpMode {
     //ServoImplEx platform;
 
 
-    boolean running;
-
-
-
 
 
 
@@ -43,7 +39,6 @@ public class SigmaTeleOp extends LinearOpMode {
         // Put initialization blocks here
 
 
-//        running = false;
 
 
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -82,26 +77,26 @@ public class SigmaTeleOp extends LinearOpMode {
 
 
 
-            if (gamepad1.left_bumper) {
-                //intakeMotor.setPower(1);
-            }
-            else {
-                //intakeMotor.setPower(0);
-            }
+//            if (gamepad1.left_bumper) {
+//                //intakeMotor.setPower(1);
+//            }
+//            else {
+//                //intakeMotor.setPower(0);
+//            }
 //            outtakeMotor.setPower(1);
 
-
-            if (gamepad1.x) {
-                telemetry.addLine("X pressed");
-                //telemetry.addData("Servo Position", platform.getPosition());
-                telemetry.update();
-                // platform.setPosition(0.5);
-            } else {
-                telemetry.addLine("X released");
-                //telemetry.addData("Servo Position", platform.getPosition());
-                telemetry.update();
-                //  platform.setPosition(0);
-            }
+//
+//            if (gamepad1.x) {
+//                telemetry.addLine("X pressed");
+//                //telemetry.addData("Servo Position", platform.getPosition());
+//                telemetry.update();
+//                // platform.setPosition(0.5);
+//            } else {
+//                telemetry.addLine("X released");
+//                //telemetry.addData("Servo Position", platform.getPosition());
+//                telemetry.update();
+//                //  platform.setPosition(0);
+//            }
 
 
             frontLeftMotor.setPower(frontLeftMotorPower);
