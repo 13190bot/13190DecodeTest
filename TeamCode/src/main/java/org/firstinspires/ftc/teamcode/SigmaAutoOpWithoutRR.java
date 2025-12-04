@@ -89,7 +89,7 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
         shoot(3);
 
 
-        //make everything stop when runtime is > 30 seconds
+        //make everything  stop when runtime is > 30 seconds
 stopAll();
 
 
