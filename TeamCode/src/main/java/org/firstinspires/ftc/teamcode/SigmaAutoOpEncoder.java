@@ -18,7 +18,7 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
     DcMotor frontRightMotor;
     DcMotor intakeMotor;
     DcMotor outtakeMotor;
-    Servo platform;
+//    Servo platform;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -31,8 +31,8 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
-        platform = hardwareMap.get(Servo.class, "platform");
-        platform.scaleRange(0, 1);
+//        platform = hardwareMap.get(Servo.class, "platform");
+//        platform.scaleRange(0, 1);
 
 
         // Set motor directions

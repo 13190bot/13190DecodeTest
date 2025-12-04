@@ -30,7 +30,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
     DcMotor outtakeMotor;
-    ServoImplEx platform;
+//    ServoImplEx platform;
 
 
 
@@ -55,8 +55,9 @@ public class SigmaTeleOp2p extends LinearOpMode {
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
-        platform = hardwareMap.get(ServoImplEx.class, "platform");
-        platform.setPwmRange(new PwmControl.PwmRange(500, 2500));
+
+//        platform = hardwareMap.get(ServoImplEx.class, "platform");
+//        platform.setPwmRange(new PwmControl.PwmRange(500, 2500));
         // Put initialization blocks here
 
 
@@ -128,25 +129,25 @@ public class SigmaTeleOp2p extends LinearOpMode {
           //  outtakeMotor.setPower(1);
 
 //
-//            if (gamepad2.right_bumper) {
-//                outtakeMotor.setPower(1);
-//            }
-//            else {
-//                outtakeMotor.setPower(0);
-//            }
-
-
-            if (gamepad2.x) {
-                telemetry.addLine("X pressed");
-                telemetry.addData("Servo Position", platform.getPosition());
-                telemetry.update();
-                platform.setPosition(0.5);
-            } else {
-                telemetry.addLine("X released");
-                telemetry.addData("Servo Position", platform.getPosition());
-                telemetry.update();
-                platform.setPosition(0);
+            if (gamepad2.right_bumper) {
+                outtakeMotor.setPower(1);
             }
+            else {
+                outtakeMotor.setPower(0);
+            }
+
+
+//            if (gamepad2.x) {
+//                telemetry.addLine("X pressed");
+//                telemetry.addData("Servo Position", platform.getPosition());
+//                telemetry.update();
+//                platform.setPosition(0.5);
+//            } else {
+//                telemetry.addLine("X released");
+//                telemetry.addData("Servo Position", platform.getPosition());
+//                telemetry.update();
+//                platform.setPosition(0);
+//            }
 
 
 
