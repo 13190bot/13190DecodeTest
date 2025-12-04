@@ -104,7 +104,7 @@ stopAll();
 
         }
 
-    // Helper to stop all drive    motors
+    // Helper to stop all drive   motors
     private void stopAll() {
         frontLeftMotor.setPower(0);
         backLeftMotor.setPower(0);
