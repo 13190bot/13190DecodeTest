@@ -57,23 +57,27 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 //        platform = hardwareMap.get(ServoImplEx.class, "platform");
 //        platform.setPwmRange(new PwmControl.PwmRange(500, 2500));
+//
+//
+
+
         // Put initialization blocks here
 
 
 
 
 
+//
+//        frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+//        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+//        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+//        frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-
-//
-//        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-//        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-//        backLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-//        frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
 
@@ -94,10 +98,9 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
-            double y = gamepad1.left_stick_y; // Remember, Y stick value is reversed
-            double x = -gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
-            double rx = -gamepad1.right_stick_x;
-
+            double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
+            double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
+            double rx = gamepad1.right_stick_x;
 
 
 
