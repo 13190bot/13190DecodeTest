@@ -57,21 +57,11 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 //        platform = hardwareMap.get(ServoImplEx.class, "platform");
 //        platform.setPwmRange(new PwmControl.PwmRange(500, 2500));
-//
-//
 
 
         // Put initialization blocks here
 
 
-
-
-
-//
-//        frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-//        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-//        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-//        frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
         frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
