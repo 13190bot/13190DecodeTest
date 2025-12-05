@@ -145,13 +145,12 @@ double outtakePower = 0;
 
             if (gamepad2.left_bumper && !lastX) {
                 intakeOn = !intakeOn;
-                intakeMotor.setPower(intakeOn ? 1 : 0);
+                intakeMotor.setPower(intakeOn ? 0.7 : 0);
                 telemetry.addData("intake", intakeMotor.getPower());
 
             }
             lastX = gamepad2.left_bumper;
 
-            telemetry.update();
 
 
 
@@ -162,27 +161,29 @@ double outtakePower = 0;
                 telemetry.addData("outtake",outtakeMotor.getPower());
             }
             lastY = gamepad2.right_bumper;
+
+
             telemetry.update();
 
 
-            boolean triggerPressed = gamepad2.right_trigger > 0.5;
-
-
-
-            if (triggerPressed && !lastRT) {
-                if (outtakeOn && outtakePower == 0.5) {
-                    outtakeOn = false;
-                    outtakePower = 0;
-                } else {
-                    outtakeOn = true;
-                    outtakePower = 0.5;
-                }
-
-                outtakeMotor.setPower(outtakePower);
-            }
-
-            lastRT = triggerPressed;
-
+//            boolean triggerPressed = gamepad2.right_trigger > 0.5;
+//
+//
+//
+//            if (triggerPressed && !lastRT) {
+//                if (outtakeOn && outtakePower == 0.5) {
+//                    outtakeOn = false;
+//                    outtakePower = 0;
+//                } else {
+//                    outtakeOn = true;
+//                    outtakePower = 0.5;
+//                }
+//
+//                outtakeMotor.setPower(outtakePower);
+//            }
+//
+//            lastRT = triggerPressed;
+//
 
 
 //            if (gamepad2.left_bumper && !lastState) {
@@ -201,53 +202,6 @@ double outtakePower = 0;
 
 
 
-
-//            // TRIANGLE
-//            if (gamepad2.triangle && !triangleLast) {
-//                if (targetPos == 1.0) {
-//                    targetPos = 0;
-//                } else {
-//                    targetPos = 1.0;
-//                }
-//            }
-//
-// // SQUARE
-//            if (gamepad2.square && !squareLast) {
-//                if (targetPos == 0.75) {
-//                    targetPos = 0;
-//                } else {
-//                    targetPos = 0.75;
-//                }
-//            }
-//
-// // CROSS
-//            if (gamepad2.cross && !crossLast) {
-//                if (targetPos == 0.5) {
-//                    targetPos = 0;
-//                } else {
-//                    targetPos = 0.5;
-//                }
-//            }
-//
-// // CIRCLE
-//            if (gamepad2.circle && !circleLast) {
-//                if (targetPos == 0.25) {
-//                    targetPos = 0;
-//                } else {
-//                    targetPos = 0.25;
-//                }
-//            }
-//
-//            triangleLast = gamepad2.triangle;
-//            squareLast = gamepad2.square;
-//            crossLast = gamepad2.cross;
-//            circleLast = gamepad2.circle;
-//
-//            platform.setPosition(targetPos);
-//
-//            telemetry.addData("Servo Position", targetPos);
-//            telemetry.update();
-//
 
 
 

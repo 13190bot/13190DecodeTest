@@ -122,7 +122,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
             if (gamepad2.left_bumper) {
-                intakeMotor.setPower(1);
+                intakeMotor.setPower(0.7);
             }
             else {
                 intakeMotor.setPower(0);
@@ -144,29 +144,6 @@ public class SigmaTeleOp2p extends LinearOpMode {
 //                telemetry.update();
 //                platform.setPosition(1);
 //
-            //            else if (gamepad2.square) {
-//                telemetry.addLine("square pressed");
-//                telemetry.addData("Servo Position", platform.getPosition());
-//                telemetry.update();
-//                platform.setPosition(0.75);
-//
-//            else if (gamepad2.cross) {
-//                telemetry.addLine("cross pressed");
-//                telemetry.addData("Servo Position", platform.getPosition());
-//                telemetry.update();
-//                platform.setPosition(0.5);
-//
-//           else if (gamepad2.circle) {
-//                telemetry.addLine("circle pressed");
-//                telemetry.addData("Servo Position", platform.getPosition());
-//                telemetry.update();
-//                platform.setPosition(0.25);
-//            } else {
-
-//                platform.setPosition(0);
-//            }
-
-
 
 
 
