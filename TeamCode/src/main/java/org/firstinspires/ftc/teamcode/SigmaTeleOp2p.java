@@ -65,12 +65,12 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
         running = false;
 
+// front motors changed to FORWARD used to be REVERSE
 
 
-
-        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         waitForStart();
         // Put run blocks here
@@ -135,6 +135,21 @@ public class SigmaTeleOp2p extends LinearOpMode {
             else {
                 outtakeMotor.setPower(0);
             }
+
+
+            if (gamepad2.left_stick_x != 0) {
+                outtakeMotor.setPower(gamepad2.left_stick_y);
+            }
+            else {
+                outtakeMotor.setPower(0);
+            }
+
+
+
+
+
+
+
 
 
 //            if (gamepad2.x) {
