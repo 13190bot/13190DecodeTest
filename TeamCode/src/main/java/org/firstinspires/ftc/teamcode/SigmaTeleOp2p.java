@@ -118,7 +118,10 @@ public class SigmaTeleOp2p extends LinearOpMode {
             double backRightMotorPower = (y + x - rx) / denominator;
 
 
-
+            frontLeftMotor.setPower(frontLeftMotorPower);
+            backLeftMotor.setPower(backLeftMotorPower);
+            frontRightMotor.setPower(frontRightMotorPower);
+            backRightMotor.setPower(backRightMotorPower);
 
 
 
@@ -143,14 +146,6 @@ public class SigmaTeleOp2p extends LinearOpMode {
             else {
                 outtakeMotor.setPower(0);
             }
-
-            if (gamepad2.right_trigger > 0.5) {
-                outtakeMotor.setPower(0.5);
-            }
-            else {
-                outtakeMotor.setPower(0);
-            }
-
 
 
             //            if (gamepad2.triangle) {
@@ -187,10 +182,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
-            frontLeftMotor.setPower(frontLeftMotorPower);
-            backLeftMotor.setPower(backLeftMotorPower);
-            frontRightMotor.setPower(frontRightMotorPower);
-            backRightMotor.setPower(backRightMotorPower);
+
         }
     }
 }
