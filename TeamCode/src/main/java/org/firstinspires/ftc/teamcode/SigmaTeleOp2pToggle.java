@@ -42,11 +42,23 @@ boolean lastY = false;
 boolean outtakeOn = false;
 
 
+
+boolean lasttriangle = false;
+
+boolean lastsquare = false;
+
+boolean lastcross = false;
+
+boolean lastcircle = false;
+
+
+
+
+
 //for the platform toggle
 
 boolean lastState;
 boolean servoState = false;
-
 
 
 
@@ -98,17 +110,9 @@ boolean servoState = false;
             // Put loop blocks here
 
 
-
-
-
             double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = gamepad1.right_stick_x;
-
-
-
-
-
 
 
             // Denominator is the largest motor power (absolute value) or 1
@@ -126,10 +130,6 @@ boolean servoState = false;
             backRightMotor.setPower(backRightMotorPower);
 
 
-
-
-
-
             // toggle with press
 
             if (gamepad2.left_bumper && !lastX) {
@@ -141,18 +141,12 @@ boolean servoState = false;
             lastX = gamepad2.left_bumper;
 
 
-
-
             if (gamepad2.right_bumper && !lastY) {
                 outtakeOn = !outtakeOn;
                 outtakeMotor.setPower(outtakeOn ? 1.0 : 0);
-                telemetry.addData("outtake",outtakeMotor.getPower());
+                telemetry.addData("outtake", outtakeMotor.getPower());
             }
             lastY = gamepad2.right_bumper;
-
-
-
-
 
 
 //            if (gamepad2.triangle && !lastState) {
@@ -163,7 +157,65 @@ boolean servoState = false;
 //
 //            lastState = gamepad2.left_bumper;
 //
+//
+//
+//            if () {
+//
+//            if(outtakeOn){
+//
+//
+//        }
+//           else{
+//
+//
+//            }
+//
+//
+//            }
+//
+//
+//
+//            else if(){
+//
+//
+//
+//
+//
+//
+//            }
+//
+//            else if(){
+//
+//
+//
+//
+//
+//
+//            }
+//
+//
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             telemetry.update();
+
 
 
 
