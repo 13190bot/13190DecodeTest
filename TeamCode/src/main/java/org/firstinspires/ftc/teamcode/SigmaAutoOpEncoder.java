@@ -248,13 +248,17 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+
+        if (opModeIsActive() && runtime.time()<29){
+          requestOpModeStop();
+        }
+
     }
 
 
     private void shoot(){
 
         outtakeMotor.setPower(1);
-
 
 
 

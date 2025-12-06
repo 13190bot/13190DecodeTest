@@ -30,7 +30,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
     DcMotor outtakeMotor;
-    ServoImplEx platform;
+    Servo platform;
 
 
 
@@ -55,8 +55,8 @@ public class SigmaTeleOp2p extends LinearOpMode {
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
 
-        platform = hardwareMap.get(ServoImplEx.class, "platform");
-        platform.setPwmRange(new PwmControl.PwmRange(500, 2500));
+        platform = hardwareMap.get(Servo.class, "platform");
+//        platform.hardwareMap(new PwmControl.PwmRange(500, 2500));
 
 
         // Put initialization blocks here
@@ -146,7 +146,13 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
                 }
 
+            if (gamepad2.circle) {
+                telemetry.addLine("triangle unpressed");
+                telemetry.addData("Servo Position2", platform.getPosition());
+                telemetry.update();
+                platform.setPosition(0);
 
+            }
 
 
         }
