@@ -158,7 +158,6 @@ boolean servoState = false;
 //            lastState = gamepad2.left_bumper;
 //
 //
-//
 //            if () {
 //
 //            if(outtakeOn){
@@ -192,9 +191,6 @@ boolean servoState = false;
 //
 //
 //            }
-//
-//
-//
 
 
 

@@ -57,7 +57,7 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
         sleep(stop);
         turn(90);
         sleep(stop);
-        intakeMotor.setPower(1);
+        intakeMotor.setPower(0.7);
         forward(30);
         sleep(stop);
         backward(50 - y);
