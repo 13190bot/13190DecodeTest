@@ -40,23 +40,12 @@ boolean intakeOn = false;
 
 boolean lastY = false;
 boolean outtakeOn = false;
-boolean lastRT = false;
-double outtakePower = 0;
-
-//boolean triangleLast = false;
-//boolean squareLast = false;
-//boolean crossLast = false;
-//boolean circleLast = false;
-//
-//double targetPos = 0;
-//
 
 
 //for the platform toggle
 
-//boolean lastState;
-//boolean servoState = false;
-//boolean running;
+boolean lastState;
+boolean servoState = false;
 
 
 
@@ -156,37 +145,17 @@ double outtakePower = 0;
 
             if (gamepad2.right_bumper && !lastY) {
                 outtakeOn = !outtakeOn;
-                outtakePower = outtakeOn ? 1.0 : 0;
-                outtakeMotor.setPower(outtakePower);
+                outtakeMotor.setPower(outtakeOn ? 1.0 : 0);
                 telemetry.addData("outtake",outtakeMotor.getPower());
             }
             lastY = gamepad2.right_bumper;
 
 
-            telemetry.update();
 
 
-//            boolean triggerPressed = gamepad2.right_trigger > 0.5;
-//
-//
-//
-//            if (triggerPressed && !lastRT) {
-//                if (outtakeOn && outtakePower == 0.5) {
-//                    outtakeOn = false;
-//                    outtakePower = 0;
-//                } else {
-//                    outtakeOn = true;
-//                    outtakePower = 0.5;
-//                }
-//
-//                outtakeMotor.setPower(outtakePower);
-//            }
-//
-//            lastRT = triggerPressed;
-//
 
 
-//            if (gamepad2.left_bumper && !lastState) {
+//            if (gamepad2.triangle && !lastState) {
 //                servoState = !servoState;   // flip
 //                platform.setPosition(servoState ? 1 : 0);
 //                telemetry.addData("Servo Position", platform.getPosition());
@@ -194,7 +163,7 @@ double outtakePower = 0;
 //
 //            lastState = gamepad2.left_bumper;
 //
-//            telemetry.update();
+            telemetry.update();
 
 
 

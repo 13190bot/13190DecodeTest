@@ -74,10 +74,10 @@ public class SigmaEncoderTest extends LinearOpMode {
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         boolean lastLB = false;
 
@@ -94,7 +94,6 @@ public class SigmaEncoderTest extends LinearOpMode {
 
             telemetry.addData("frontLeft", frontLeftMotor.getCurrentPosition());
 
-            telemetry.update();
 
 
             if (gamepad1.cross) {
@@ -102,7 +101,17 @@ public class SigmaEncoderTest extends LinearOpMode {
                 backLeftMotor.setPower(0.5);
                 frontRightMotor.setPower(0.5);
                 backRightMotor.setPower(0.5);
+
+
+                telemetry.addData("button pressed", "5");
+
+            }else {
+                frontLeftMotor.setPower(0);
+                backLeftMotor.setPower(0);
+                frontRightMotor.setPower(0);
+                backRightMotor.setPower(0);
             }
+
 
 
 
@@ -114,16 +123,18 @@ public class SigmaEncoderTest extends LinearOpMode {
                 backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
-                frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-                lastLB = gamepad1.left_bumper;
+                telemetry.addData("button pressed", "6");
 
 
             }
+            lastLB = gamepad1.left_bumper;
 
+            telemetry.update();
 
         }
     }
