@@ -65,7 +65,7 @@ public class SigmaAutoOp1 extends LinearOpMode {
 //        outtakeMotor.setPower(0);
 //
 //        // Run intake for 1 second
-//        intakeMotor.setPower(1);
+//        intakeMotor.setPower(0.7);
 //        sleep(1000);
 //        intakeMotor.setPower(0);
 //

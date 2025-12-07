@@ -18,7 +18,12 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
     DcMotor frontRightMotor;
     DcMotor intakeMotor;
     DcMotor outtakeMotor;
+<<<<<<< HEAD
     Servo platform;
+=======
+//    Servo platform;
+//    ServoImplEx platform;
+>>>>>>> tested
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -31,8 +36,13 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
+<<<<<<< HEAD
         platform = hardwareMap.get(Servo.class, "platform");
         platform.scaleRange(0, 1);
+=======
+//        platform = hardwareMap.get(ServoImplEx.class, "platform");
+//        platform.setPwmRange(new PwmControl.PwmRange(500, 2500));
+>>>>>>> tested
 
 
         // Set motor directions
@@ -62,7 +72,8 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
 
         turn(90);
 
-        intakeMotor.setPower(1);
+        intakeMotor.setPower(0.7);
+
         forward(30);
 
         backward(50 - y);
@@ -123,7 +134,7 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
 
         while (frontLeftMotor.isBusy() || frontRightMotor.isBusy() ||
                 backLeftMotor.isBusy() || backRightMotor.isBusy()) {
-            // Optional: add telemetry or idle here
+            idle();
         }
 
 
@@ -158,7 +169,7 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
 
         while (frontLeftMotor.isBusy() || frontRightMotor.isBusy() ||
                 backLeftMotor.isBusy() || backRightMotor.isBusy()) {
-            // Optional: add telemetry or idle here
+            idle();
         }
 
 
@@ -193,7 +204,7 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
 
         while (frontLeftMotor.isBusy() || frontRightMotor.isBusy() ||
                 backLeftMotor.isBusy() || backRightMotor.isBusy()) {
-            // Optional: add telemetry or idle here
+            idle();
         }
 
 
@@ -228,7 +239,11 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
 
         while (frontLeftMotor.isBusy() || frontRightMotor.isBusy() ||
                 backLeftMotor.isBusy() || backRightMotor.isBusy()) {
+<<<<<<< HEAD
             // Optional: add telemetry or idle here
+=======
+            idle();
+>>>>>>> tested
         }
 
         stopDrive();
@@ -246,7 +261,27 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+
+        if (opModeIsActive() && runtime.time()<29){
+          requestOpModeStop();
+        }
+
     }
+
+
+    private void shoot(){
+
+        outtakeMotor.setPower(1);
+
+
+
+    }
+
+
+
+
+
+
 }
 
 
