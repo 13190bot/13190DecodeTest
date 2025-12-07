@@ -7,9 +7,25 @@ package org.firstinspires.ftc.teamcode;
 
 
 
+
+
+
+
+
+
+
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.*;
+
+
+
+
+
+
+
+
 
 
 
@@ -29,16 +45,30 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
+
+
+
+
     DcMotor outtakeMotor;
-<<<<<<< HEAD
-    ServoImplEx platform;
-=======
     Servo platform;
->>>>>>> tested
 
 
 
-    boolean running;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -59,34 +89,30 @@ public class SigmaTeleOp2p extends LinearOpMode {
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
-<<<<<<< HEAD
-        platform = hardwareMap.get(ServoImplEx.class, "platform");
-        platform.setPwmRange(new PwmControl.PwmRange(500, 2500));
-=======
+
 
         platform = hardwareMap.get(Servo.class, "platform");
 //        platform.hardwareMap(new PwmControl.PwmRange(500, 2500));
 
 
->>>>>>> tested
+
+
         // Put initialization blocks here
 
 
 
 
-<<<<<<< HEAD
-        running = false;
 
 
 
 
-        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-=======
         frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
->>>>>>> tested
         backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
+
 
 
 
@@ -96,7 +122,15 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
+
+
+
+
         if (isStopRequested()) return;
+
+
+
+
 
 
 
@@ -107,9 +141,20 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
+
+
+
+
             double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = gamepad1.right_stick_x;
+
+
+
+
+
+
+
 
 
 
@@ -127,10 +172,21 @@ public class SigmaTeleOp2p extends LinearOpMode {
             double backRightMotorPower = (y + x - rx) / denominator;
 
 
+
+
             frontLeftMotor.setPower(frontLeftMotorPower);
             backLeftMotor.setPower(backLeftMotorPower);
             frontRightMotor.setPower(frontRightMotorPower);
             backRightMotor.setPower(backRightMotorPower);
+
+
+
+
+
+
+
+
+
 
 
 
@@ -146,38 +202,10 @@ public class SigmaTeleOp2p extends LinearOpMode {
             else {
                 intakeMotor.setPower(0);
             }
-          //  outtakeMotor.setPower(1);
-
-<<<<<<< HEAD
-//
-//            if (gamepad2.right_bumper) {
-//                outtakeMotor.setPower(1);
-//            }
-//            else {
-//                outtakeMotor.setPower(0);
-//            }
-
-
-            if (gamepad2.x) {
-                telemetry.addLine("X pressed");
-                telemetry.addData("Servo Position", platform.getPosition());
-                telemetry.update();
-                platform.setPosition(0.5);
-            } else {
-                telemetry.addLine("X released");
-                telemetry.addData("Servo Position", platform.getPosition());
-                telemetry.update();
-                platform.setPosition(0);
-            }
 
 
 
 
-            frontLeftMotor.setPower(frontLeftMotorPower);
-            backLeftMotor.setPower(backLeftMotorPower);
-            frontRightMotor.setPower(frontRightMotorPower);
-            backRightMotor.setPower(backRightMotorPower);
-=======
 
 
             if (gamepad2.right_bumper) {
@@ -188,13 +216,17 @@ public class SigmaTeleOp2p extends LinearOpMode {
             }
 
 
-                if (gamepad2.triangle) {
-                    telemetry.addLine("triangle pressed");
-                    telemetry.addData("Servo Position", platform.getPosition());
-                    telemetry.update();
-                    platform.setPosition(1);
 
-                }
+
+            if (gamepad2.triangle) {
+                telemetry.addLine("triangle pressed");
+                telemetry.addData("Servo Position", platform.getPosition());
+                telemetry.update();
+                platform.setPosition(1);
+
+
+            }
+
 
             if (gamepad2.circle) {
                 telemetry.addLine("triangle unpressed");
@@ -202,13 +234,31 @@ public class SigmaTeleOp2p extends LinearOpMode {
                 telemetry.update();
                 platform.setPosition(0);
 
+
             }
 
 
->>>>>>> tested
+
+
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

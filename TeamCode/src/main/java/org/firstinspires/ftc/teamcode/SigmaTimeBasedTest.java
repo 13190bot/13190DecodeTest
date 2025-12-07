@@ -7,9 +7,25 @@ package org.firstinspires.ftc.teamcode;
 
 
 
+
+
+
+
+
+
+
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.*;
+
+
+
+
+
+
+
+
 
 
 
@@ -29,8 +45,27 @@ public class SigmaTimeBasedTest extends LinearOpMode {
 
 
 
+
+
+
+
     DcMotor outtakeMotor;
 //    ServoImplEx platform;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -55,13 +90,18 @@ public class SigmaTimeBasedTest extends LinearOpMode {
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
 
+
 //        platform = hardwareMap.get(ServoImplEx.class, "platform");
 //        platform.setPwmRange(new PwmControl.PwmRange(500, 2500));
 
 
+
+
         // Put initialization blocks here
 
+
         int x;
+
 
         int y;
         frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -71,8 +111,15 @@ public class SigmaTimeBasedTest extends LinearOpMode {
 
 
 
+
+
+
         waitForStart();
         // Put run blocks here
+
+
+
+
 
 
 
@@ -82,7 +129,16 @@ public class SigmaTimeBasedTest extends LinearOpMode {
 
 
 
+
+
+
+
         while (opModeIsActive()) {
+
+
+
+
+
 
 
 
@@ -94,6 +150,7 @@ public class SigmaTimeBasedTest extends LinearOpMode {
                 frontRightMotor.setPower(0.5);
                 backRightMotor.setPower(0.5);
 
+
             }
             else {
                 frontLeftMotor.setPower(0);
@@ -101,7 +158,9 @@ public class SigmaTimeBasedTest extends LinearOpMode {
                 frontRightMotor.setPower(0);
                 backRightMotor.setPower(0);
 
+
             }
+
 
             if (gamepad1.left_bumper) {
                 frontLeftMotor.setPower(-0.5);
@@ -109,6 +168,7 @@ public class SigmaTimeBasedTest extends LinearOpMode {
                 frontRightMotor.setPower(0.5);
                 backRightMotor.setPower(0.5);
 
+
             }
             else {
                 frontLeftMotor.setPower(0);
@@ -116,7 +176,9 @@ public class SigmaTimeBasedTest extends LinearOpMode {
                 frontRightMotor.setPower(0);
                 backRightMotor.setPower(0);
 
+
             }
+
 
             if (gamepad1.right_bumper) {
                 frontLeftMotor.setPower(0.5);
@@ -124,6 +186,7 @@ public class SigmaTimeBasedTest extends LinearOpMode {
                 frontRightMotor.setPower(-0.5);
                 backRightMotor.setPower(-0.5);
 
+
             }
             else {
                 frontLeftMotor.setPower(0);
@@ -131,7 +194,11 @@ public class SigmaTimeBasedTest extends LinearOpMode {
                 frontRightMotor.setPower(0);
                 backRightMotor.setPower(0);
 
+
             }
+
+
+
 
 
 
@@ -182,8 +249,17 @@ public class SigmaTimeBasedTest extends LinearOpMode {
 //            }
 
 
+
+
 //                telemetry.addData("Servo Position", platform.getPosition());
 //                telemetry.update();
+
+
+
+
+
+
+
 
 
 
@@ -194,6 +270,22 @@ public class SigmaTimeBasedTest extends LinearOpMode {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
