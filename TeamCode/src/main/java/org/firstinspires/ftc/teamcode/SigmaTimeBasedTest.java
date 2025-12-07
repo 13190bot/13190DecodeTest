@@ -19,7 +19,7 @@ import com.qualcomm.robotcore.hardware.*;
 
 
 @TeleOp
-public class TimeBasedTest extends LinearOpMode {
+public class SigmaTimeBasedTest extends LinearOpMode {
     DcMotor backLeftMotor;
     DcMotor backRightMotor;
     DcMotor frontLeftMotor;
@@ -61,9 +61,9 @@ public class TimeBasedTest extends LinearOpMode {
 
         // Put initialization blocks here
 
-int x;
+        int x;
 
-int y;
+        int y;
         frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
