@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.TestOps;
 
 
 
@@ -126,10 +126,12 @@ public class SigmaEncoderTest extends LinearOpMode {
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
+
         boolean lastLB = false;
 
-
-
+        int TrianglePressed = 0;
+        int LBPressed = 0;
+        int RBPressed = 0;
 
         while (opModeIsActive()) {
 
@@ -154,16 +156,37 @@ public class SigmaEncoderTest extends LinearOpMode {
 
 
 
-            if (gamepad1.cross) {
+            if (gamepad1.triangle) {
                 frontLeftMotor.setPower(0.5);
                 backLeftMotor.setPower(0.5);
                 frontRightMotor.setPower(0.5);
                 backRightMotor.setPower(0.5);
+                TrianglePressed++;
 
 
 
 
-                telemetry.addData("button pressed", "5");
+                telemetry.addData("Triangle pressed", TrianglePressed);
+
+
+            }else {
+                frontLeftMotor.setPower(0);
+                backLeftMotor.setPower(0);
+                frontRightMotor.setPower(0);
+                backRightMotor.setPower(0);
+            }
+
+            if (gamepad1.right_bumper) {
+                frontLeftMotor.setPower(0.5);
+                backLeftMotor.setPower(0.5);
+                frontRightMotor.setPower(-0.5);
+                backRightMotor.setPower(-0.5);
+                RBPressed++;
+
+
+
+
+                telemetry.addData("RB pressed", RBPressed);
 
 
             }else {
@@ -174,9 +197,25 @@ public class SigmaEncoderTest extends LinearOpMode {
             }
 
 
+            if (gamepad1.left_bumper) {
+                frontLeftMotor.setPower(-0.5);
+                backLeftMotor.setPower(-0.5);
+                frontRightMotor.setPower(0.5);
+                backRightMotor.setPower(0.5);
+                LBPressed++;
 
 
 
+
+                telemetry.addData("LB pressed", LBPressed);
+
+
+            }else {
+                frontLeftMotor.setPower(0);
+                backLeftMotor.setPower(0);
+                frontRightMotor.setPower(0);
+                backRightMotor.setPower(0);
+            }
 
 
 
