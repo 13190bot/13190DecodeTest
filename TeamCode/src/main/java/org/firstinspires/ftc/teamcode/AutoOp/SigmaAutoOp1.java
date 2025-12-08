@@ -19,7 +19,7 @@ public class SigmaAutoOp1 extends LinearOpMode {
     Servo platform;
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         // Initialize hardware
         backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
         backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
