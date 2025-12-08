@@ -82,7 +82,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
         backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
         frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
@@ -135,7 +135,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
-        while (opModeIsActive()) {
+        while (opModeIsActive() && !isStopRequested()) {
             // Put loop blocks here
 
 
