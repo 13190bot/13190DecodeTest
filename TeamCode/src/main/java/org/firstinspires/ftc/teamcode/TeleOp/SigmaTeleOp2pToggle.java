@@ -245,12 +245,18 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
             //TEST WHAT HAPPENS WHEN 2 BUTTONS ARE PRESSED AT THE SAME TIME!!!!
 
-
-            toggleouttake(gamepad2.triangle,lastTriangle, 1);
-            toggleouttake(gamepad2.square,lastSquare, 0.8);
-            toggleouttake(gamepad2.cross,lastCross, 0.65);
-            toggleouttake(gamepad2.circle,lastCircle, 0.5);
-
+            if (gamepad2.triangle && !lastTriangle) {
+                toggleouttake(1);
+            }
+            else if (gamepad2.square && !lastSquare) {
+                toggleouttake(0.8);
+            }
+            else if (gamepad2.cross && !lastCross) {
+                toggleouttake(0.65);
+            }
+            else if (gamepad2.circle && !lastCircle) {
+                toggleouttake(0.5);
+            }
 
 
 
@@ -402,10 +408,9 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
 
 
-    private void toggleouttake(boolean Button, boolean lastButton, double Power) {
+    private void toggleouttake(double Power) {
 
 
-        if (Button && !lastButton) {
 
 
             if (outtakeOn) {
@@ -433,7 +438,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
 
         }
-    }
+
 
 
 
