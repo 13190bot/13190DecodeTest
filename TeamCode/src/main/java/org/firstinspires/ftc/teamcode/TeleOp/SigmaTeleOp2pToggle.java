@@ -34,9 +34,11 @@ Dpad Left: intake reset power 0
 Dpad Down: all reset power 0
 Dpad Right: platform reset power 0
 
+
 Left Bumper: intake
 Right Bumper: platform
-Right Trigger: auto shoot
+Right Trigger: auto shoot power 0.9
+Left Trigger: auto shoot power 0.6
 
  */
 
@@ -231,6 +233,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
             if (gamepad2.right_trigger > 0.5) {
 
+                stopDrive();
                 outtakeOn = true;
                 platformOn = true;
                 outtakeMotor.setPower(0.9);
@@ -243,7 +246,22 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
                 platform.setPosition(1);
                 telemetry.addData("Platform", platform.getPosition());
 
-            }else if (gamepad2.right_bumper && !lastRB) {
+            } else if (gamepad2.left_trigger > 0.5) {
+
+                stopDrive();
+                outtakeOn = true;
+                platformOn = true;
+                outtakeMotor.setPower(0.6);
+                shootnumber++;
+                while (outtakeMotor.isBusy()) {
+                    telemetry.addData("shooting", shootnumber);
+                    telemetry.addData("Outtake", outtakeMotor.getPower());
+
+                }
+                platform.setPosition(1);
+                telemetry.addData("Platform", platform.getPosition());
+
+            } else if (gamepad2.right_bumper && !lastRB) {
                 platformOn = !platformOn;
                 platform.setPosition(platformOn ? 1 : 0);
                 telemetry.addData("Platform", platform.getPosition());
@@ -469,7 +487,14 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
         }
 
 
+    private void stopDrive() {
+        frontLeftMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backRightMotor.setPower(0);
 
+
+    }
 
 
 
