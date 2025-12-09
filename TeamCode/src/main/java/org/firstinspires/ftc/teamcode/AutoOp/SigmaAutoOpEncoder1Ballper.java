@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous
-public class SigmaAutoOpEncoder extends LinearOpMode {
+public class SigmaAutoOpEncoder1Ballper extends LinearOpMode {
     final int ticks = 1000;
     DcMotor backLeftMotor;
     DcMotor backRightMotor;
@@ -58,45 +58,26 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
         int x = 1; //shooting
         int y = 1; //shooting
 
-// find tick per cm or inch
-// or cm per tick
+// red and far from goal
+
+   forward(27);
+
+   turn(90);
 
 
-        forward(25);
+   // intake
+   forward(20);
 
-        turn(90);
+   backward(44);
 
-        intakeMotor.setPower(0.7);
+   turncc(90);
 
-        forward(30);
+   forward(38);
 
-        backward(50 - y);
+   turn(45);
 
-        turncc(90);
+   //shoot();
 
-        forward(37 - x);
-
-        turn(45);
-
-        //  shoot(3);
-
-        turn(135);
-
-        forward(13 - x);
-
-        turncc(90);
-
-        forward(50 - y);
-
-        backward(50 - y);
-
-        turncc(90);
-
-        forward(37 - x);
-
-        turn(45);
-
-        // shoot(3);
 
     }
 
@@ -255,13 +236,14 @@ public class SigmaAutoOpEncoder extends LinearOpMode {
 
 
         if (opModeIsActive() && runtime.time()<29){
-          requestOpModeStop();
+            requestOpModeStop();
         }
 
     }
 
 
     private void shoot(){
+
 
         outtakeMotor.setPower(0.7);
         sleep(1500);
