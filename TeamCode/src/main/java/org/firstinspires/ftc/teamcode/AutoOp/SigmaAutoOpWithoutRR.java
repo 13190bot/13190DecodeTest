@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Autonomous
 public class SigmaAutoOpWithoutRR extends LinearOpMode {
 
+    int stop = 500;
 
     DcMotor backLeftMotor;
     DcMotor backRightMotor;
@@ -19,7 +20,7 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
     DcMotor frontRightMotor;
     DcMotor intakeMotor;
     DcMotor outtakeMotor;
-//    Servo platform;
+    Servo platform;
 
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -34,7 +35,7 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
-//        platform = hardwareMap.get(Servo.class, "platform");
+        platform = hardwareMap.get(Servo.class, "platform");
 //        platform.scaleRange(0, 1);
 
 
@@ -60,7 +61,6 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
 
 
         // === Autonomous Sequence ==
-        int stop = 500;
         int x = 1; //shooting
         int y = 1; //shooting
 
@@ -68,39 +68,36 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
 
 
         forward(25);
-        sleep(stop);
+
         turn(90);
-        sleep(stop);
+
         intakeMotor.setPower(0.7);
         forward(30);
-        sleep(stop);
+
         backward(50 - y);
-        sleep(stop);
+
         turncc(90);
-        sleep(stop);
+
         forward(37 - x);
-        sleep(stop);
+
         turn(45);
-        sleep(stop);
 
 
-        sleep(stop);
         turn(135);
-        sleep(stop);
+
         forward(13 - x);
-        sleep(stop);
+
         turncc(90);
-        sleep(stop);
+
         forward(50 - y);
-        sleep(stop);
+
         backward(50 - y);
-        sleep(stop);
+
         turncc(90);
-        sleep(stop);
+
         forward(37 - x);
-        sleep(stop);
+
         turn(45);
-        sleep(stop);
 
 
 
@@ -149,6 +146,7 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
         backRightMotor.setPower(-0.5);
         sleep((int) (degrees * (1000 / 90)));  // 360 degrees divided by 4 seconds = 90
         stopDrive();
+        sleep(stop);
     }
 
 
@@ -161,6 +159,7 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
         backRightMotor.setPower(0.5);
         sleep((int) (degrees * (1000 / 90)));  // 360 degrees divided by 4 seconds = 90
         stopDrive();
+        sleep(stop);
     }
 
 
@@ -175,6 +174,7 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
         backRightMotor.setPower(0.5);
         sleep((int) (unit * (1000 / 5)));
         stopDrive();
+        sleep(stop);
     }
 
 
@@ -185,9 +185,22 @@ public class SigmaAutoOpWithoutRR extends LinearOpMode {
         backRightMotor.setPower(-0.5);
         sleep((int) (unit * (1000 / 5)));
         stopDrive();
+        sleep(stop);
     }
 
+    private void shoot(){
 
+
+        outtakeMotor.setPower(0.7);
+        sleep(1500);
+        platform.setPosition(1);
+        sleep(1000);
+        platform.setPosition(0);
+        outtakeMotor.setPower(0);
+
+
+        stopAll();
+    }
 
 
 

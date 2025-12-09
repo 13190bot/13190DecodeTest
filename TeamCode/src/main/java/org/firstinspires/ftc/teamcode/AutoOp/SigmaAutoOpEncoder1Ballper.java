@@ -19,7 +19,7 @@ public class SigmaAutoOpEncoder1Ballper extends LinearOpMode {
     DcMotor intakeMotor;
     DcMotor outtakeMotor;
 
-//    Servo platform;
+    Servo platform;
 //    ServoImplEx platform;
 
 
@@ -34,7 +34,7 @@ public class SigmaAutoOpEncoder1Ballper extends LinearOpMode {
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
-//        platform = hardwareMap.get(ServoImplEx.class, "platform");
+        platform = hardwareMap.get(Servo.class, "platform");
 //        platform.setPwmRange(new PwmControl.PwmRange(500, 2500));
 
 
@@ -244,7 +244,14 @@ public class SigmaAutoOpEncoder1Ballper extends LinearOpMode {
 
     private void shoot(){
 
-        outtakeMotor.setPower(1);
+
+        outtakeMotor.setPower(0.7);
+        sleep(1500);
+        platform.setPosition(1);
+        sleep(1000);
+        platform.setPosition(0);
+        outtakeMotor.setPower(0);
+
 
 
 
