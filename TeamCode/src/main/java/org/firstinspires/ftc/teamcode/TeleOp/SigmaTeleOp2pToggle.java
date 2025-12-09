@@ -18,9 +18,27 @@ package org.firstinspires.ftc.teamcode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.*;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 
+/*
+Toggle
 
+Triangle: Outtake 1
+Square: Outtake 0.8
+Cross: Outtake 0.65
+Circle: Outtake 0.5
+
+Dpad Up: outtake reset power 0
+Dpad Left: intake reset power 0
+Dpad Down: all reset power 0
+Dpad Right: platform reset power 0
+
+Left Bumper: intake
+Right Bumper: platform
+Right Trigger: auto shoot
+
+ */
 
 
 
@@ -41,6 +59,11 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
     DcMotor frontLeftMotor;
     DcMotor frontRightMotor;
     DcMotor intakeMotor;
+
+
+    //made timer cuz sleep kills entire program for the time
+    private ElapsedTime runtime = new ElapsedTime();
+
 
 
 
@@ -88,7 +111,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 //for the platform toggle
 
 
-    boolean lastPlatform;
+    boolean lastRB;
     boolean platformOn = false;
 
 
@@ -103,7 +126,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
     int allreset =0;
 
-
+    int shootnumber =0;
 
 
 
@@ -119,13 +142,6 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
         platform = hardwareMap.get(Servo.class, "platform");
-
-
-//convert to implservo
-//        ServoImplEx platformEx = (ServoImplEx) platform;
-//        platformEx.setPwmRange(new PwmControl.PwmRange(500, 2500));
-//
-
 
 
 
@@ -213,16 +229,29 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
 
 
+            if (gamepad2.right_trigger > 0.5) {
 
+                outtakeOn = true;
+                platformOn = true;
+                outtakeMotor.setPower(0.9);
+                shootnumber++;
+                while (outtakeMotor.isBusy()){
+                    telemetry.addData("shooting", shootnumber);
+                    telemetry.addData("Outtake", outtakeMotor.getPower());
 
-            if (gamepad2.right_bumper && !lastPlatform) {
+                }
+                platform.setPosition(1);
+                telemetry.addData("Platform", platform.getPosition());
+
+            }else if (gamepad2.right_bumper && !lastRB) {
                 platformOn = !platformOn;
                 platform.setPosition(platformOn ? 1 : 0);
                 telemetry.addData("Platform", platform.getPosition());
             }
 
 
-            lastPlatform = gamepad2.right_bumper;
+            lastRB = gamepad2.right_bumper;
+
 
 
 
