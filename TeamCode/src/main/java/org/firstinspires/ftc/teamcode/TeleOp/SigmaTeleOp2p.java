@@ -50,7 +50,8 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
     DcMotor outtakeMotor;
-    Servo platform;
+    Servo platformRight;
+    Servo platformLeft;
 
 
 
@@ -91,7 +92,8 @@ public class SigmaTeleOp2p extends LinearOpMode {
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
 
 
-        platform = hardwareMap.get(Servo.class, "platform");
+        platformRight = hardwareMap.get(Servo.class, "platformRight");
+        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
 //        platform.hardwareMap(new PwmControl.PwmRange(500, 2500));
 
 
@@ -220,20 +222,66 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
             if (gamepad2.triangle) {
                 telemetry.addLine("triangle pressed");
-                telemetry.addData("Servo Position", platform.getPosition());
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
                 telemetry.update();
-                platform.setPosition(1);
+                platformRight.setPosition(1);
+                platformLeft.setPosition(1);
 
+            }
+
+            if (gamepad2.dpad_up) {
+                telemetry.addLine("up pressed");
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
+                telemetry.update();
+                platformRight.setPosition(0.9);
+                platformLeft.setPosition(0.9);
+
+            } if (gamepad2.dpad_right) {
+                telemetry.addLine("right pressed");
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
+                telemetry.update();
+                platformRight.setPosition(0.8);
+                platformLeft.setPosition(0.8);
+
+            } if (gamepad2.dpad_down) {
+                telemetry.addLine("down pressed");
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
+                telemetry.update();
+                platformRight.setPosition(0.7);
+                platformLeft.setPosition(0.7);
+
+            } if (gamepad2.dpad_left) {
+                telemetry.addLine("left pressed");
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
+                telemetry.update();
+                platformRight.setPosition(0.6);
+                platformLeft.setPosition(0.6);
 
             }
 
 
+
+
+
+
+
+
+
+
+
+
             if (gamepad2.circle) {
                 telemetry.addLine("triangle unpressed");
-                telemetry.addData("Servo Position2", platform.getPosition());
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
                 telemetry.update();
-                platform.setPosition(0);
-
+                platformRight.setPosition(0);
+                platformLeft.setPosition(0);
 
             }
 
