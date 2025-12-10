@@ -24,10 +24,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 /*
 Toggle
 
-Triangle: Outtake 1
+Triangle: Outtake 0.9
 Square: Outtake 0.8
-Cross: Outtake 0.65
-Circle: Outtake 0.5
+Cross: Outtake 0.7
+Circle: Outtake 0.6
 
 Dpad Up: outtake reset power 0
 Dpad Left: intake reset power 0
@@ -37,8 +37,8 @@ Dpad Right: platform reset power 0
 
 Left Bumper: intake
 Right Bumper: platform
-Right Trigger: auto shoot power 0.9
-Left Trigger: auto shoot power 0.6
+Right Trigger: auto shoot power 0.75
+Left Trigger: auto shoot power 0.5
 
  */
 
@@ -236,7 +236,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
                 stopDrive();
                 outtakeOn = true;
                 platformOn = true;
-                outtakeMotor.setPower(0.9);
+                outtakeMotor.setPower(0.75);
                 shootnumber++;
                 while (outtakeMotor.isBusy()){
                     telemetry.addData("shooting", shootnumber);
@@ -251,7 +251,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
                 stopDrive();
                 outtakeOn = true;
                 platformOn = true;
-                outtakeMotor.setPower(0.6);
+                outtakeMotor.setPower(0.5);
                 shootnumber++;
                 while (outtakeMotor.isBusy()) {
                     telemetry.addData("shooting", shootnumber);
@@ -293,16 +293,16 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
             //TEST WHAT HAPPENS WHEN 2 BUTTONS ARE PRESSED AT THE SAME TIME!!!!
 
             if (gamepad2.triangle && !lastTriangle) {
-                toggleouttake(1);
+                toggleouttake(0.9);
             }
             else if (gamepad2.square && !lastSquare) {
                 toggleouttake(0.8);
             }
             else if (gamepad2.cross && !lastCross) {
-                toggleouttake(0.65);
+                toggleouttake(0.7);
             }
             else if (gamepad2.circle && !lastCircle) {
-                toggleouttake(0.5);
+                toggleouttake(0.6);
             }
 
 
