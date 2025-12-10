@@ -113,8 +113,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-
-
+        platformRight.setDirection(Servo.Direction.REVERSE);
 
 
 
@@ -122,7 +121,8 @@ public class SigmaTeleOp2p extends LinearOpMode {
         // Put run blocks here
 
 
-
+        platformRight.setPosition(0);
+        platformLeft.setPosition(0);
 
 
 
@@ -276,6 +276,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
             if (gamepad2.circle) {
+
                 telemetry.addLine("triangle unpressed");
                 telemetry.addData("Servo Position2 Right", platformRight.getPosition());
                 telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
