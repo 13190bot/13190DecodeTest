@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.AutoOp;
+package org.firstinspires.ftc.teamcode.AutoOp.TimeBased;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 @Autonomous
-public class SigmaAutoOpWithoutRR extends LinearOpMode {
+public class SigmaAutoOpWithoutRRRedFar extends LinearOpMode {
 
     int stop = 500;
 
