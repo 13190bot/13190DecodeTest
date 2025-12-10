@@ -1,6 +1,6 @@
 // may work more consistent due to battery stuff with time based auto
 
-package org.firstinspires.ftc.teamcode.AutoOp;
+package org.firstinspires.ftc.teamcode.AutoOp.Encoder2ball;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous
-public class SigmaAutoOpEncoder1Ballper extends LinearOpMode {
+public class SigmaAutoOpEncoderRedFar extends LinearOpMode {
     final int ticks = 1000;
     DcMotor backLeftMotor;
     DcMotor backRightMotor;
@@ -58,26 +58,45 @@ public class SigmaAutoOpEncoder1Ballper extends LinearOpMode {
         int x = 1; //shooting
         int y = 1; //shooting
 
-// red and far from goal
-
-   forward(27);
-
-   turn(90);
+// find tick per cm or inch
+// or cm per tick
 
 
-   // intake
-   forward(20);
+        forward(25);
 
-   backward(44);
+        turn(90);
 
-   turncc(90);
+        intakeMotor.setPower(0.7);
 
-   forward(38);
+        forward(30);
 
-   turn(45);
+        backward(50 - y);
 
-   //shoot();
+        turncc(90);
 
+        forward(37 - x);
+
+        turn(45);
+
+        //  shoot(3);
+
+        turn(135);
+
+        forward(13 - x);
+
+        turncc(90);
+
+        forward(50 - y);
+
+        backward(50 - y);
+
+        turncc(90);
+
+        forward(37 - x);
+
+        turn(45);
+
+        // shoot(3);
 
     }
 
@@ -236,14 +255,13 @@ public class SigmaAutoOpEncoder1Ballper extends LinearOpMode {
 
 
         if (opModeIsActive() && runtime.time()<29){
-            requestOpModeStop();
+          requestOpModeStop();
         }
 
     }
 
 
     private void shoot(){
-
 
         outtakeMotor.setPower(0.7);
         sleep(1500);
