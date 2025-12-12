@@ -50,8 +50,8 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
     DcMotor outtakeMotor;
-//    Servo platformRight;
-//    Servo platformLeft;
+    Servo platformRight;
+    Servo platformLeft;
 
 
 
@@ -92,8 +92,8 @@ public class SigmaTeleOp2p extends LinearOpMode {
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
 
 
-//        platformRight = hardwareMap.get(Servo.class, "platformRight");
-//        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
+        platformRight = hardwareMap.get(Servo.class, "platformRight");
+        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
 //        platform.hardwareMap(new PwmControl.PwmRange(500, 2500));
 
 
@@ -113,9 +113,9 @@ public class SigmaTeleOp2p extends LinearOpMode {
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-//        platformRight.setDirection(Servo.Direction.REVERSE);
-//        platformRight.setPosition(0);
-//        platformLeft.setPosition(0);
+        platformRight.setDirection(Servo.Direction.REVERSE);
+        platformRight.setPosition(0);
+        platformLeft.setPosition(0);
 
 
         waitForStart();
@@ -210,73 +210,73 @@ public class SigmaTeleOp2p extends LinearOpMode {
             }
 
 
-//
-//
-//            if (gamepad2.triangle) {
-//                telemetry.addLine("triangle pressed");
-//                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
-//                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
-//                telemetry.update();
-//                platformRight.setPosition(1);
-//                platformLeft.setPosition(1);
-//
-//            }
-//
-//            if (gamepad2.dpad_up) {
-//                telemetry.addLine("up pressed");
-//                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
-//                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
-//                telemetry.update();
-//                platformRight.setPosition(0.9);
-//                platformLeft.setPosition(0.9);
-//
-//            } if (gamepad2.dpad_right) {
-//                telemetry.addLine("right pressed");
-//                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
-//                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
-//                telemetry.update();
-//                platformRight.setPosition(0.8);
-//                platformLeft.setPosition(0.8);
-//
-//            } if (gamepad2.dpad_down) {
-//                telemetry.addLine("down pressed");
-//                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
-//                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
-//                telemetry.update();
-//                platformRight.setPosition(0.7);
-//                platformLeft.setPosition(0.7);
-//
-//            } if (gamepad2.dpad_left) {
-//                telemetry.addLine("left pressed");
-//                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
-//                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
-//                telemetry.update();
-//                platformRight.setPosition(0.6);
-//                platformLeft.setPosition(0.6);
-//
-//            }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//            if (gamepad2.circle) {
-//
-//                telemetry.addLine("triangle unpressed");
-//                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
-//                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
-//                telemetry.update();
-//                platformRight.setPosition(0);
-//                platformLeft.setPosition(0);
-//
-//            }
+
+
+            if (gamepad2.triangle) {
+                telemetry.addLine("triangle pressed");
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
+                telemetry.update();
+                platformRight.setPosition(1);
+                platformLeft.setPosition(1);
+
+            }
+
+            if (gamepad2.dpad_up) {
+                telemetry.addLine("up pressed");
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
+                telemetry.update();
+                platformRight.setPosition(0.9);
+                platformLeft.setPosition(0.9);
+
+            } if (gamepad2.dpad_right) {
+                telemetry.addLine("right pressed");
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
+                telemetry.update();
+                platformRight.setPosition(0.8);
+                platformLeft.setPosition(0.8);
+
+            } if (gamepad2.dpad_down) {
+                telemetry.addLine("down pressed");
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
+                telemetry.update();
+                platformRight.setPosition(0.7);
+                platformLeft.setPosition(0.7);
+
+            } if (gamepad2.dpad_left) {
+                telemetry.addLine("left pressed");
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
+                telemetry.update();
+                platformRight.setPosition(0.6);
+                platformLeft.setPosition(0.6);
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+            if (gamepad2.circle) {
+
+                telemetry.addLine("triangle unpressed");
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
+                telemetry.update();
+                platformRight.setPosition(0);
+                platformLeft.setPosition(0);
+
+            }
 
 
 
