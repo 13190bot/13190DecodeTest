@@ -197,33 +197,29 @@ public class SigmaTestPlatform extends LinearOpMode {
 
 
 
-
-
-
-            if (gamepad2.right_trigger > 0.3) {
-                outtakeMotor.setPower(0.2);
-            }
-
-
-            
-            if (gamepad2.left_trigger > 0.3) {
-                outtakeMotor.setPower(0.1);
-            }
+//
+//
+//
+//            if (gamepad2.right_trigger > 0.3) {
+//                outtakeMotor.setPower(0.2);
+//            }
+//
+//
+//
+//            if (gamepad2.left_trigger > 0.3) {
+//                outtakeMotor.setPower(0.1);
+//            }
 
 
 
 
             if (gamepad2.right_bumper) {
                 telemetry.addLine("platform pressed");
-                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
-                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
                 platformRight.setPosition(0.3);
                 platformLeft.setPosition(0.3);
 
             }else {
                 telemetry.addLine("platform unpressed");
-                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
-                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
                 platformRight.setPosition(0);
                 platformLeft.setPosition(0);
 

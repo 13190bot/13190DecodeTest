@@ -43,9 +43,7 @@ public class BACKUPAutoOpBotCantShootThisOnlyMovesForward extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-        platformRight.setDirection(Servo.Direction.REVERSE);
-        platformRight.setPosition(0);
-        platformLeft.setPosition(0);
+
 
         // Wait for start
         waitForStart();
