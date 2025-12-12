@@ -50,8 +50,8 @@ public class SigmaTimeBasedTest extends LinearOpMode {
 
 
     DcMotor outtakeMotor;
-//    ServoImplEx platform;
-
+    Servo platformRight;
+    Servo platformLeft;
 
 
 
@@ -89,11 +89,12 @@ public class SigmaTimeBasedTest extends LinearOpMode {
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
+        platformRight = hardwareMap.get(Servo.class, "platformRight");
+        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
 
-
-//        platform = hardwareMap.get(ServoImplEx.class, "platform");
-//        platform.setPwmRange(new PwmControl.PwmRange(500, 2500));
-
+        platformRight.setDirection(Servo.Direction.REVERSE);
+        platformRight.setPosition(0);
+        platformLeft.setPosition(0);
 
 
 
@@ -141,6 +142,22 @@ public class SigmaTimeBasedTest extends LinearOpMode {
 
 
 
+
+
+
+            if (gamepad1.cross){
+
+
+                outtakeMotor.setPower(0.7);
+                sleep(1500);
+                platformRight.setPosition(1);
+                platformLeft.setPosition(1);
+                sleep(1000);
+                platformRight.setPosition(0);
+                platformLeft.setPosition(0);
+                outtakeMotor.setPower(0);
+
+            }
 
 
 

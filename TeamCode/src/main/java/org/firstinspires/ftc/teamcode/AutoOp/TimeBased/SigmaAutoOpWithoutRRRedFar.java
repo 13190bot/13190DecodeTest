@@ -66,8 +66,8 @@ public class SigmaAutoOpWithoutRRRedFar extends LinearOpMode {
 
 
         // === Autonomous Sequence ==
-        int x = 1; //shooting
-        int y = 1; //shooting
+        int x = 0; //shooting in the middle
+        int y = 0; //shooting
 
 
 
@@ -87,6 +87,7 @@ public class SigmaAutoOpWithoutRRRedFar extends LinearOpMode {
 
         turn(45);
 
+        shoot();
 
         turn(135);
 
@@ -103,6 +104,9 @@ public class SigmaAutoOpWithoutRRRedFar extends LinearOpMode {
         forward(37 - x);
 
         turn(45);
+
+
+        shoot();
 
 
 
