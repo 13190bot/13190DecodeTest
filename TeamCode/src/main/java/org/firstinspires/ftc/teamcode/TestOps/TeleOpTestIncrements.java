@@ -302,23 +302,23 @@ public class TeleOpTestIncrements extends LinearOpMode {
 
 
             if (gamepad2.triangle && !lastTriangle) {
-                outtakeMotor.setPower(outtakeMotor.getCurrentPosition() + 0.1);                
+                outtakeMotor.setPower(outtakeMotor.getPower() + 0.1);                
                 
             }
             else if (gamepad2.square && !lastSquare) {
 
-                outtakeMotor.setPower(outtakeMotor.getCurrentPosition() + 0.3);                
+                outtakeMotor.setPower(outtakeMotor.getPower() + 0.3);                
                 
             }
             else if (gamepad2.cross && !lastCross) {
 
-            outtakeMotor.setPower(outtakeMotor.getCurrentPosition() - 0.1);                
+            outtakeMotor.setPower(outtakeMotor.getPower() - 0.1);                
                 
                 
             }
             else if (gamepad2.circle && !lastCircle) {
 
-            outtakeMotor.setPower(outtakeMotor.getCurrentPosition() - 0.3);                
+            outtakeMotor.setPower(outtakeMotor.getPower() - 0.3);                
                 
                 
                 
