@@ -42,8 +42,8 @@ public class SigmaTimeBasedPick extends LinearOpMode {
     DcMotor frontRightMotor;
     DcMotor intakeMotor;
     DcMotor outtakeMotor;
-    Servo platform;
-
+    Servo platformRight;
+    Servo platformLeft;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -60,7 +60,9 @@ public class SigmaTimeBasedPick extends LinearOpMode {
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
-        platform = hardwareMap.get(Servo.class, "platform");
+        platformRight = hardwareMap.get(Servo.class, "platformRight");
+        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
+
 //        platform.scaleRange(0, 1);
 
 
@@ -90,11 +92,11 @@ public class SigmaTimeBasedPick extends LinearOpMode {
   
 init();
       
-while (DDD == 0) {
+while (DDD == 0 && !isStopRequested()) {
 
 
         
-        while (AAA == 0) {
+        while (AAA == 0 && !isStopRequested()) {
 
             telemetry.addLine("Pick Delay seconds... Triangle: 0, Circle: 3, Cross: 5, Square: 7");
             telemetry.update();
@@ -117,7 +119,7 @@ while (DDD == 0) {
 
         }
 
-        while (BBB == 0){
+        while (BBB == 0 && !isStopRequested()){
             telemetry.addData("delay selected in seconds", waiting/1000);
             telemetry.addLine("Select place from the goal: Triangle: RED FAR, Circle: RED CLOSE, Cross: BLUE FAR, Square: BLUE CLOSE");
             telemetry.update();
@@ -152,14 +154,14 @@ while (DDD == 0) {
         telemetry.addLine("Is this correct? Circle for Yes, Cross for No.");
         telemetry.update();
 
-    while (CCC == 0){
-        if (gamepad1.circle) {
+    while (CCC == 0 && !isStopRequested()){
+        if (gamepad1.cross) {
             AAA = 0;
             BBB = 0;
             CCC++;
             }
 
-        if (gamepad1.cross) {
+        if (gamepad1.circle) {
             CCC++;
             DDD++;
         }
@@ -316,9 +318,11 @@ while (DDD == 0) {
 
         outtakeMotor.setPower(0.7);
         sleep(1500);
-        platform.setPosition(1);
+        platformLeft.setPosition(0.3);
+        platformRight.setPosition(0.3);
         sleep(1000);
-        platform.setPosition(0);
+        platformRight.setPosition(0);
+        platformLeft.setPosition(0);
         outtakeMotor.setPower(0);
 
 
