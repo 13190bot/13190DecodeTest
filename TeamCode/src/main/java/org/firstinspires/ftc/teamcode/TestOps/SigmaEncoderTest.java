@@ -140,16 +140,16 @@ public class SigmaEncoderTest extends LinearOpMode {
 
 
 
-            telemetry.addData("frontRight", frontRightMotor.getCurrentPosition());
+            telemetry.addData("frontRight", frontRightMotor.getPower());
 
 
-            telemetry.addData("backRight", backRightMotor.getCurrentPosition());
+            telemetry.addData("backRight", backRightMotor.getPower());
 
 
-            telemetry.addData("backLeft", backLeftMotor.getCurrentPosition());
+            telemetry.addData("backLeft", backLeftMotor.getPower());
 
 
-            telemetry.addData("frontLeft", frontLeftMotor.getCurrentPosition());
+            telemetry.addData("frontLeft", frontLeftMotor.getPower());
 
 
 
