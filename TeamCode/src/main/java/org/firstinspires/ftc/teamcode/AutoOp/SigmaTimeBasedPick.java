@@ -28,6 +28,14 @@ public class SigmaTimeBasedPick extends LinearOpMode {
     int waiting = 3;
 
 
+    int location;
+
+    // 0 = RED FAR
+    // 1 = RED CLOSE
+    // 2 = BLUE FAR
+    // 3 = BLUE CLOSE
+
+
     DcMotor backLeftMotor;
     DcMotor backRightMotor;
     DcMotor frontLeftMotor;
@@ -72,24 +80,69 @@ public class SigmaTimeBasedPick extends LinearOpMode {
         if (isStopRequested()) return;
 
 
+        int AAA=0;
+
+        int BBB = 0;
 
 
+init();
+
+        while (AAA == 0) {
+
+            telemetry.addLine("Pick Delay seconds... Triangle: 0, Circle: 3, Cross: 5, Square: 7");
+            telemetry.update();
+            if (gamepad1.triangle) {
+                waiting = 0;
+                AAA++;
+            }
+            if (gamepad1.circle) {
+                waiting = 3000;
+                AAA++;
+            }
+            if (gamepad1.cross) {
+                waiting = 5000;
+                AAA++;
+            }
+            if (gamepad1.square) {
+                waiting = 7000;
+                AAA++;
+            }
+
+        }
+
+        while (BBB == 0){
+            telemetry.addData("delay selected in seconds", waiting/1000);
+            telemetry.addLine("Select place from the goal: Triangle: RED FAR, Circle: RED CLOSE, Cross: BLUE FAR, Square: BLUE CLOSE");
+            telemetry.update();
+            // 0 = RED FAR
+            // 1 = RED CLOSE
+            // 2 = BLUE FAR
+            // 3 = BLUE CLOSE
 
 
+            if (gamepad1.triangle) {
+                location = 0;
+                BBB++;
+            }
+            if (gamepad1.circle) {
+                location = 1;
+                BBB++;
+            }
+            if (gamepad1.cross) {
+                location = 2;
+                BBB++;
+            }
+            if (gamepad1.square) {
+                location = 3;
+                BBB++;
+            }
 
+        }
 
-//
-//while (do something) {
-//
-//
-//
-//
-//
-//
-//        }
-//
-//
-
+        telemetry.addData("Location", location);
+        telemetry.addLine("0: RED FAR, 1: RED CLOSE, 2: BLUE FAR, 3: BLUE CLOSE");
+        telemetry.addData("delay selected in seconds", waiting/1000);
+        telemetry.update();
 
 
 
@@ -106,6 +159,9 @@ public class SigmaTimeBasedPick extends LinearOpMode {
         // === Autonomous Sequence ==
         int x = 1; //shooting
         int y = 1; //shooting
+
+
+
 
         sleep(waiting);
 
