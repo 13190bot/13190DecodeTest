@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.TeleOp;
+package org.firstinspires.ftc.teamcode.TestOps;
 
 
 
@@ -35,7 +35,7 @@ import com.qualcomm.robotcore.hardware.*;
 
 
 @TeleOp
-public class SigmaTeleOp2p extends LinearOpMode {
+public class SigmaTeleOpTestPush extends LinearOpMode {
     DcMotor backLeftMotor;
     DcMotor backRightMotor;
     DcMotor frontLeftMotor;
