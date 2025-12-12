@@ -22,24 +22,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 /*
-Toggle
-
-Triangle: Outtake 0.9
-Square: Outtake 0.7
-Cross: Outtake 0.5
-Circle: Outtake 0.3
-
-Dpad Up: outtake reset power 0
-Dpad Left: intake reset power 0
-Dpad Down: all reset power 0
-Dpad Right: platform reset power 0
-
-
-Left Bumper: intake
-Right Bumper: platform
-Right Trigger: auto shoot power 0.75
-Left Trigger: auto shoot power 0.5
-
+INCREMENTS
  */
 
 
@@ -318,71 +301,28 @@ public class TeleOpTestIncrements extends LinearOpMode {
 
 
 
-//toggle for triangle square cross circle (4 if statements) : press a button consecutively then it stop motors
-//checks for whether we pressed the button, whether outtake is currently moving, and adds telemetry
-
-
-
-
-            //TEST WHAT HAPPENS WHEN 2 BUTTONS ARE PRESSED AT THE SAME TIME!!!!
-
             if (gamepad2.triangle && !lastTriangle) {
-                toggleOuttake(0.9);
+                outtakeMotor.setPower(outtakeMotor.getCurrentPosition() + 0.1);                
+                
             }
             else if (gamepad2.square && !lastSquare) {
-                toggleOuttake(0.7);
+
+                outtakeMotor.setPower(outtakeMotor.getCurrentPosition() + 0.3);                
+                
             }
             else if (gamepad2.cross && !lastCross) {
-                toggleOuttake(0.5);
+
+            outtakeMotor.setPower(outtakeMotor.getCurrentPosition() - 0.1);                
+                
+                
             }
             else if (gamepad2.circle && !lastCircle) {
-                toggleOuttake(0.3);
+
+            outtakeMotor.setPower(outtakeMotor.getCurrentPosition() - 0.3);                
+                
+                
+                
             }
-
-
-
-
-
-            //made a function of this
-
-
-//            if (gamepad2.triangle && !lastTriangle) {
-//
-//                  if (outtakeOn) {
-//
-//                      if (outtakeMotor.getPower() == 1){
-//                          outtakeOn = false;
-//                          outtakeMotor.setPower(0);
-//
-//                      } else{
-//                          outtakeMotor.setPower(1);
-//
-//                      }
-//
-//                } else{
-//                    outtakeOn = true;
-//                    outtakeMotor.setPower(1);
-//                }
-//
-//                  telemetry.addData("outtake", outtakeMotor.getPower());
-//
-//            }
-
-
-
-
-
-
-            // USE ONLY IF THE STATEMENT ABOVE DOESN'T WORK - TESTED CODE
-
-
-//            if (gamepad2.triangle && !lastTriangle) {
-//                outtakeOn = !outtakeOn;
-//                outtakeMotor.setPower(outtakeOn ? 1.0 : 0);
-//                telemetry.addData("outtake", outtakeMotor.getPower());
-//            }
-//            lastTriangle = gamepad2.triangle;
-
 
 
 
