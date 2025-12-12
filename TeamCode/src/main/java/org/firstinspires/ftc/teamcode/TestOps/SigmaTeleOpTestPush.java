@@ -201,19 +201,15 @@ public class SigmaTeleOpTestPush extends LinearOpMode {
 
 
             if (gamepad2.right_trigger > 0.3) {
-                outtakeMotor.setPower(0.8);
+                outtakeMotor.setPower(0.2);
             }
-            else {
-                outtakeMotor.setPower(0);
-            }
+
 
             
             if (gamepad2.left_trigger > 0.3) {
-                outtakeMotor.setPower(0.5);
+                outtakeMotor.setPower(0.1);
             }
-            else {
-                outtakeMotor.setPower(0);
-            }
+
 
 
 
@@ -252,7 +248,7 @@ public class SigmaTeleOpTestPush extends LinearOpMode {
             }
 
             if (gamepad2.circle) {
-            outtakeMotor.setPower(0.2);
+            outtakeMotor.setPower(0);
             }
 
 
