@@ -84,9 +84,16 @@ public class SigmaTimeBasedPick extends LinearOpMode {
 
         int BBB = 0;
 
-
+        int CCC = 0;
+        
+        int DDD = 0;
+  
 init();
+      
+while (DDD == 0) {
 
+
+        
         while (AAA == 0) {
 
             telemetry.addLine("Pick Delay seconds... Triangle: 0, Circle: 3, Cross: 5, Square: 7");
@@ -142,9 +149,27 @@ init();
         telemetry.addData("Location", location);
         telemetry.addLine("0: RED FAR, 1: RED CLOSE, 2: BLUE FAR, 3: BLUE CLOSE");
         telemetry.addData("delay selected in seconds", waiting/1000);
+        telemetry.addLine("Is this correct? Circle for Yes, Cross for No.");
         telemetry.update();
 
+    while (CCC == 0){
+        if (gamepad1.circle) {
+            AAA = 0;
+            BBB = 0;
+            CCC++;
+            }
 
+        if (gamepad1.cross) {
+            CCC++;
+            DDD++;
+        }
+
+
+        
+    }
+    CCC = 0;
+    
+}
 
 
 
