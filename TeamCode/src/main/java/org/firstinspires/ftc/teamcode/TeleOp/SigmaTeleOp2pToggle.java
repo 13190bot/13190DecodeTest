@@ -25,9 +25,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 Toggle
 
 Triangle: Outtake 0.9
-Square: Outtake 0.8
-Cross: Outtake 0.7
-Circle: Outtake 0.6
+Square: Outtake 0.7
+Cross: Outtake 0.5
+Circle: Outtake 0.3
 
 Dpad Up: outtake reset power 0
 Dpad Left: intake reset power 0
@@ -274,8 +274,8 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
                     telemetry.addData("Outtake", outtakeMotor.getPower());
 
                 }
-                platformLeft.setPosition(1);
-                platformRight.setPosition(1);
+                platformLeft.setPosition(0.3);
+                platformRight.setPosition(0.3);
 //                telemetry.addData("Platform", platform.getPosition());
 
             } else if (gamepad2.left_trigger > 0.5) {
@@ -290,14 +290,14 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
                     telemetry.addData("Outtake", outtakeMotor.getPower());
 
                 }
-                platformLeft.setPosition(1);
-                platformRight.setPosition(1);
+                platformLeft.setPosition(0.3);
+                platformRight.setPosition(0.3);
 //                telemetry.addData("Platform", platform.getPosition());
 
             } else if (gamepad2.right_bumper && !lastRB) {
                 platformOn = !platformOn;
-                platformLeft.setPosition(platformOn ? 1 : 0);
-                platformRight.setPosition(platformOn ? 1 : 0);
+                platformLeft.setPosition(platformOn ? 0.3 : 0);
+                platformRight.setPosition(platformOn ? 0.3 : 0);
 //                telemetry.addData("Platform", platform.getPosition());
             }
 
@@ -330,13 +330,13 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
                 toggleOuttake(0.9);
             }
             else if (gamepad2.square && !lastSquare) {
-                toggleOuttake(0.8);
-            }
-            else if (gamepad2.cross && !lastCross) {
                 toggleOuttake(0.7);
             }
+            else if (gamepad2.cross && !lastCross) {
+                toggleOuttake(0.5);
+            }
             else if (gamepad2.circle && !lastCircle) {
-                toggleOuttake(0.6);
+                toggleOuttake(0.3);
             }
 
 
