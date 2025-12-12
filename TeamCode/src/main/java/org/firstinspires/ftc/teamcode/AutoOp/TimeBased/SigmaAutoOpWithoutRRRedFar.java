@@ -20,8 +20,8 @@ public class SigmaAutoOpWithoutRRRedFar extends LinearOpMode {
     DcMotor frontRightMotor;
     DcMotor intakeMotor;
     DcMotor outtakeMotor;
-    Servo platform;
-
+    Servo platformRight;
+    Servo platformLeft;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -35,7 +35,12 @@ public class SigmaAutoOpWithoutRRRedFar extends LinearOpMode {
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
-        platform = hardwareMap.get(Servo.class, "platform");
+        platformRight = hardwareMap.get(Servo.class, "platformRight");
+        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
+
+        platformRight.setDirection(Servo.Direction.REVERSE);
+        platformRight.setPosition(0);
+        platformLeft.setPosition(0);
 //        platform.scaleRange(0, 1);
 
 
@@ -193,9 +198,11 @@ public class SigmaAutoOpWithoutRRRedFar extends LinearOpMode {
 
         outtakeMotor.setPower(0.7);
         sleep(1500);
-        platform.setPosition(1);
+        platformRight.setPosition(1);
+        platformLeft.setPosition(1);
         sleep(1000);
-        platform.setPosition(0);
+        platformRight.setPosition(0);
+        platformLeft.setPosition(0);
         outtakeMotor.setPower(0);
 
 
