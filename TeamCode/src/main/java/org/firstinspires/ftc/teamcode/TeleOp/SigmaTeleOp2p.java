@@ -34,6 +34,22 @@ import com.qualcomm.robotcore.hardware.*;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @TeleOp
 public class SigmaTeleOp2p extends LinearOpMode {
     DcMotor backLeftMotor;
@@ -41,6 +57,14 @@ public class SigmaTeleOp2p extends LinearOpMode {
     DcMotor frontLeftMotor;
     DcMotor frontRightMotor;
     DcMotor intakeMotor;
+
+
+
+
+
+
+
+
 
 
 
@@ -82,6 +106,36 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public void runOpMode() throws InterruptedException {
         backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
@@ -92,9 +146,15 @@ public class SigmaTeleOp2p extends LinearOpMode {
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
 
 
+
+
         platformRight = hardwareMap.get(Servo.class, "platformRight");
         platformLeft = hardwareMap.get(Servo.class, "platformLeft");
 //        platform.hardwareMap(new PwmControl.PwmRange(500, 2500));
+
+
+
+
 
 
 
@@ -108,12 +168,23 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
+
+
+
+
+
+
+
+
         frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
+
         platformRight.setDirection(Servo.Direction.REVERSE);
+
+
 
 
         waitForStart();
@@ -125,7 +196,22 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
+
+
+
+
+
+
+
         if (isStopRequested()) return;
+
+
+
+
+
+
+
+
 
 
 
@@ -144,9 +230,31 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
+
+
+
+
+
+
+
+
             double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = gamepad1.right_stick_x;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -173,10 +281,25 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
+
+
+
+
             frontLeftMotor.setPower(frontLeftMotorPower);
             backLeftMotor.setPower(backLeftMotorPower);
             frontRightMotor.setPower(frontRightMotorPower);
             backRightMotor.setPower(backRightMotorPower);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -200,20 +323,24 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
-            if (gamepad2.right_trigger > 0.5) {
+
+
+
+
+
+
+            if (gamepad2.right_trigger > 0.7) {
                 outtakeMotor.setPower(0.7);
             }
-            else {
-                outtakeMotor.setPower(0);
-            }
-
-            
-            if (gamepad2.left_trigger > 0.5) {
+            else if (gamepad2.left_trigger > 0.7) {
                 outtakeMotor.setPower(0.4);
             }
             else {
                 outtakeMotor.setPower(0);
             }
+
+
+
 
 
 
@@ -224,18 +351,31 @@ public class SigmaTeleOp2p extends LinearOpMode {
                 platformRight.setPosition(1);
                 platformLeft.setPosition(1);
 
-            }else {
+
+            }
+
+
+
+
+            if (gamepad2.circle) {
+                telemetry.addLine("platform pressed");
+                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
+                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
+                platformRight.setPosition(0.75);
+                platformLeft.setPosition(0.75);
+            }
+
+
+            if (gamepad2.triangle) {
                 telemetry.addLine("platform pressed");
                 telemetry.addData("Servo Position2 Right", platformRight.getPosition());
                 telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
                 platformRight.setPosition(0);
                 platformLeft.setPosition(0);
-
-
-
-
-                
             }
+
+
+
 
 
 
@@ -244,7 +384,23 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
-                telemetry.update();
+
+
+
+            telemetry.update();
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -261,9 +417,6 @@ public class SigmaTeleOp2p extends LinearOpMode {
         }
     }
 }
-
-
-
 
 
 
