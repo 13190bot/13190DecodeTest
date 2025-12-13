@@ -274,8 +274,8 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
                     telemetry.addData("Outtake", outtakeMotor.getPower());
 
                 }
-                platformLeft.setPosition(0.3);
-                platformRight.setPosition(0.3);
+                platformLeft.setPosition(1);
+                platformRight.setPosition(1);
 //                telemetry.addData("Platform", platform.getPosition());
 
             } else if (gamepad2.left_trigger > 0.5) {
@@ -290,14 +290,14 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
                     telemetry.addData("Outtake", outtakeMotor.getPower());
 
                 }
-                platformLeft.setPosition(0.3);
-                platformRight.setPosition(0.3);
+                platformLeft.setPosition(1);
+                platformRight.setPosition(1);
 //                telemetry.addData("Platform", platform.getPosition());
 
             } else if (gamepad2.right_bumper && !lastRB) {
                 platformOn = !platformOn;
-                platformLeft.setPosition(platformOn ? 0.3 : 0);
-                platformRight.setPosition(platformOn ? 0.3 : 0);
+                platformLeft.setPosition(platformOn ? 1 : 0);
+                platformRight.setPosition(platformOn ? 1 : 0);
 //                telemetry.addData("Platform", platform.getPosition());
             }
 

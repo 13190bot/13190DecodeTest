@@ -214,15 +214,10 @@ public class SigmaTestPlatform extends LinearOpMode {
 
 
             if (gamepad2.right_bumper) {
-                telemetry.addLine("platform pressed");
-                platformRight.setPosition(0.3);
-                platformLeft.setPosition(0.3);
+                outtakeMotor.setPower(0.67);
 
             }else {
-                telemetry.addLine("platform unpressed");
-                platformRight.setPosition(0);
-                platformLeft.setPosition(0);
-
+                outtakeMotor.setPower(0);
     
             }
 
@@ -235,41 +230,35 @@ public class SigmaTestPlatform extends LinearOpMode {
             platformRight.setPosition(0.2);
             }
 
-
             if (gamepad2.square) {
-            platformLeft.setPosition(0.4);
-            platformRight.setPosition(0.4);
-              
+            platformLeft.setPosition(1);
+            platformRight.setPosition(1);
             }
 
             if (gamepad2.cross) {
-            platformLeft.setPosition(0.325);
-            platformRight.setPosition(0.325);
+            platformLeft.setPosition(0.4);
+            platformRight.setPosition(0.4);
             }
 
             if (gamepad2.circle) {
-            platformLeft.setPosition(0.275);
-            platformRight.setPosition(0.275);
+            platformLeft.setPosition(0.5);
+            platformRight.setPosition(0.5);
             }
-
-
-
-
 
 
             if (gamepad2.dpad_left) {
-            platformLeft.setPosition(0.35);
-            platformRight.setPosition(0.35);
+            platformLeft.setPosition(0.6);
+            platformRight.setPosition(0.6);
             }
 
             if (gamepad2.dpad_up) {
-            platformLeft.setPosition(0.3);
-            platformRight.setPosition(0.3);
+            platformLeft.setPosition(0.8);
+            platformRight.setPosition(0.8);
             }
 
             if (gamepad2.dpad_right) {
-            platformLeft.setPosition(0.25);
-            platformRight.setPosition(0.25);
+            platformLeft.setPosition(0.9);
+            platformRight.setPosition(0.9);
             }
 
             if (gamepad2.dpad_down) {
@@ -279,9 +268,9 @@ public class SigmaTestPlatform extends LinearOpMode {
 
 
 
-            
 
-            
+
+            telemetry.addLine("lb: intake, rb: outtake, dpad down: platform off. t, s, cross, circle, l, u, r: 0.2, 0.4, 0.325, 0.275, 0.35, 0.3, 0.25 respectively ");
             telemetry.addData("Servo Position2 Right", platformRight.getPosition());
             telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
             telemetry.addData("Outtake", outtakeMotor.getPower());
