@@ -374,7 +374,6 @@ public class SigmaTeleOp2p extends LinearOpMode {
                 platformLeft.setPosition(0);
             }
 
-//sadfkljfsdfsdjokfowijeefw
 
 
 
