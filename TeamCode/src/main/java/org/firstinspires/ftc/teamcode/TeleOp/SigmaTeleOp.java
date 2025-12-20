@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
-//ritesh test committ
+//ritesh test comm
 
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
