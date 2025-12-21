@@ -1,14 +1,11 @@
 package org.firstinspires.ftc.teamcode.Subsystem;
 import com.qualcomm.robotcore.hardware.*;
+import com.arcrobotics.ftclib.command.SubsystemBase;
 
 
-
-
-
-
-public class DriveTrain {
-
-
+public class DriveTrain extends SubsystemBase {
+    public final int ticks = 67;
+    public final int stoptime = 1000;
     DcMotor backLeftMotor;
     DcMotor backRightMotor;
     DcMotor frontLeftMotor;
@@ -17,6 +14,7 @@ public class DriveTrain {
 
 
     public DriveTrain(HardwareMap hardwareMap) {
+
 
         backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
         backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
@@ -30,237 +28,102 @@ public class DriveTrain {
 
     }
 
-        // Helper to stop all drive motors
-        public void stopDrivetime() {
-            frontLeftMotor.setPower(0);
-            backLeftMotor.setPower(0);
-            frontRightMotor.setPower(0);
-            backRightMotor.setPower(0);
 
 
-        }
+    public boolean Busy() {
+        return frontLeftMotor.isBusy() || frontRightMotor.isBusy() || backLeftMotor.isBusy() || backRightMotor.isBusy();
+    }
 
-
-
-        // Helper method to turn clockwise
-        //assuming it takes 4 seconds for 360 degrees
-        public void turntime(int degrees) {
-            frontLeftMotor.setPower(0.5);
-            backLeftMotor.setPower(0.5);
-            frontRightMotor.setPower(-0.5);
-            backRightMotor.setPower(-0.5);
-            stopDrivetime();
-        }
-
-
-        // Helper method to turn counterclockwise
-        //assuming it takes 4 seconds for 360 degrees
-        public void turncctime(int degrees) {
-            frontLeftMotor.setPower(-0.5);
-            backLeftMotor.setPower(-0.5);
-            frontRightMotor.setPower(0.5);
-            backRightMotor.setPower(0.5);
-            stopDrivetime();
-        }
+    public void DrivePower(double fl, double bl, double fr, double br){
+        frontLeftMotor.setPower(fl);
+        backLeftMotor.setPower(bl);
+        frontRightMotor.setPower(fr);
+        backRightMotor.setPower(br);
+    }
 
 
 
 
-        // Helper method to drive forward
-        //assuming 1 unit in meepmeep is
-        private void forwardtime(int unit) {
-            frontLeftMotor.setPower(0.5);
-            backLeftMotor.setPower(0.5);
-            frontRightMotor.setPower(0.5);
-            backRightMotor.setPower(0.5);
-            stopDrivetime();
-        }
+    public void stopDrive() {
+        DrivePower(0,0,0,0);
+    }
 
+    public void turntime(int degrees) {
+        DrivePower(0.5,0.5,-0.5,-0.5);
+    }
 
-        private void backwardtime(int unit) {
-            frontLeftMotor.setPower(-0.5);
-            backLeftMotor.setPower(-0.5);
-            frontRightMotor.setPower(-0.5);
-            backRightMotor.setPower(-0.5);
-            stopDrivetime();
-        }
+    public void turncctime(int degrees) {
+        DrivePower(-0.5,-0.5,0.5,0.5);
+    }
 
 
 
 
+    // Helper method to drive forward
+    //assuming 1 unit in meepmeep is
+    public void forwardtime(int unit) {
+        DrivePower(0.5,0.5,0.5,0.5);
+    }
 
 
-// ENCODERS
-    private void forward(int unit) {
+    public void backwardtime(int unit) {
+        DrivePower(-0.5,-0.5,-0.5,-0.5);
+    }
+
+    public void resetEncoders(){
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
 
-
-        int target = unit * ticks;
-
-        frontLeftMotor.setTargetPosition(target);
-        frontRightMotor.setTargetPosition(target);
-        backLeftMotor.setTargetPosition(target);
-        backRightMotor.setTargetPosition(target);
-
+    public void EncoderRun(){
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
 
-        frontLeftMotor.setPower(0.5);
-        frontRightMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
+    public void encoderTarget(double fl, double bl, double fr, double br){
+        int fltarget = (int) (fl * ticks);
+        int bltarget = (int) (bl * ticks);
+        int frtarget = (int) (fr * ticks);
+        int brtarget = (int) (br * ticks);
 
-
-        while (frontLeftMotor.isBusy() || frontRightMotor.isBusy() ||
-                backLeftMotor.isBusy() || backRightMotor.isBusy()) {
-//            idle();
-        }
-
-
-        stopDrive();
+        frontLeftMotor.setTargetPosition(fltarget);
+        backLeftMotor.setTargetPosition(bltarget);
+        frontRightMotor.setTargetPosition(frtarget);
+        backRightMotor.setTargetPosition(brtarget);
     }
 
 
-    private void backward(int unit) {
-        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    public void encoderDrive(double flunit, double blunit, double frunit, double brunit){
+        resetEncoders();
+        encoderTarget(flunit,blunit,frunit,brunit);
+        EncoderRun();
+        DrivePower(0.5,0.5,0.5,0.5);
+    }
+
+    public void forward(double unit) {
+        encoderDrive(unit,unit,unit,unit);
+    }
 
 
-        int target = unit * ticks;
-
-        frontLeftMotor.setTargetPosition(-target);
-        frontRightMotor.setTargetPosition(-target);
-        backLeftMotor.setTargetPosition(-target);
-        backRightMotor.setTargetPosition(-target);
-
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        frontLeftMotor.setPower(0.5);
-        frontRightMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
-
-
-        while (frontLeftMotor.isBusy() || frontRightMotor.isBusy() ||
-                backLeftMotor.isBusy() || backRightMotor.isBusy()) {
-//            idle();
-        }
-
-
-        stopDrive();
+    public void backward(double unit) {
+        encoderDrive(-unit,-unit,-unit,-unit);
     }
 
 
 
-
-
-
-
-    private void turn(int degrees) {
-        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-        int target = degrees * ticks;
-
-        frontLeftMotor.setTargetPosition(target);
-        frontRightMotor.setTargetPosition(-target);
-        backLeftMotor.setTargetPosition(target);
-        backRightMotor.setTargetPosition(-target);
-
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        frontLeftMotor.setPower(0.5);
-        frontRightMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
-
-
-        while (frontLeftMotor.isBusy() || frontRightMotor.isBusy() ||
-                backLeftMotor.isBusy() || backRightMotor.isBusy()) {
-//            idle();
-        }
-
-
-        stopDrive();
-    }
-
-
-    private void turncc(int degrees) {
-        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-        int target = degrees * ticks;
-
-        frontLeftMotor.setTargetPosition(-target);
-        frontRightMotor.setTargetPosition(target);
-        backLeftMotor.setTargetPosition(-target);
-        backRightMotor.setTargetPosition(target);
-
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        frontLeftMotor.setPower(0.5);
-        frontRightMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
-
-
-        while (frontLeftMotor.isBusy() || frontRightMotor.isBusy() ||
-                backLeftMotor.isBusy() || backRightMotor.isBusy()) {
-
-//            idle();
-
-        }
-
-        stopDrive();
-    }
-
-
-    private void stopDrive() {
-        frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        backRightMotor.setPower(0);
-
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-
-//        if (opModeIsActive() && runtime.time()<29){
-//            requestOpModeStop();
-//        }
+    public void turn(int degrees) {
+        encoderDrive(degrees,degrees,-degrees,-degrees);
 
     }
 
 
-
-
-
-
-
+    public void turncc(int degrees) {
+        encoderDrive(-degrees,-degrees,degrees,degrees);
+    }
 
 
 
