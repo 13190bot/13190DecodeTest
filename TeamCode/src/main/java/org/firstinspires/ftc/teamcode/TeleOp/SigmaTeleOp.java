@@ -41,10 +41,12 @@ public class SigmaTeleOp extends LinearOpMode {
 
 
 
-        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
         waitForStart();
         // Put run blocks here
 
@@ -60,43 +62,11 @@ public class SigmaTeleOp extends LinearOpMode {
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = -gamepad1.right_stick_x;
 
-
-
-
-            // Denominator is the largest motor power (absolute value) or 1
-            // This ensures all the powers maintain the same ratio,
-            // but only if at least one is out of the range [-1, 1]
             double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
             double frontLeftMotorPower = (y + x + rx) / denominator;
             double backLeftMotorPower = (y - x + rx) / denominator;
             double frontRightMotorPower = (y - x - rx) / denominator;
             double backRightMotorPower = (y + x - rx) / denominator;
-
-
-
-
-
-
-//            if (gamepad1.left_bumper) {
-//                //intakeMotor.setPower(1);
-//            }
-//            else {
-//                //intakeMotor.setPower(0);
-//            }
-//            outtakeMotor.setPower(1);
-
-//
-//            if (gamepad1.x) {
-//                telemetry.addLine("X pressed");
-//                //telemetry.addData("Servo Position", platform.getPosition());
-//                telemetry.update();
-//                // platform.setPosition(0.5);
-//            } else {
-//                telemetry.addLine("X released");
-//                //telemetry.addData("Servo Position", platform.getPosition());
-//                telemetry.update();
-//                //  platform.setPosition(0);
-//            }
 
 
             frontLeftMotor.setPower(frontLeftMotorPower);
