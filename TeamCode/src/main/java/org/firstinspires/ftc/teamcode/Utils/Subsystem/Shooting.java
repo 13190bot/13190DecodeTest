@@ -23,6 +23,15 @@ public class Shooting extends SubsystemBase {
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
         platformRight = hardwareMap.get(Servo.class, "platformRight");
         platformLeft = hardwareMap.get(Servo.class, "platformLeft");
+        platformRight.setDirection(Servo.Direction.REVERSE);
+    }
+
+
+    public void stopShooting(){
+        intakeMotor.setPower(0);
+        outtakeMotor.setPower(0);
+        platformLeft.setPosition(0);
+        platformRight.setPosition(0);
     }
 
 

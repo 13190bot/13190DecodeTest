@@ -8,14 +8,9 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.Utils.Subsystem.DriveTrain;
+import org.firstinspires.ftc.teamcode.Utils.Subsystem.Shooting;
 
-/*
-
-
-
-
-
-*/
 
 
 
@@ -35,15 +30,8 @@ public class SigmaTimeBasedPick extends LinearOpMode {
     // 3 = BLUE CLOSE
 
 
-    DcMotor backLeftMotor;
-    DcMotor backRightMotor;
-    DcMotor frontLeftMotor;
-    DcMotor frontRightMotor;
-    DcMotor intakeMotor;
-    DcMotor outtakeMotor;
-    Servo platformRight;
-    Servo platformLeft;
-
+    private DriveTrain drive;
+    private Shooting shooting;
     private ElapsedTime runtime = new ElapsedTime();
 
 
@@ -55,27 +43,8 @@ public class SigmaTimeBasedPick extends LinearOpMode {
 
 
         // Initialize hardware
-        backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
-        backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
-        frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
-        frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
-        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-        outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
-        platformRight = hardwareMap.get(Servo.class, "platformRight");
-        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
-
-//        platform.scaleRange(0, 1);
-
-
-
-
-
-
-        // Set motor directions
-        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        drive = new DriveTrain(hardwareMap);
+        shooting = new Shooting(hardwareMap);
 
 
 
@@ -193,37 +162,37 @@ while (DDD == 0 && !isStopRequested()) {
 
         sleep(waiting);
 
-        forward(25);
+        drive.forward(25);
 
-        turn(90);
+        drive.turn(90);
 
-        intakeMotor.setPower(0.7);
-        forward(30);
+        shooting.intakeMotor.setPower(0.7);
 
-        backward(50 - y);
+        drive.forward(30);
 
-        turncc(90);
+        drive.backward(50 - y);
 
-        forward(37 - x);
+        drive.turncc(90);
 
-        turn(45);
+        drive.forward(37 - x);
 
+        drive.turn(45);
 
-        turn(135);
+        drive.turn(135);
 
-        forward(13 - x);
+        drive.forward(13 - x);
 
-        turncc(90);
+        drive.turncc(90);
 
-        forward(50 - y);
+        drive.forward(50 - y);
 
-        backward(50 - y);
+        drive.backward(50 - y);
 
-        turncc(90);
+        drive.turncc(90);
 
-        forward(37 - x);
+        drive.forward(37 - x);
 
-        turn(45);
+        drive.turn(45);
 
 
 
@@ -231,107 +200,11 @@ while (DDD == 0 && !isStopRequested()) {
 
 
         //make everything  stop when runtime is > 30 seconds
-        stopAll();
-
-
-
-
-    }
-
-
-    // Helper to stop all drive motors
-    private void stopDrive() {
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
+        drive.stopDrive();
+        shooting.stopShooting();
 
 
     }
-
-
-    // Helper to stop all drive   motors
-    private void stopAll() {
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-        outtakeMotor.setPower(0);
-        intakeMotor.setPower(0);
-
-
-    }
-
-
-    // Helper method to turn clockwise
-    //assuming it takes 4 seconds for 360 degrees
-    private void turn(int degrees) {
-        frontLeftMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
-        frontRightMotor.setPower(-0.5);
-        backRightMotor.setPower(-0.5);
-        sleep((int) (degrees * (1000 / 90)));  // 360 degrees divided by 4 seconds = 90
-        stopDrive();
-        sleep(stop);
-    }
-
-
-    // Helper method to turn counterclockwise
-    //assuming it takes 4 seconds for 360 degrees
-    private void turncc(int degrees) {
-        frontLeftMotor.setPower(-0.5);
-        backLeftMotor.setPower(-0.5);
-        frontRightMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
-        sleep((int) (degrees * (1000 / 90)));  // 360 degrees divided by 4 seconds = 90
-        stopDrive();
-        sleep(stop);
-    }
-
-
-
-
-    // Helper method to drive forward
-    //assuming 1 unit in meepmeep is
-    private void forward(int unit) {
-        frontLeftMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
-        frontRightMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
-        sleep((int) (unit * (1000 / 5)));
-        stopDrive();
-        sleep(stop);
-    }
-
-
-    private void backward(int unit) {
-        frontLeftMotor.setPower(-0.5);
-        backLeftMotor.setPower(-0.5);
-        frontRightMotor.setPower(-0.5);
-        backRightMotor.setPower(-0.5);
-        sleep((int) (unit * (1000 / 5)));
-        stopDrive();
-        sleep(stop);
-    }
-
-    private void shoot(){
-
-
-        outtakeMotor.setPower(0.7);
-        sleep(1500);
-        platformLeft.setPosition(0.3);
-        platformRight.setPosition(0.3);
-        sleep(1000);
-        platformRight.setPosition(0);
-        platformLeft.setPosition(0);
-        outtakeMotor.setPower(0);
-
-
-        stopAll();
-    }
-
-
-
 
 
 
