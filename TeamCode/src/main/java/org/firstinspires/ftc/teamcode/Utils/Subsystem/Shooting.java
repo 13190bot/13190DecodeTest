@@ -11,10 +11,10 @@ public class Shooting extends SubsystemBase {
 
 
 
-    DcMotor intakeMotor;
-    DcMotor outtakeMotor;
-    Servo platformRight;
-    Servo platformLeft;
+    public DcMotor intakeMotor;
+    public DcMotor outtakeMotor;
+    public Servo platformRight;
+    public Servo platformLeft;
 
 
 

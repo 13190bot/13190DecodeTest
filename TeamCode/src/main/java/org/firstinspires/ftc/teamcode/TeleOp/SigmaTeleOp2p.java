@@ -1,238 +1,40 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.*;
 
+import com.arcrobotics.ftclib.gamepad.*;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import org.firstinspires.ftc.teamcode.Utils.Subsystem.*;
 
 
 @TeleOp
 public class SigmaTeleOp2p extends LinearOpMode {
-    DcMotor backLeftMotor;
-    DcMotor backRightMotor;
-    DcMotor frontLeftMotor;
-    DcMotor frontRightMotor;
-    DcMotor intakeMotor;
 
+    private DriveTrain drive;
+    private Shooting shooting;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    DcMotor outtakeMotor;
-    Servo platformRight;
-    Servo platformLeft;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    GamepadEx gamepadEx1;
+    GamepadEx gamepadEx2;
 
 
     @Override
     public void runOpMode() throws InterruptedException {
-        backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
-        backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
-        frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
-        frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
-        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-        outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
 
-
-
-
-        platformRight = hardwareMap.get(Servo.class, "platformRight");
-        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
-//        platform.hardwareMap(new PwmControl.PwmRange(500, 2500));
-
-
-
-
-
-
-
-
-        // Put initialization blocks here
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
-
-        platformRight.setDirection(Servo.Direction.REVERSE);
+        drive = new DriveTrain(hardwareMap);
+        shooting = new Shooting(hardwareMap);
+        gamepadEx1 = new GamepadEx(gamepad1);
+        gamepadEx2 = new GamepadEx(gamepad2);
 
 
 
 
         waitForStart();
-        // Put run blocks here
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         if (isStopRequested()) return;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         while (opModeIsActive() && !isStopRequested()) {
-            // Put loop blocks here
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -241,33 +43,6 @@ public class SigmaTeleOp2p extends LinearOpMode {
             double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = gamepad1.right_stick_x;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio,
@@ -278,137 +53,54 @@ public class SigmaTeleOp2p extends LinearOpMode {
             double frontRightMotorPower = (y - x - rx) / denominator;
             double backRightMotorPower = (y + x - rx) / denominator;
 
-
-
-
-
-
-
-
-            frontLeftMotor.setPower(frontLeftMotorPower);
-            backLeftMotor.setPower(backLeftMotorPower);
-            frontRightMotor.setPower(frontRightMotorPower);
-            backRightMotor.setPower(backRightMotorPower);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            if (gamepad2.left_bumper) {
-                intakeMotor.setPower(0.7);
-            }
-            else {
-                intakeMotor.setPower(0);
-            }
-
-
-
-
-
-
-
-
-
-
+            drive.frontLeftMotor.setPower(frontLeftMotorPower);
+            drive.backLeftMotor.setPower(backLeftMotorPower);
+            drive.frontRightMotor.setPower(frontRightMotorPower);
+            drive.backRightMotor.setPower(backRightMotorPower);
 
 
             if (gamepad2.right_trigger > 0.7) {
-                outtakeMotor.setPower(0.7);
+                shooting.outtakeMotor.setPower(0.7);
             }
             else if (gamepad2.left_trigger > 0.7) {
-                outtakeMotor.setPower(0.4);
+                shooting.outtakeMotor.setPower(0.4);
             }
             else {
-                outtakeMotor.setPower(0);
+                shooting.outtakeMotor.setPower(0);
             }
-
-
-
-
 
 
             if (gamepad2.right_bumper) {
-                telemetry.addLine("platform pressed");
-                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
-                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
-                platformRight.setPosition(1);
-                platformLeft.setPosition(1);
+                shooting.platformRight.setPosition(1);
+                shooting.platformLeft.setPosition(1);
 
-
-            }
-
-
-
-
-            if (gamepad2.circle) {
-                telemetry.addLine("platform pressed");
-                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
-                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
-                platformRight.setPosition(0.75);
-                platformLeft.setPosition(0.75);
-            }
-
-
-            if (gamepad2.triangle) {
-                telemetry.addLine("platform pressed");
-                telemetry.addData("Servo Position2 Right", platformRight.getPosition());
-                telemetry.addData("Servo Position2 Left", platformLeft.getPosition());
-                platformRight.setPosition(0);
-                platformLeft.setPosition(0);
+            } else {
+                shooting.platformRight.setPosition(0);
+                shooting.platformLeft.setPosition(0);
             }
 
 
 
 
 
-            telemetry.addData("Outtake", outtakeMotor.getPower());
-            telemetry.addData("Intake", intakeMotor.getPower());
 
+// TELEMETRY
 
+            telemetry.addLine("Intake: Left Bumper");
+            telemetry.addLine("Platform: Right Bumper");
+            telemetry.addLine("Outtake Power: 0.7 right trigger, 0.4 left trigger");
 
-
+            telemetry.addData("Platform", shooting.platformRight.getPosition());
+            telemetry.addData("Platform", shooting.platformLeft.getPosition());
+            telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
+            telemetry.addData("Intake", shooting.intakeMotor.getPower());
+            telemetry.addData("front left", drive.frontLeftMotor.getPower());
+            telemetry.addData("back left", drive.backLeftMotor.getPower());
+            telemetry.addData("front right", drive.frontRightMotor.getPower());
+            telemetry.addData("back left", drive.frontRightMotor.getPower());
 
 
             telemetry.update();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

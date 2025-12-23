@@ -24,7 +24,7 @@ public class TeleOpCommand extends CommandBase {
         double rx = -gamepad.right_stick_x;
 
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-        drive.DrivePower(((y + x + rx)/denominator),
+        drive.drivePower(((y + x + rx)/denominator),
                 ((y - x + rx)/denominator),
                 ((y - x - rx)/denominator),
                 ((y + x - rx)/denominator));

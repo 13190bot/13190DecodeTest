@@ -6,10 +6,10 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 public class DriveTrain extends SubsystemBase {
     public final int ticks = 67;
     public final int stoptime = 1000;
-    DcMotor backLeftMotor;
-    DcMotor backRightMotor;
-    DcMotor frontLeftMotor;
-    DcMotor frontRightMotor;
+    public DcMotor backLeftMotor;
+    public DcMotor backRightMotor;
+    public DcMotor frontLeftMotor;
+    public DcMotor frontRightMotor;
 
 
 
@@ -30,11 +30,11 @@ public class DriveTrain extends SubsystemBase {
 
 
 
-    public boolean Busy() {
+    public boolean isBusy() {
         return frontLeftMotor.isBusy() || frontRightMotor.isBusy() || backLeftMotor.isBusy() || backRightMotor.isBusy();
     }
 
-    public void DrivePower(double fl, double bl, double fr, double br){
+    public void drivePower(double fl, double bl, double fr, double br){
         frontLeftMotor.setPower(fl);
         backLeftMotor.setPower(bl);
         frontRightMotor.setPower(fr);
@@ -45,15 +45,15 @@ public class DriveTrain extends SubsystemBase {
 
 
     public void stopDrive() {
-        DrivePower(0,0,0,0);
+        drivePower(0,0,0,0);
     }
 
     public void turntime(int degrees) {
-        DrivePower(0.5,0.5,-0.5,-0.5);
+        drivePower(0.5,0.5,-0.5,-0.5);
     }
 
     public void turncctime(int degrees) {
-        DrivePower(-0.5,-0.5,0.5,0.5);
+        drivePower(-0.5,-0.5,0.5,0.5);
     }
 
 
@@ -62,12 +62,12 @@ public class DriveTrain extends SubsystemBase {
     // Helper method to drive forward
     //assuming 1 unit in meepmeep is
     public void forwardtime(int unit) {
-        DrivePower(0.5,0.5,0.5,0.5);
+        drivePower(0.5,0.5,0.5,0.5);
     }
 
 
     public void backwardtime(int unit) {
-        DrivePower(-0.5,-0.5,-0.5,-0.5);
+        drivePower(-0.5,-0.5,-0.5,-0.5);
     }
 
     public void resetEncoders(){
@@ -77,7 +77,7 @@ public class DriveTrain extends SubsystemBase {
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
-    public void EncoderRun(){
+    public void encoderRun(){
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -100,8 +100,8 @@ public class DriveTrain extends SubsystemBase {
     public void encoderDrive(double flunit, double blunit, double frunit, double brunit){
         resetEncoders();
         encoderTarget(flunit,blunit,frunit,brunit);
-        EncoderRun();
-        DrivePower(0.5,0.5,0.5,0.5);
+        encoderRun();
+        drivePower(0.5,0.5,0.5,0.5);
     }
 
     public void forward(double unit) {
