@@ -1,73 +1,60 @@
-package org.firstinspires.ftc.teamcode.AutoOp;
-
+package org.firstinspires.ftc.teamcode.Utils;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-
 @Autonomous
-public class BACKUPAutoOpBotCantShootThisOnlyMovesForward extends LinearOpMode {
-
-    int stop = 500;
+public class testchassisautodeccomp extends LinearOpMode {
 
     DcMotor backLeftMotor;
     DcMotor backRightMotor;
     DcMotor frontLeftMotor;
     DcMotor frontRightMotor;
 
-
-
-
-
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         // Initialize hardware
         backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
         backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
         frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
 
-
-
-
         // Set motor directions
-        frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
-
-
-
-        if (isStopRequested()) return;
-
-
+        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Wait for start
         waitForStart();
 
+        if (isStopRequested()) return;
+
+        // === Autonomous Sequence ===
+        // Example: Drive forward for 2 seconds
+        drive(0.5, 2000);
+
+        // Stop motors
+        stopDrive();
 
 
+        stopDrive();
+    }
 
+    // Helper method to drive in one direction for time (ms)
+    private void drive(double power, int timeMs) {
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
+        sleep(timeMs);
+    }
 
-        // === Autonomous Sequence ==
-        sleep(5000);
-        frontLeftMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
-        frontRightMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
-        sleep(1500);
-
+    // Helper to stop all driv e motors
+    private void stopDrive() {
         frontLeftMotor.setPower(0);
         backLeftMotor.setPower(0);
         frontRightMotor.setPower(0);
         backRightMotor.setPower(0);
-
-
-
-
     }
 }
-

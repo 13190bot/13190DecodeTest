@@ -20,27 +20,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.*;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-
-/*
-Toggle
-
-Triangle: Outtake 0.9
-Square: Outtake 0.7
-Cross: Outtake 0.5
-Circle: Outtake 0.3
-
-Dpad Up: outtake reset power 0
-Dpad Left: intake reset power 0
-Dpad Down: all reset power 0
-Dpad Right: platform reset power 0
-
-
-Left Bumper: intake
-Right Bumper: platform
-Right Trigger: auto shoot power 0.75
-Left Trigger: auto shoot power 0.5
-
- */
+import com.arcrobotics.ftclib.gamepad.*;
+import org.firstinspires.ftc.teamcode.Utils.Subsystem.*;
 
 
 
@@ -56,12 +37,11 @@ Left Trigger: auto shoot power 0.5
 
 @TeleOp
 public class SigmaTeleOp2pToggle extends LinearOpMode {
-    DcMotor backLeftMotor;
-    DcMotor backRightMotor;
-    DcMotor frontLeftMotor;
-    DcMotor frontRightMotor;
-    DcMotor intakeMotor;
 
+    private DriveTrain drive;
+    private Shooting shooting;
+    GamepadEx gamepadEx1;
+    GamepadEx gamepadEx2;
 
     //made timer cuz sleep kills entire program for the time
     private ElapsedTime runtime = new ElapsedTime();
@@ -71,12 +51,6 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
 
 
-
-
-
-    DcMotor outtakeMotor;
-    Servo platformRight;
-    Servo platformLeft;
 
 
 
@@ -131,13 +105,6 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
 
 
-
-
-
-
-
-
-
 //for the platform toggle
 
 
@@ -166,32 +133,13 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
-        backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
-        frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
-        frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
-        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-        outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
 
-        platformRight = hardwareMap.get(Servo.class, "platformRight");
-        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
+        drive = new DriveTrain(hardwareMap);
+        shooting = new Shooting(hardwareMap);
+        gamepadEx1 = new GamepadEx(gamepad1);
+        gamepadEx2 = new GamepadEx(gamepad2);
 
 
-        platformRight.setDirection(Servo.Direction.REVERSE);
-        platformRight.setPosition(0);
-        platformLeft.setPosition(0);
-
-
-
-
-
-
-
-
-        frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         waitForStart();
@@ -236,10 +184,10 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
             double backRightMotorPower = (y + x - rx) / denominator;
 
 
-            frontLeftMotor.setPower(frontLeftMotorPower);
-            backLeftMotor.setPower(backLeftMotorPower);
-            frontRightMotor.setPower(frontRightMotorPower);
-            backRightMotor.setPower(backRightMotorPower);
+            drive.frontLeftMotor.setPower(frontLeftMotorPower);
+            drive.backLeftMotor.setPower(backLeftMotorPower);
+            drive.frontRightMotor.setPower(frontRightMotorPower);
+            drive.backRightMotor.setPower(backRightMotorPower);
 
 
 
@@ -252,8 +200,8 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
             if (gamepad2.left_bumper && !lastLB) {
                 intakeOn = !intakeOn;
-                intakeMotor.setPower(intakeOn ? 0.7 : 0);
-                telemetry.addData("intake", intakeMotor.getPower());
+                shooting.intakeMotor.setPower(intakeOn ? 0.7 : 0);
+                telemetry.addData("intake", shooting.intakeMotor.getPower());
 
 
             }
@@ -261,44 +209,44 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
 
 
-
-            if (gamepad2.right_trigger > 0.5) {
-
-                stopDrive();
-                outtakeOn = true;
-                platformOn = true;
-                outtakeMotor.setPower(0.75);
-                shootnumber++;
-                while (outtakeMotor.isBusy()){
-                    telemetry.addData("shooting", shootnumber);
-                    telemetry.addData("Outtake", outtakeMotor.getPower());
-
-                }
-                platformLeft.setPosition(1);
-                platformRight.setPosition(1);
-//                telemetry.addData("Platform", platform.getPosition());
-
-            } else if (gamepad2.left_trigger > 0.5) {
-
-                stopDrive();
-                outtakeOn = true;
-                platformOn = true;
-                outtakeMotor.setPower(0.5);
-                shootnumber++;
-                while (outtakeMotor.isBusy()) {
-                    telemetry.addData("shooting", shootnumber);
-                    telemetry.addData("Outtake", outtakeMotor.getPower());
-
-                }
-                platformLeft.setPosition(1);
-                platformRight.setPosition(1);
-//                telemetry.addData("Platform", platform.getPosition());
-
-            } else if (gamepad2.right_bumper && !lastRB) {
+//
+//            if (gamepad2.right_trigger > 0.5) {
+//
+//                stopDrive();
+//                outtakeOn = true;
+//                platformOn = true;
+//                shooting.outtakeMotor.setPower(0.75);
+//                shootnumber++;
+//                while (shooting.outtakeMotor.isBusy()){
+//                    telemetry.addData("shooting", shootnumber);
+//                    telemetry.addData("Outtake", outtakeMotor.getPower());
+//
+//                }
+//                platformLeft.setPosition(1);
+//                platformRight.setPosition(1);
+////                telemetry.addData("Platform", platform.getPosition());
+//
+//            } else if (gamepad2.left_trigger > 0.5) {
+//
+//                stopDrive();
+//                outtakeOn = true;
+//                platformOn = true;
+//                outtakeMotor.setPower(0.5);
+//                shootnumber++;
+//                while (outtakeMotor.isBusy()) {
+//                    telemetry.addData("shooting", shootnumber);
+//                    telemetry.addData("Outtake", outtakeMotor.getPower());
+//
+//                }
+//                platformLeft.setPosition(1);
+//                platformRight.setPosition(1);
+////                telemetry.addData("Platform", platform.getPosition());
+//
+//            } else
+                if (gamepad2.right_bumper && !lastRB) {
                 platformOn = !platformOn;
-                platformLeft.setPosition(platformOn ? 1 : 0);
-                platformRight.setPosition(platformOn ? 1 : 0);
-//                telemetry.addData("Platform", platform.getPosition());
+                shooting.platformLeft.setPosition(platformOn ? 1 : 0);
+                shooting.platformRight.setPosition(platformOn ? 1 : 0);
             }
 
 
@@ -405,7 +353,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
 
             if (gamepad2.dpad_left){
-                intakeMotor.setPower(0);
+                shooting.intakeMotor.setPower(0);
                 intakeOn = false;
                 inttakereset++;
                 telemetry.addData("intake reset", inttakereset);
@@ -415,7 +363,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
 
             if (gamepad2.dpad_up){
-                outtakeMotor.setPower(0);
+                shooting.outtakeMotor.setPower(0);
                 outtakeOn = false;
                 outtakereset++;
                 telemetry.addData("outtake reset", outtakereset);
@@ -423,8 +371,8 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
 
             if (gamepad2.dpad_right){
-                platformLeft.setPosition(0);
-                platformRight.setPosition(0);
+                shooting.platformLeft.setPosition(0);
+                shooting.platformRight.setPosition(0);
 
                 platformOn = false;
                 platformreset++;
@@ -433,10 +381,10 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
 
             if (gamepad2.dpad_down){
-                intakeMotor.setPower(0);
-                outtakeMotor.setPower(0);
-                platformLeft.setPosition(0);
-                platformRight.setPosition(0);
+                shooting.intakeMotor.setPower(0);
+                shooting.outtakeMotor.setPower(0);
+                shooting.platformLeft.setPosition(0);
+                shooting.platformRight.setPosition(0);
 
 
                 intakeOn = false;
@@ -455,6 +403,21 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
 
 
+
+
+            telemetry.addLine("Intake: Left Bumper");
+            telemetry.addLine("Platform: Right Bumper");
+            telemetry.addLine("Outtake Power: 0.9 triangle, 0.7 square, 0.5 cross, 0.3 circle");
+            telemetry.addLine("dpad reset: left intake, up outtake, right platform, down everything");
+
+            telemetry.addData("Platform", shooting.platformRight.getPosition());
+            telemetry.addData("Platform", shooting.platformLeft.getPosition());
+            telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
+            telemetry.addData("Intake", shooting.intakeMotor.getPower());
+            telemetry.addData("front left", drive.frontLeftMotor.getPower());
+            telemetry.addData("back left", drive.backLeftMotor.getPower());
+            telemetry.addData("front right", drive.frontRightMotor.getPower());
+            telemetry.addData("back left", drive.frontRightMotor.getPower());
 
 
             telemetry.update();
@@ -496,16 +459,16 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
         // If the power changed, always turn the motor on with the new power
         if (power != lastOuttakePower) {
             outtakeOn = true;
-            outtakeMotor.setPower(power);
+            shooting.outtakeMotor.setPower(power);
             lastOuttakePower = power;
         }
         // Otherwise, toggle on/off
         else {
             outtakeOn = !outtakeOn;
-            outtakeMotor.setPower(outtakeOn ? power : 0);
+            shooting.outtakeMotor.setPower(outtakeOn ? power : 0);
         }
 
-        telemetry.addData("outtake", outtakeMotor.getPower());
+        telemetry.addData("outtake", shooting.outtakeMotor.getPower());
     }
 
 
@@ -543,14 +506,6 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 //        }
 
 
-    private void stopDrive() {
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-
-
-    }
 
 
 
