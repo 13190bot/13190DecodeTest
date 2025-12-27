@@ -114,12 +114,12 @@ public class DriveTest extends LinearOpMode {
             telemetry.addData("front left", drive.frontLeftMotor.getPower());
             telemetry.addData("back left", drive.backLeftMotor.getPower());
             telemetry.addData("front right", drive.frontRightMotor.getPower());
-            telemetry.addData("back left", drive.frontRightMotor.getPower());
+            telemetry.addData("back right", drive.backRightMotor.getPower());
 
             telemetry.addData("front left encoders", drive.frontLeftMotor.getCurrentPosition());
             telemetry.addData("back left encoders", drive.backLeftMotor.getCurrentPosition());
             telemetry.addData("front right encoders", drive.frontRightMotor.getCurrentPosition());
-            telemetry.addData("back left encoders", drive.frontRightMotor.getCurrentPosition());
+            telemetry.addData("back right encoders", drive.backRightMotor.getCurrentPosition());
 
             telemetry.update();
 

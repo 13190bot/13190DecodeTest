@@ -417,7 +417,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
             telemetry.addData("front left", drive.frontLeftMotor.getPower());
             telemetry.addData("back left", drive.backLeftMotor.getPower());
             telemetry.addData("front right", drive.frontRightMotor.getPower());
-            telemetry.addData("back left", drive.frontRightMotor.getPower());
+            telemetry.addData("back right", drive.backRightMotor.getPower());
 
 
             telemetry.update();
