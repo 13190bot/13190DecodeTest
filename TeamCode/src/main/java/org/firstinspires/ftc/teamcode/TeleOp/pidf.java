@@ -4,12 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 @TeleOp(name="FlywheelPIDF")
-public class FlywheelPIDFOpMode extends LinearOpMode {
+public class pidf extends LinearOpMode {
 
     private DcMotorEx flywheel;
     private PIDFController pidfController;
 
-    // Tuned PIDF constants for your flywheel
+    // Tuned PIDF constants for your flywheel e
     private static final double kP = 0.001;
     private static final double kI = 0.0001;
     private static final double kD = 0.00001;
