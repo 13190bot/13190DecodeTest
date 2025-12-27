@@ -20,7 +20,7 @@
  */
 
 
-package org.firstinspires.ftc.teamcode.Utils;
+package org.firstinspires.ftc.teamcode.Utils.CV;
 
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
