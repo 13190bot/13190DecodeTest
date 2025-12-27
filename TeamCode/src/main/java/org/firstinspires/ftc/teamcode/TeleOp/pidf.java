@@ -1,79 +1,54 @@
-package org.firstinspires.ftc.teamcode.TeleOp;
-
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.arcrobotics.ftclib.controller.PIDFController;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.util.Range;
-public class pidf extends OpMode {
 
-//e
+@TeleOp(name="FlywheelPIDF")
+public class FlywheelPIDFOpMode extends LinearOpMode {
 
+    private DcMotorEx flywheel;
+    private PIDFController pidfController;
 
-    @TeleOp(name = "outtakeMotor PIDF Test", group = "Test")
+    // Tuned PIDF constants for your flywheel
+    private static final double kP = 0.001;
+    private static final double kI = 0.0001;
+    private static final double kD = 0.00001;
+    private static final double kF = 0.0002;
 
+    // Target velocity (encoder ticks per second)
+    private double targetVelocity = 1500;
 
-        // Hardware
-        private DcMotorEx outtakeMotor;
+    @Override
+    public void runOpMode() {
 
-        // Encoder info (CHANGE THIS)
-        private static final double TICKS_PER_REV = 28.0; // GoBILDA 5202/5203 motor
+        flywheel = hardwareMap.get(DcMotorEx.class, "flywheelMotor");
 
-        // PIDF constants (TUNE THESE)
-        private static final double kP = 0.0015;
-        private static final double kI = 0.0;
-        private static final double kD = 0.00005;
-        private static final double kF = 0.00017;
+        // Set motor to run using encoder for velocity feedback
+        flywheel.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
-        // Target speed
-        private double targetRPM = 4200;
+        // Create PIDFController with flywheel-specific gains
+        pidfController = new PIDFController(new double[]{kP, kI, kD, kF});
 
-        // Controller
-        private PIDFController pidf;
+        waitForStart();
 
-        @Override
-        public void init() {
+        while (opModeIsActive()) {
 
-            outtakeMotor = hardwareMap.get(DcMotorEx.class, "outtakeMotor");
+            // Current velocity reading from encoder
+            double currentVelocity = flywheel.getVelocity();
 
-            outtakeMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-            outtakeMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+            // Calculate the new power using PIDF controller
+            double powerOutput = pidfController.calculate(currentVelocity, targetVelocity);
 
-            pidf = new PIDFController(kP, kI, kD, kF);
-            pidf.setTolerance(50); // RPM tolerance
-        }
+            // Optional: clamp power to safe range
+            powerOutput = Math.max(-1.0, Math.min(1.0, powerOutput));
 
-        @Override
-        public void loop() {
+            // Apply the calculated power to the flywheel
+            flywheel.setPower(powerOutput);
 
-            // Enable / disable outtakeMotor
-            if (gamepad1.a) {
-                targetRPM = 4200;
-            } else if (gamepad1.b) {
-                targetRPM = 0;
-            }
-
-            // Get current RPM
-            double currentRPM =
-                    outtakeMotor.getVelocity() * 60.0 / TICKS_PER_REV;
-
-            // PIDF calculation
-            double power = pidf.calculate(currentRPM, targetRPM);
-
-            // Clamp power
-            power = Range.clip(power, 0.0, 1.0);
-
-            // Apply power
-            outtakeMotor.setPower(power);
-
-            // Telemetry
-            telemetry.addData("Target RPM", targetRPM);
-            telemetry.addData("Current RPM", currentRPM);
-            telemetry.addData("Motor Power", power);
-            telemetry.addData("At Speed", pidf.atSetPoint());
+            telemetry.addData("Target Vel", targetVelocity);
+            telemetry.addData("Current Vel", currentVelocity);
+            telemetry.addData("Power", powerOutput);
             telemetry.update();
-
+        }
     }
-
 }
