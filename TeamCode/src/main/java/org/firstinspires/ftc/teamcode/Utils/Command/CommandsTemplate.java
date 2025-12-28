@@ -4,12 +4,12 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-public class DriveCommands extends CommandBase{
+public class CommandsTemplate extends CommandBase{
 public final DriveTrain driveTrain;
 
 public ElapsedTime runtime;
 
-    public DriveCommands(DriveTrain driveTrain) {
+    public CommandsTemplate(DriveTrain driveTrain) {
         this.driveTrain = driveTrain;
         this.runtime = new ElapsedTime();
         addRequirements(driveTrain);
