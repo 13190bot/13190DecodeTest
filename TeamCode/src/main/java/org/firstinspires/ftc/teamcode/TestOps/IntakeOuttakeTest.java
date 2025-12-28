@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.TestOps;
 
 
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -15,11 +16,13 @@ import org.firstinspires.ftc.teamcode.Utils.Subsystem.*;
 
 
 @TeleOp
+@Config
 public class IntakeOuttakeTest extends LinearOpMode {
 
 
     DcMotor intakeMotor;
     DcMotor outtakeMotor;
+    public static double outtakePower = 1;
 
 
 
@@ -52,7 +55,7 @@ public class IntakeOuttakeTest extends LinearOpMode {
 
 
             if (gamepad1.left_bumper) {
-                outtakeMotor.setPower(1);
+                outtakeMotor.setPower(outtakePower);
             }
 
             if (gamepad1.right_bumper) {
