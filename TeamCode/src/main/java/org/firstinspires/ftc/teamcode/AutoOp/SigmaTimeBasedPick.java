@@ -17,6 +17,10 @@ import org.firstinspires.ftc.teamcode.Utils.Subsystem.Shooting;
 @Autonomous
 public class SigmaTimeBasedPick extends LinearOpMode {
 
+
+    public static boolean isRed;
+
+
     int stop = 500;
 
     int waiting = 3;
@@ -146,6 +150,15 @@ while (DDD == 0 && !isStopRequested()) {
 
 
 
+
+    if (location == 0 || location == 1){
+        isRed = true;
+    } else if (location == 2 || location == 3){
+            isRed = false;
+    }
+
+
+
         // Wait for start
         waitForStart();
         runtime.reset();
@@ -161,6 +174,28 @@ while (DDD == 0 && !isStopRequested()) {
 
 
         sleep(waiting);
+
+
+        //red far
+        if (location == 0){
+
+        }
+        //red close
+        if (location == 1){
+
+        }
+
+
+        // blue far
+        if (location == 2){
+
+
+        }
+
+        // blue close
+        if (location == 3){
+
+        }
 
         drive.forward(25);
 
