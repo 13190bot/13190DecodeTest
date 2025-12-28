@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.arcrobotics.ftclib.command.*;
 
 
+import org.firstinspires.ftc.teamcode.Utils.Pattern;
 import org.firstinspires.ftc.teamcode.Utils.Subsystem.*;
 import org.firstinspires.ftc.teamcode.Utils.Command.*;
 
@@ -67,12 +68,14 @@ public class CommandTeleOp extends LinearOpMode {
 
 //have aim for when alliance is red or alliance is blue
 
-            if (SigmaTimeBasedPick.isRed){
+            if (SigmaTimeBasedPick.alliance == Pattern.alliance.RED){
 
-            }else {
+            }else if (SigmaTimeBasedPick.alliance == Pattern.alliance.BLUE){
+
+            }else{
+               //backup if it doesn't work
 
             }
-
 
 
 

@@ -11,6 +11,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Utils.Subsystem.DriveTrain;
 import org.firstinspires.ftc.teamcode.Utils.Subsystem.Shooting;
 
+import org.firstinspires.ftc.teamcode.Utils.Pattern;
+
 
 
 
@@ -18,9 +20,10 @@ import org.firstinspires.ftc.teamcode.Utils.Subsystem.Shooting;
 public class SigmaTimeBasedPick extends LinearOpMode {
 
 
-    public static boolean isRed;
 
-
+    public static Pattern.alliance alliance;
+    public static Pattern.startingLocation startingLocation;
+    public static Pattern.motif motif;
     int stop = 500;
 
     int waiting = 3;
@@ -122,8 +125,22 @@ while (DDD == 0 && !isStopRequested()) {
 
         }
 
-        telemetry.addData("Location", location);
-        telemetry.addLine("0: RED FAR, 1: RED CLOSE, 2: BLUE FAR, 3: BLUE CLOSE");
+
+    if (location == 0 || location == 1){
+        alliance = Pattern.alliance.RED;
+    } else if (location == 2 || location == 3){
+        alliance = Pattern.alliance.BLUE;
+    }
+
+    if (location == 0 || location == 2){
+        startingLocation = Pattern.startingLocation.FAR;
+    } else if (location == 1 || location == 3){
+        startingLocation = Pattern.startingLocation.CLOSE;
+    }
+
+
+        telemetry.addData("Alliance", alliance);
+        telemetry.addData("Location", startingLocation);
         telemetry.addData("delay selected in seconds", waiting/1000);
         telemetry.addLine("Is this correct? Circle for Yes, Cross for No.");
         telemetry.update();
@@ -151,51 +168,47 @@ while (DDD == 0 && !isStopRequested()) {
 
 
 
-    if (location == 0 || location == 1){
-        isRed = true;
-    } else if (location == 2 || location == 3){
-            isRed = false;
-    }
 
-
-
-        // Wait for start
         waitForStart();
-        runtime.reset();
 
 
 
 
-        // === Autonomous Sequence ==
         int x = 1; //shooting
         int y = 1; //shooting
 
 
 
+        runtime.reset();
 
         sleep(waiting);
 
+        if (alliance == Pattern.alliance.RED){
 
-        //red far
-        if (location == 0){
+            if (startingLocation == Pattern.startingLocation.FAR){
 
+            }
+
+            if (startingLocation == Pattern.startingLocation.CLOSE){
+
+            }
+
+        }else if (alliance == Pattern.alliance.BLUE){
+
+            if (startingLocation == Pattern.startingLocation.FAR){
+
+            }
+
+            if (startingLocation == Pattern.startingLocation.CLOSE){
+
+            }
+        }else{
+            //if it doesn't work... just go forwards
         }
-        //red close
-        if (location == 1){
-
-        }
 
 
-        // blue far
-        if (location == 2){
 
 
-        }
-
-        // blue close
-        if (location == 3){
-
-        }
 
         drive.forward(25);
 
