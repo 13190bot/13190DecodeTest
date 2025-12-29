@@ -1,54 +1,49 @@
+package org.firstinspires.ftc.teamcode;
+
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
+import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.controller.PIDFController;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-@TeleOp(name="FlywheelPIDF")
-public class pidf extends LinearOpMode {
+@Config
+public class updatedPIDF{
 
-    private DcMotorEx flywheel;
-    private PIDFController pidfController;
+    public DcMotorEx flywheel;
+    public PIDFController pidfController;
 
-    // Tuned PIDF constants for your flywheel e
-    private static final double kP = 0.001;
-    private static final double kI = 0.0001;
-    private static final double kD = 0.00001;
-    private static final double kF = 0.0002;
+    public double kP = 0.001;
+    public double kI = 0.0001;
+    public double kD = 0.00001;
 
-    // Target velocity (encoder ticks per second)
-    private double targetVelocity = 1500;
+    public double targetVelocity = 1500;
 
-    @Override
-    public void runOpMode() {
-
+    public void FlywheelPIDF(DcMotorEx flywheel) {
+        this.flywheel = flywheel;
         flywheel = hardwareMap.get(DcMotorEx.class, "flywheelMotor");
 
-        // Set motor to run using encoder for velocity feedback
-        flywheel.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        flywheel.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        flywheel.setMode(DcMotorEx.ZeroPowerBehavior.FLOAT);
+        pidfController = new PIDFController(kP, kI, kD);
 
-        // Create PIDFController with flywheel-specific gains
-        pidfController = new PIDFController(new double[]{kP, kI, kD, kF});
+    }
+    public void setTargetVelocity(double velocity) {
+        targetVelocity = velocity;
+    }
 
-        waitForStart();
+   public void update(){
 
-        while (opModeIsActive()) {
-
-            // Current velocity reading from encoder
             double currentVelocity = flywheel.getVelocity();
 
-            // Calculate the new power using PIDF controller
-            double powerOutput = pidfController.calculate(currentVelocity, targetVelocity);
+            double output = pidfController.calculate(currentVelocity, targetVelocity);
 
-            // Optional: clamp power to safe range
-            powerOutput = Math.max(-1.0, Math.min(1.0, powerOutput));
+            output = Math.max(-1.0, Math.min(1.0, output));
 
-            // Apply the calculated power to the flywheel
-            flywheel.setPower(powerOutput);
+            flywheel.setVelocity(output);
 
             telemetry.addData("Target Vel", targetVelocity);
             telemetry.addData("Current Vel", currentVelocity);
-            telemetry.addData("Power", powerOutput);
             telemetry.update();
         }
     }
-}
