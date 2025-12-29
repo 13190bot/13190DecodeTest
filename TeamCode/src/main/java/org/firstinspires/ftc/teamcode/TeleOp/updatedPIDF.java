@@ -32,18 +32,18 @@ public class updatedPIDF{
         targetVelocity = velocity;
     }
 
-   public void update(){
+    public void update(){
 
-            double currentVelocity = flywheel.getVelocity();
+        double currentVelocity = flywheel.getVelocity();
 
-            double output = pidfController.calculate(currentVelocity, targetVelocity);
+        double output = pidfController.calculate(currentVelocity, targetVelocity);
 
-            output = Math.max(-1.0, Math.min(1.0, output));
+        output = Math.max(-1.0, Math.min(1.0, output));
 
-            flywheel.setVelocity(output);
+        flywheel.setVelocity(output);
 
-            telemetry.addData("Target Vel", targetVelocity);
-            telemetry.addData("Current Vel", currentVelocity);
-            telemetry.update();
-        }
+        telemetry.addData("Target Vel", targetVelocity);
+        telemetry.addData("Current Vel", currentVelocity);
+        telemetry.update();
     }
+}
