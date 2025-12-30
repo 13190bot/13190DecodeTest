@@ -66,9 +66,7 @@ public class SigmaTimeBasedPick extends LinearOpMode {
         int CCC = 0;
         
         int DDD = 0;
-  
-init();
-      
+
 while (DDD == 0 && !isStopRequested()) {
 
 
