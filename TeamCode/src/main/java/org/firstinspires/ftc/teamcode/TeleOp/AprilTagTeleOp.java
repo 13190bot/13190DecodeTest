@@ -1,16 +1,19 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
+import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import com.arcrobotics.ftclib.gamepad.*;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
+
+import org.firstinspires.ftc.teamcode.Utils.Pattern;
 import org.firstinspires.ftc.teamcode.Utils.Subsystem.*;
 
+import org.firstinspires.ftc.teamcode.AutoOp.SigmaTimeBasedPick;
 
 @TeleOp
-public class SigmaTeleOp2p extends LinearOpMode {
+public class AprilTagTeleOp extends LinearOpMode {
 
     private DriveTrain drive;
     private Shooting shooting;
@@ -38,8 +41,6 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
 
-
-
             double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = gamepad1.right_stick_x;
@@ -59,36 +60,25 @@ public class SigmaTeleOp2p extends LinearOpMode {
             drive.backRightMotor.setPower(backRightMotorPower);
 
 
-            if (gamepad2.right_trigger > 0.7) {
-                shooting.outtakeMotor.setPower(0.7);
-            }
-            else if (gamepad2.left_trigger > 0.7) {
-                shooting.outtakeMotor.setPower(0.4);
-            }
-            else {
-                shooting.outtakeMotor.setPower(0);
-            }
 
 
-            if (gamepad2.right_bumper) {
-                shooting.platformRight.setPosition(1);
-                shooting.platformLeft.setPosition(1);
 
-            } else {
-                shooting.platformRight.setPosition(0);
-                shooting.platformLeft.setPosition(0);
+//have aim for when alliance is red or alliance is blue
+
+            if (SigmaTimeBasedPick.alliance == Pattern.alliance.RED){
+
+            }else if (SigmaTimeBasedPick.alliance == Pattern.alliance.BLUE){
+
+            }else{
+               //backup if it doesn't work
+
             }
-
 
 
 
 
 
 // TELEMETRY
-
-            telemetry.addLine("Intake: Left Bumper");
-            telemetry.addLine("Platform: Right Bumper");
-            telemetry.addLine("Outtake Power: 0.7 right trigger, 0.4 left trigger");
 
             telemetry.addData("Platform", shooting.platformRight.getPosition());
             telemetry.addData("Platform", shooting.platformLeft.getPosition());

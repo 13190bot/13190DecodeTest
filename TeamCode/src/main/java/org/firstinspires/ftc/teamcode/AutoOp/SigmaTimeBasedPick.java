@@ -8,21 +8,22 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.Utils.Subsystem.DriveTrain;
+import org.firstinspires.ftc.teamcode.Utils.Subsystem.Shooting;
 
+import org.firstinspires.ftc.teamcode.Utils.Pattern;
 
-/*
-
-
-
-
-
-*/
 
 
 
 @Autonomous
 public class SigmaTimeBasedPick extends LinearOpMode {
 
+
+
+    public static Pattern.alliance alliance;
+    public static Pattern.startingLocation startingLocation;
+    public static Pattern.motif motif;
     int stop = 500;
 
     int waiting = 3;
@@ -36,15 +37,8 @@ public class SigmaTimeBasedPick extends LinearOpMode {
     // 3 = BLUE CLOSE
 
 
-    DcMotor backLeftMotor;
-    DcMotor backRightMotor;
-    DcMotor frontLeftMotor;
-    DcMotor frontRightMotor;
-    DcMotor intakeMotor;
-    DcMotor outtakeMotor;
-    Servo platformRight;
-    Servo platformLeft;
-
+    private DriveTrain drive;
+    private Shooting shooting;
     private ElapsedTime runtime = new ElapsedTime();
 
 
@@ -53,28 +47,11 @@ public class SigmaTimeBasedPick extends LinearOpMode {
 
 
 
+
+
         // Initialize hardware
-        backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
-        backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
-        frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
-        frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
-        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-        outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
-        platformRight = hardwareMap.get(Servo.class, "platformRight");
-        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
-
-//        platform.scaleRange(0, 1);
-
-
-
-
-
-
-        // Set motor directions
-        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        drive = new DriveTrain(hardwareMap);
+        shooting = new Shooting(hardwareMap);
 
 
 
@@ -89,9 +66,7 @@ public class SigmaTimeBasedPick extends LinearOpMode {
         int CCC = 0;
         
         int DDD = 0;
-  
-init();
-      
+
 while (DDD == 0 && !isStopRequested()) {
 
 
@@ -148,8 +123,22 @@ while (DDD == 0 && !isStopRequested()) {
 
         }
 
-        telemetry.addData("Location", location);
-        telemetry.addLine("0: RED FAR, 1: RED CLOSE, 2: BLUE FAR, 3: BLUE CLOSE");
+
+    if (location == 0 || location == 1){
+        alliance = Pattern.alliance.RED;
+    } else if (location == 2 || location == 3){
+        alliance = Pattern.alliance.BLUE;
+    }
+
+    if (location == 0 || location == 2){
+        startingLocation = Pattern.startingLocation.FAR;
+    } else if (location == 1 || location == 3){
+        startingLocation = Pattern.startingLocation.CLOSE;
+    }
+
+
+        telemetry.addData("Alliance", alliance);
+        telemetry.addData("Location", startingLocation);
         telemetry.addData("delay selected in seconds", waiting/1000);
         telemetry.addLine("Is this correct? Circle for Yes, Cross for No.");
         telemetry.update();
@@ -176,27 +165,55 @@ while (DDD == 0 && !isStopRequested()) {
 
 
 
-        // Wait for start
+
+
         waitForStart();
-        runtime.reset();
 
 
 
 
-        // === Autonomous Sequence ==
         int x = 1; //shooting
         int y = 1; //shooting
 
 
 
+        runtime.reset();
 
         sleep(waiting);
+
+        if (alliance == Pattern.alliance.RED){
+
+            if (startingLocation == Pattern.startingLocation.FAR){
+
+            }
+
+            if (startingLocation == Pattern.startingLocation.CLOSE){
+
+            }
+
+        }else if (alliance == Pattern.alliance.BLUE){
+
+            if (startingLocation == Pattern.startingLocation.FAR){
+
+            }
+
+            if (startingLocation == Pattern.startingLocation.CLOSE){
+
+            }
+        }else{
+            //if it doesn't work... just go forwards
+        }
+
+
+
+
 
         forward(25);
 
         turn(90);
 
-        intakeMotor.setPower(0.7);
+        shooting.intakeMotor.setPower(0.7);
+
         forward(30);
 
         backward(50 - y);
@@ -206,7 +223,6 @@ while (DDD == 0 && !isStopRequested()) {
         forward(37 - x);
 
         turn(45);
-
 
         turn(135);
 
@@ -230,112 +246,62 @@ while (DDD == 0 && !isStopRequested()) {
 
 
         //make everything  stop when runtime is > 30 seconds
-        stopAll();
-
-
-
-
-    }
-
-
-    // Helper to stop all drive motors
-    private void stopDrive() {
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
+        drive.stopDrive();
+        shooting.stopShooting();
 
 
     }
 
 
-    // Helper to stop all drive   motors
-    private void stopAll() {
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-        outtakeMotor.setPower(0);
-        intakeMotor.setPower(0);
 
+    public void forward(double inches){
+        drive.forward(0.5,inches);
+        while (drive.isBusy()){
+            telemetry.addData("moving forward", inches);
+            telemetry.addData("final position", inches/DriveTrain.ticks);
+            getMotorPosition();
+            telemetry.update();
+        }
 
     }
 
+    public void backward(double inches){
+        drive.backward(0.5, inches);
+        while (drive.isBusy()){
+            telemetry.addData("moving backward", inches);
+            telemetry.addData("final position", inches/DriveTrain.ticks);
+            getMotorPosition();
+            telemetry.update();
+        }
+    }
 
-    // Helper method to turn clockwise
-    //assuming it takes 4 seconds for 360 degrees
-    private void turn(int degrees) {
-        frontLeftMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
-        frontRightMotor.setPower(-0.5);
-        backRightMotor.setPower(-0.5);
-        sleep((int) (degrees * (1000 / 90)));  // 360 degrees divided by 4 seconds = 90
-        stopDrive();
-        sleep(stop);
+    public void turn(double degrees){
+        drive.turn(0.5, degrees);
+        while (drive.isBusy()){
+            telemetry.addData("turning clockwise", degrees);
+            telemetry.addData("final position", degrees/DriveTrain.ticks);
+            getMotorPosition();
+            telemetry.update();
+        }
+    }
+
+    public void turncc(double degrees){
+        drive.turncc(0.5, degrees);
+        while (drive.isBusy()){
+            telemetry.addData("turning counterclockwise", degrees);
+            telemetry.addData("final position", degrees/DriveTrain.ticks);
+            getMotorPosition();
+            telemetry.update();
+        }
     }
 
 
-    // Helper method to turn counterclockwise
-    //assuming it takes 4 seconds for 360 degrees
-    private void turncc(int degrees) {
-        frontLeftMotor.setPower(-0.5);
-        backLeftMotor.setPower(-0.5);
-        frontRightMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
-        sleep((int) (degrees * (1000 / 90)));  // 360 degrees divided by 4 seconds = 90
-        stopDrive();
-        sleep(stop);
+    public void getMotorPosition(){
+        telemetry.addData("fl", drive.frontLeftMotor.getCurrentPosition());
+        telemetry.addData("fr",drive.frontRightMotor.getCurrentPosition());
+        telemetry.addData("bl",drive.backLeftMotor.getCurrentPosition());
+        telemetry.addData("br",drive.backRightMotor.getCurrentPosition());
     }
-
-
-
-
-    // Helper method to drive forward
-    //assuming 1 unit in meepmeep is
-    private void forward(int unit) {
-        frontLeftMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
-        frontRightMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
-        sleep((int) (unit * (1000 / 5)));
-        stopDrive();
-        sleep(stop);
-    }
-
-
-    private void backward(int unit) {
-        frontLeftMotor.setPower(-0.5);
-        backLeftMotor.setPower(-0.5);
-        frontRightMotor.setPower(-0.5);
-        backRightMotor.setPower(-0.5);
-        sleep((int) (unit * (1000 / 5)));
-        stopDrive();
-        sleep(stop);
-    }
-
-    private void shoot(){
-
-
-        outtakeMotor.setPower(0.7);
-        sleep(1500);
-        platformLeft.setPosition(0.3);
-        platformRight.setPosition(0.3);
-        sleep(1000);
-        platformRight.setPosition(0);
-        platformLeft.setPosition(0);
-        outtakeMotor.setPower(0);
-
-
-        stopAll();
-    }
-
-
-
-
-
-
-
-
 
 
 }
