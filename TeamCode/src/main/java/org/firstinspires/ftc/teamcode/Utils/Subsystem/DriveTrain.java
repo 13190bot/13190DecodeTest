@@ -1,16 +1,18 @@
 package org.firstinspires.ftc.teamcode.Utils.Subsystem;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.*;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
 
 public class DriveTrain extends SubsystemBase {
-    public final int ticks = 67;
-    public final int stoptime = 1000;
+    public static double ticks = 67;
     public DcMotor backLeftMotor;
     public DcMotor backRightMotor;
     public DcMotor frontLeftMotor;
     public DcMotor frontRightMotor;
-
+    public IMU imu;
 
 
     public DriveTrain(HardwareMap hardwareMap) {
@@ -20,15 +22,39 @@ public class DriveTrain extends SubsystemBase {
         backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
         frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
+        imu = hardwareMap.get(IMU.class, "imu");
+        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
+        imu.initialize(parameters);
 
-        frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
+        backRightMotor.setDirection(DcMotor.Direction.FORWARD);
+        backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+
+
+        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        runWithoutEncoders();
+
+//        runWithEncoders();
+
 
     }
 
+    public double botHeading() {
+        return imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+    }
 
+
+    public void resetIMU() {
+        imu.resetYaw();
+    }
 
     public boolean isBusy() {
         return frontLeftMotor.isBusy() || frontRightMotor.isBusy() || backLeftMotor.isBusy() || backRightMotor.isBusy();
@@ -48,12 +74,12 @@ public class DriveTrain extends SubsystemBase {
         drivePower(0,0,0,0);
     }
 
-    public void turntime(int degrees) {
-        drivePower(0.5,0.5,-0.5,-0.5);
+    public void turntime(double power) {
+        drivePower(power,power,-power,-power);
     }
 
-    public void turncctime(int degrees) {
-        drivePower(-0.5,-0.5,0.5,0.5);
+    public void turncctime(double power) {
+        drivePower(-power,-power,power,power);
     }
 
 
@@ -61,15 +87,28 @@ public class DriveTrain extends SubsystemBase {
 
     // Helper method to drive forward
     //assuming 1 unit in meepmeep is
-    public void forwardtime(int unit) {
-        drivePower(0.5,0.5,0.5,0.5);
+    public void forwardtime(double power) {
+        drivePower(power,power,power,power);
     }
 
 
-    public void backwardtime(int unit) {
-        drivePower(-0.5,-0.5,-0.5,-0.5);
+    public void backwardtime(double power) {
+        drivePower(-power,-power,-power,-power);
     }
 
+    public void runWithoutEncoders(){
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+
+    public void runWithEncoders(){
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
     public void resetEncoders(){
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -97,32 +136,32 @@ public class DriveTrain extends SubsystemBase {
     }
 
 
-    public void encoderDrive(double flunit, double blunit, double frunit, double brunit){
+    public void encoderDrive(double power, double flunit, double blunit, double frunit, double brunit){
         resetEncoders();
         encoderTarget(flunit,blunit,frunit,brunit);
         encoderRun();
-        drivePower(0.5,0.5,0.5,0.5);
+        drivePower(power,power,power,power);
     }
 
-    public void forward(double unit) {
-        encoderDrive(unit,unit,unit,unit);
-    }
-
-
-    public void backward(double unit) {
-        encoderDrive(-unit,-unit,-unit,-unit);
+    public void forward(double power, double unit) {
+        encoderDrive(power, unit,unit,unit,unit);
     }
 
 
+    public void backward(double power, double unit) {
+        encoderDrive(power, -unit,-unit,-unit,-unit);
+    }
 
-    public void turn(int degrees) {
-        encoderDrive(degrees,degrees,-degrees,-degrees);
+
+
+    public void turn(double power, double degrees) {
+        encoderDrive(power, degrees,degrees,-degrees,-degrees);
 
     }
 
 
-    public void turncc(int degrees) {
-        encoderDrive(-degrees,-degrees,degrees,degrees);
+    public void turncc(double power, double degrees) {
+        encoderDrive(power, -degrees,-degrees,degrees,degrees);
     }
 
 

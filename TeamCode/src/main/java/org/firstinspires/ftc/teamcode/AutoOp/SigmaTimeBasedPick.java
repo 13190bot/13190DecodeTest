@@ -208,37 +208,37 @@ while (DDD == 0 && !isStopRequested()) {
 
 
 
-        drive.forward(25);
+        forward(25);
 
-        drive.turn(90);
+        turn(90);
 
         shooting.intakeMotor.setPower(0.7);
 
-        drive.forward(30);
+        forward(30);
 
-        drive.backward(50 - y);
+        backward(50 - y);
 
-        drive.turncc(90);
+        turncc(90);
 
-        drive.forward(37 - x);
+        forward(37 - x);
 
-        drive.turn(45);
+        turn(45);
 
-        drive.turn(135);
+        turn(135);
 
-        drive.forward(13 - x);
+        forward(13 - x);
 
-        drive.turncc(90);
+        turncc(90);
 
-        drive.forward(50 - y);
+        forward(50 - y);
 
-        drive.backward(50 - y);
+        backward(50 - y);
 
-        drive.turncc(90);
+        turncc(90);
 
-        drive.forward(37 - x);
+        forward(37 - x);
 
-        drive.turn(45);
+        turn(45);
 
 
 
@@ -254,8 +254,54 @@ while (DDD == 0 && !isStopRequested()) {
 
 
 
+    public void forward(double inches){
+        drive.forward(0.5,inches);
+        while (drive.isBusy()){
+            telemetry.addData("moving forward", inches);
+            telemetry.addData("final position", inches/DriveTrain.ticks);
+            getMotorPosition();
+            telemetry.update();
+        }
+
+    }
+
+    public void backward(double inches){
+        drive.backward(0.5, inches);
+        while (drive.isBusy()){
+            telemetry.addData("moving backward", inches);
+            telemetry.addData("final position", inches/DriveTrain.ticks);
+            getMotorPosition();
+            telemetry.update();
+        }
+    }
+
+    public void turn(double degrees){
+        drive.turn(0.5, degrees);
+        while (drive.isBusy()){
+            telemetry.addData("turning clockwise", degrees);
+            telemetry.addData("final position", degrees/DriveTrain.ticks);
+            getMotorPosition();
+            telemetry.update();
+        }
+    }
+
+    public void turncc(double degrees){
+        drive.turncc(0.5, degrees);
+        while (drive.isBusy()){
+            telemetry.addData("turning counterclockwise", degrees);
+            telemetry.addData("final position", degrees/DriveTrain.ticks);
+            getMotorPosition();
+            telemetry.update();
+        }
+    }
 
 
+    public void getMotorPosition(){
+        telemetry.addData("fl", drive.frontLeftMotor.getCurrentPosition());
+        telemetry.addData("fr",drive.frontRightMotor.getCurrentPosition());
+        telemetry.addData("bl",drive.backLeftMotor.getCurrentPosition());
+        telemetry.addData("br",drive.backRightMotor.getCurrentPosition());
+    }
 
 
 }

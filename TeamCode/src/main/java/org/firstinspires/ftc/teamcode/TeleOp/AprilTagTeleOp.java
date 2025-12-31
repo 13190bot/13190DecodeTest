@@ -1,22 +1,19 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
+import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import com.arcrobotics.ftclib.gamepad.*;
-import com.qualcomm.robotcore.hardware.Gamepad;
-
-import com.arcrobotics.ftclib.command.*;
 
 
 import org.firstinspires.ftc.teamcode.Utils.Pattern;
 import org.firstinspires.ftc.teamcode.Utils.Subsystem.*;
-import org.firstinspires.ftc.teamcode.Utils.Command.*;
 
 import org.firstinspires.ftc.teamcode.AutoOp.SigmaTimeBasedPick;
 
 @TeleOp
-public class CommandTeleOp extends LinearOpMode {
+public class AprilTagTeleOp extends LinearOpMode {
 
     private DriveTrain drive;
     private Shooting shooting;
