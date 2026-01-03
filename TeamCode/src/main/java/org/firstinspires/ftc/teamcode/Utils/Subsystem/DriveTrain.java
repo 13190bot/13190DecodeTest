@@ -7,7 +7,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 
 public class DriveTrain extends SubsystemBase {
-    public static double ticks = 67;
+    public static double ticks = 67; // how much encoder tick goes per inch
+    public static double isBusyTolerance = 3; // change this later
+    public static double inchesPerSecond; // find this out for later assuming 0.5 speed on all motors
     public DcMotor backLeftMotor;
     public DcMotor backRightMotor;
     public DcMotor frontLeftMotor;
@@ -56,8 +58,11 @@ public class DriveTrain extends SubsystemBase {
         imu.resetYaw();
     }
 
-    public boolean isBusy() {
-        return frontLeftMotor.isBusy() || frontRightMotor.isBusy() || backLeftMotor.isBusy() || backRightMotor.isBusy();
+    public boolean isBusy(double unit) {
+        return frontLeftMotor.getCurrentPosition() > (unit*ticks-isBusyTolerance) ||
+                backLeftMotor.getCurrentPosition() > (unit*ticks-isBusyTolerance) ||
+                frontRightMotor.getCurrentPosition() > (unit*ticks-isBusyTolerance) ||
+                backRightMotor.getCurrentPosition() > (unit*ticks-isBusyTolerance);
     }
 
     public void drivePower(double fl, double bl, double fr, double br){

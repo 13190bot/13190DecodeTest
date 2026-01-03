@@ -255,8 +255,9 @@ while (DDD == 0 && !isStopRequested()) {
 
 
     public void forward(double inches){
+        runtime.reset();
         drive.forward(0.5,inches);
-        while (drive.isBusy()){
+        while (drive.isBusy(inches) || runtime.seconds() > inches/DriveTrain.inchesPerSecond*0.95){
             telemetry.addData("moving forward", inches);
             telemetry.addData("final position", inches/DriveTrain.ticks);
             getMotorPosition();
@@ -266,8 +267,9 @@ while (DDD == 0 && !isStopRequested()) {
     }
 
     public void backward(double inches){
+        runtime.reset();
         drive.backward(0.5, inches);
-        while (drive.isBusy()){
+        while (drive.isBusy(inches) || runtime.seconds() > inches/DriveTrain.inchesPerSecond*0.95){
             telemetry.addData("moving backward", inches);
             telemetry.addData("final position", inches/DriveTrain.ticks);
             getMotorPosition();
@@ -276,8 +278,9 @@ while (DDD == 0 && !isStopRequested()) {
     }
 
     public void turn(double degrees){
+        runtime.reset();
         drive.turn(0.5, degrees);
-        while (drive.isBusy()){
+        while (drive.isBusy(degrees) || runtime.seconds() > degrees/DriveTrain.inchesPerSecond*0.95){
             telemetry.addData("turning clockwise", degrees);
             telemetry.addData("final position", degrees/DriveTrain.ticks);
             getMotorPosition();
@@ -286,8 +289,9 @@ while (DDD == 0 && !isStopRequested()) {
     }
 
     public void turncc(double degrees){
+        runtime.reset();
         drive.turncc(0.5, degrees);
-        while (drive.isBusy()){
+        while (drive.isBusy(degrees) || runtime.seconds() > degrees/DriveTrain.inchesPerSecond*0.95){
             telemetry.addData("turning counterclockwise", degrees);
             telemetry.addData("final position", degrees/DriveTrain.ticks);
             getMotorPosition();
