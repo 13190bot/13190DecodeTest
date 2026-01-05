@@ -19,4 +19,11 @@ public class Pattern {
         PPG
     }
 
+
+    public enum ballColor{
+        GREEN,
+        PURPLE
+
+    }
+
 }
