@@ -1,35 +1,43 @@
-package org.firstinspires.ftc.teamcode;
-
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.controller.PIDFController;
+import com.arcrobotics.ftclib.controller.wpilibcontroller.SimpleMotorFeedforward;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.util.Range;
 
 @Config
 public class updatedPIDF{
-
-    public DcMotorEx flywheel;
     public PIDFController pidfController;
+    public static double kP = 0.0;
+    public static double kI = 0.0;
+    public static double kD = 0.0;
+    public static double kS = 0.0;
+    public static double kV = 0.0;
+    public static double targetVelocity = 1500;
 
-    public double kP = 0.001;
-    public double kI = 0.0001;
-    public double kD = 0.00001;
+    public static double tolerance = 10;
+    DcMotorEx flywheel;
 
-    public double targetVelocity = 1500;
+
+    SimpleMotorFeedforward feedforward =
+            new SimpleMotorFeedforward(kS, kV);
 
     public void FlywheelPIDF(DcMotorEx flywheel) {
         this.flywheel = flywheel;
-        flywheel = hardwareMap.get(DcMotorEx.class, "flywheelMotor");
-
+        flywheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         flywheel.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         flywheel.setMode(DcMotorEx.ZeroPowerBehavior.FLOAT);
         pidfController = new PIDFController(kP, kI, kD);
-
+        pidfController.setTolerance(tolerance);
     }
     public void setTargetVelocity(double velocity) {
         targetVelocity = velocity;
+    }
+
+    public double getCurrentVelocity() {
+        return flywheel.getVelocity();
     }
 
     public void update(){
@@ -38,12 +46,9 @@ public class updatedPIDF{
 
         double output = pidfController.calculate(currentVelocity, targetVelocity);
 
-        output = Math.max(-1.0, Math.min(1.0, output));
+        output = Range.clip(output, -1.0, 1.0);
 
-        flywheel.setVelocity(output);
-
-        telemetry.addData("Target Vel", targetVelocity);
-        telemetry.addData("Current Vel", currentVelocity);
-        telemetry.update();
+        flywheel.setVelocityPIDFCoefficients(kP, kI, kD);
+        feedforward.calculate(10, 20);
     }
 }
