@@ -1,13 +1,11 @@
-package org.firstinspires.ftc.teamcode.TeleOp;
+package org.firstinspires.ftc.teamcode.TeleOp.;
 
-import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.controller.PIDFController;
 import com.arcrobotics.ftclib.controller.wpilibcontroller.SimpleMotorFeedforward;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 
-@Config
 public class updatedPIDF{
     public PIDFController pidfController;
     public static double kP = 0.0;
@@ -18,18 +16,18 @@ public class updatedPIDF{
     public static double targetVelocity = 1500;
 
     public static double tolerance = 10;
-    DcMotorEx flywheel;
+    DcMotorEx outtakeMotor;
 
 
-    SimpleMotorFeedforward feedforward =
-            new SimpleMotorFeedforward(kS, kV);
+    SimpleMotorFeedforward feedforward;
 
-    public void FlywheelPIDF(DcMotorEx flywheel) {
-        this.flywheel = flywheel;
+    public updatedPIDF(DcMotorEx flywheel, double initialVelocity) {
+        this.outtakeMotor = flywheel;
+        this.feedforward = new SimpleMotorFeedforward(kS, kV);
         flywheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         flywheel.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        flywheel.setMode(DcMotorEx.ZeroPowerBehavior.FLOAT);
-        pidfController = new PIDFController(kP, kI, kD);
+        flywheel.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+        pidfController = new PIDFController(kP, kI, kD, 0, initialVelocity, flywheel.getVelocity());
         pidfController.setTolerance(tolerance);
     }
     public void setTargetVelocity(double velocity) {
@@ -37,18 +35,23 @@ public class updatedPIDF{
     }
 
     public double getCurrentVelocity() {
-        return flywheel.getVelocity();
+        return outtakeMotor.getVelocity();
     }
 
     public void update(){
 
-        double currentVelocity = flywheel.getVelocity();
+        double currentVelocity = outtakeMotor.getVelocity();
 
-        double output = pidfController.calculate(currentVelocity, targetVelocity);
+        double output = pidfController.calculate(currentVelocity, targetVelocity) + feedforward.calculate(targetVelocity);
 
         output = Range.clip(output, -1.0, 1.0);
 
-        flywheel.setVelocityPIDFCoefficients(kP, kI, kD);
-        feedforward.calculate(10, 20);
+        outtakeMotor.setPower(output);
+    }
+
+    public void updateCoeff() {
+        outtakeMotor.setVelocityPIDFCoefficients(kP, kI, kD, 0);
+        this.feedforward = new SimpleMotorFeedforward(kS, kV);
+        pidfController.setTolerance(tolerance);
     }
 }
