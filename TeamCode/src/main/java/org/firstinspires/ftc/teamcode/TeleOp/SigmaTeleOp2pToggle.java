@@ -15,6 +15,7 @@ package org.firstinspires.ftc.teamcode.TeleOp;
 
 
 
+import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.*;
@@ -164,6 +165,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
         while (opModeIsActive() && !isStopRequested()) {
             // Put loop blocks here
 
+            CommandScheduler.getInstance().run();
 
 
 

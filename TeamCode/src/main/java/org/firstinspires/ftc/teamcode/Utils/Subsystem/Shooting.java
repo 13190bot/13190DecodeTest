@@ -64,7 +64,10 @@ public class Shooting extends SubsystemBase {
         //Sarvesh madullapalli pro advice ^^^
     }
 
-    public void updatePIDF(){
+
+
+    @Override
+    public void periodic(){
 
         double currentVelocity = outtakeMotor.getVelocity();
 

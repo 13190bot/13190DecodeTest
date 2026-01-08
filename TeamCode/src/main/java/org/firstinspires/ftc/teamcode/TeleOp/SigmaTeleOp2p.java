@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
+import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -28,7 +29,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
         gamepadEx2 = new GamepadEx(gamepad2);
 
 
-
+        CommandScheduler.getInstance().enable();
 
         waitForStart();
 
@@ -36,7 +37,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
         while (opModeIsActive() && !isStopRequested()) {
 
-
+            CommandScheduler.getInstance().run();
 
 
 
