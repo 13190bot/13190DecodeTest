@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.TestOps;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -19,9 +21,14 @@ public class ShootingTest extends LinearOpMode {
     private Shooting shooting;
     public static double platformPower = 1;
 
+    boolean lastUp = false;
+    boolean lastDown = false;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
+
+        telemetry = new MultipleTelemetry(FtcDashboard.getInstance().getTelemetry(), telemetry);
 
         shooting = new Shooting(hardwareMap);
 
@@ -44,13 +51,16 @@ public class ShootingTest extends LinearOpMode {
             }
 
 
-            if (gamepad1.dpad_up) {
+            if (gamepad1.dpad_up & !lastUp) {
                 shooting.outtakeMotor.setPower(shooting.outtakeMotor.getPower()+0.1);
             }
 
-            if (gamepad1.dpad_down) {
+            if (gamepad1.dpad_down & !lastDown) {
                 shooting.outtakeMotor.setPower(shooting.outtakeMotor.getPower()-0.1);
             }
+
+            lastDown = gamepad1.dpad_down;
+            lastUp = gamepad1.dpad_up;
 
 
             telemetry.addLine("Left Bumper: intake = 0.7");

@@ -1,12 +1,17 @@
 package org.firstinspires.ftc.teamcode.AutoOp;
 
 
+import com.arcrobotics.ftclib.command.Command;
+import com.arcrobotics.ftclib.command.CommandScheduler;
+import com.arcrobotics.ftclib.command.InstantCommand;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.teamcode.Utils.Subsystem.Shooting;
 
 
 @Autonomous
@@ -38,6 +43,7 @@ public class SigmaAutoOpWithoutRRRedFar extends LinearOpMode {
         platformRight = hardwareMap.get(Servo.class, "platformRight");
         platformLeft = hardwareMap.get(Servo.class, "platformLeft");
 
+
         platformRight.setDirection(Servo.Direction.REVERSE);
         platformRight.setPosition(0);
         platformLeft.setPosition(0);
@@ -52,6 +58,8 @@ public class SigmaAutoOpWithoutRRRedFar extends LinearOpMode {
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
+        Shooting myshot = new Shooting(hardwareMap);
+
 
 
 
@@ -63,58 +71,68 @@ public class SigmaAutoOpWithoutRRRedFar extends LinearOpMode {
         runtime.reset();
 
 
-
-
-        // === Autonomous Sequence ==
-        int x = 0; //shooting in the middle
-        int y = 0; //shooting
-
-
-
-
-        forward(25);
-
-        turn(90);
-
-        intakeMotor.setPower(0.7);
-        forward(30);
-
-        backward(50 - y);
-
-        turncc(90);
-
-        forward(37 - x);
-
-        turn(45);
-
-        shoot();
-
-        turn(135);
-
-        forward(13 - x);
-
-        turncc(90);
-
-        forward(50 - y);
-
-        backward(50 - y);
-
-        turncc(90);
-
-        forward(37 - x);
-
-        turn(45);
-
-
-        shoot();
+        CommandScheduler.getInstance().schedule(new InstantCommand(() -> {
+            // === Autonomous Sequence ==
+            int x = 0; //shooting in the middle
+            int y = 0; //shooting
 
 
 
+            forward(25);
+
+            turn(90);
+
+            intakeMotor.setPower(0.7);
+            forward(30);
+
+            backward(50 - y);
+
+            turncc(90);
+
+            forward(37 - x);
+
+            turn(45);
+
+            shoot();
+
+            turn(135);
+
+            forward(13 - x);
+
+            turncc(90);
+
+            forward(50 - y);
+
+            backward(50 - y);
+
+            turncc(90);
+
+            forward(37 - x);
+
+            turn(45);
+
+
+            shoot();
+
+
+            //make everything  stop when runtime is > 30 seconds
+            stopAll();
+        }));
+
+
+        CommandScheduler.getInstance().registerSubsystem(myshot);
 
 
 
-        //make everything  stop when runtime is > 30 seconds
-        stopAll();
+
+
+
+
+
+
+        while (opModeIsActive()) {
+            CommandScheduler.getInstance().run();
+        }
 
 
 
