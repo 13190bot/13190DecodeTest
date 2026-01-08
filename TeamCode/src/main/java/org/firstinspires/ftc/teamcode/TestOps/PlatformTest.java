@@ -129,7 +129,8 @@ public class PlatformTest extends LinearOpMode {
 
 
 
-
+    boolean lastUp = false;
+    boolean lastDown = false;
 
 
 
@@ -231,17 +232,20 @@ public class PlatformTest extends LinearOpMode {
 
 
 
-            if (gamepad1.dpad_up) {
+            if (gamepad1.dpad_up & !lastUp) {
                 platformLeft.setPosition(platformLeft.getPosition()+0.1);
                 platformRight.setPosition(platformRight.getPosition()+0.1);
             }
 
 
-            if (gamepad1.dpad_down) {
+            if (gamepad1.dpad_down & !lastDown) {
                 platformLeft.setPosition(platformLeft.getPosition()-0.1);
                 platformRight.setPosition(platformRight.getPosition()-0.1);
             }
 
+            lastUp = gamepad1.dpad_up;
+
+            lastDown = gamepad1.dpad_down;
 
 
 

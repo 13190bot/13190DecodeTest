@@ -19,6 +19,11 @@ public class ShootingTest extends LinearOpMode {
     private Shooting shooting;
     public static double platformPower = 1;
 
+    boolean lastUp = false;
+    boolean lastDown = false;
+
+    boolean lastRB = false;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -35,23 +40,39 @@ public class ShootingTest extends LinearOpMode {
 
             if (gamepad1.left_bumper){
                 shooting.intakeMotor.setPower(0.7);
+            }else {
+                shooting.intakeMotor.setPower(0);
             }
 
 
-            if (gamepad1.right_bumper){
-                shooting.platformRight.setPosition(platformPower);
-                shooting.platformRight.setPosition(platformPower);
+            if (gamepad1.right_bumper && !lastRB){
+
+                if (shooting.platformRight.getPosition() == platformPower || shooting.platformLeft.getPosition() == platformPower){
+                    shooting.platformRight.setPosition(0);
+                    shooting.platformRight.setPosition(0);
+                }else {
+                    shooting.platformRight.setPosition(platformPower);
+                    shooting.platformRight.setPosition(platformPower);
+                }
+
+
             }
 
+            lastRB = gamepad1.right_bumper;
 
-            if (gamepad1.dpad_up) {
+
+
+            if (gamepad1.dpad_up && !lastUp) {
                 shooting.outtakeMotor.setPower(shooting.outtakeMotor.getPower()+0.1);
             }
 
-            if (gamepad1.dpad_down) {
+            if (gamepad1.dpad_down && !lastDown) {
                 shooting.outtakeMotor.setPower(shooting.outtakeMotor.getPower()-0.1);
             }
 
+            lastUp = gamepad1.dpad_up;
+
+            lastDown = gamepad1.dpad_down;
 
             telemetry.addLine("Left Bumper: intake = 0.7");
             telemetry.addLine("Right Bumper: platform power smth");
