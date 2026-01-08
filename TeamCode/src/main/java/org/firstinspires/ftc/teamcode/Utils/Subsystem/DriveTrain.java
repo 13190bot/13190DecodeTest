@@ -26,8 +26,8 @@ public class DriveTrain extends SubsystemBase {
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         imu = hardwareMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
+                RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
+                RevHubOrientationOnRobot.UsbFacingDirection.UP));
         imu.initialize(parameters);
 
 
