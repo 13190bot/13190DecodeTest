@@ -1,34 +1,46 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.arcrobotics.ftclib.hardware.RevIMU;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import com.arcrobotics.ftclib.gamepad.*;
 
+import com.arcrobotics.ftclib.command.*;
 
-import org.firstinspires.ftc.teamcode.Utils.Pattern;
+
 import org.firstinspires.ftc.teamcode.Utils.Subsystem.*;
 
-import org.firstinspires.ftc.teamcode.AutoOp.SigmaTimeBasedPick;
 
 @TeleOp
-public class AprilTagTeleOp extends LinearOpMode {
+public class CommandTeleOp extends CommandOpMode  {
 
     private DriveTrain drive;
     private Shooting shooting;
 
     GamepadEx gamepadEx1;
     GamepadEx gamepadEx2;
-
+    RevIMU imu;
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void initialize(){
 
         drive = new DriveTrain(hardwareMap);
         shooting = new Shooting(hardwareMap);
         gamepadEx1 = new GamepadEx(gamepad1);
         gamepadEx2 = new GamepadEx(gamepad2);
+        imu = new RevIMU(hardwareMap);
+
+
+        telemetry.addLine("initalized");
+        telemetry.update();
+    }
+
+
+
+    @Override
+    public void run(){
+        double heading = imu.getHeading();
+
 
 
 
@@ -39,6 +51,7 @@ public class AprilTagTeleOp extends LinearOpMode {
 
         while (opModeIsActive() && !isStopRequested()) {
 
+            CommandScheduler.getInstance().run();
 
 
             double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
@@ -60,24 +73,6 @@ public class AprilTagTeleOp extends LinearOpMode {
             drive.backRightMotor.setPower(backRightMotorPower);
 
 
-
-
-
-//have aim for when alliance is red or alliance is blue
-
-            if (SigmaTimeBasedPick.alliance == Pattern.alliance.RED){
-
-            }else if (SigmaTimeBasedPick.alliance == Pattern.alliance.BLUE){
-
-            }else{
-               //backup if it doesn't work
-
-            }
-
-
-
-
-
 // TELEMETRY
 
             telemetry.addData("Platform", shooting.platformRight.getPosition());
@@ -87,7 +82,7 @@ public class AprilTagTeleOp extends LinearOpMode {
             telemetry.addData("front left", drive.frontLeftMotor.getPower());
             telemetry.addData("back left", drive.backLeftMotor.getPower());
             telemetry.addData("front right", drive.frontRightMotor.getPower());
-            telemetry.addData("back right", drive.backRightMotor.getPower());
+            telemetry.addData("back left", drive.frontRightMotor.getPower());
 
 
             telemetry.update();
