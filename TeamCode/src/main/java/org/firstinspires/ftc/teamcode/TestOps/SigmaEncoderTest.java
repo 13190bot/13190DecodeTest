@@ -15,6 +15,8 @@ package org.firstinspires.ftc.teamcode.TestOps;
 
 
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.*;
@@ -43,6 +45,7 @@ public class SigmaEncoderTest extends LinearOpMode {
     DcMotor intakeMotor;
 
 
+    FtcDashboard dashboard = FtcDashboard.getInstance();
 
 
 
@@ -80,6 +83,7 @@ public class SigmaEncoderTest extends LinearOpMode {
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
 
 
+        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
 
 

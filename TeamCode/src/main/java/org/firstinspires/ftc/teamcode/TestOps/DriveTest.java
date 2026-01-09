@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.TestOps;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -11,6 +13,7 @@ import org.firstinspires.ftc.teamcode.Utils.Subsystem.*;
 
 @TeleOp
 public class DriveTest extends LinearOpMode {
+    FtcDashboard dashboard = FtcDashboard.getInstance();
 
     private DriveTrain drive;
 
@@ -31,6 +34,7 @@ public class DriveTest extends LinearOpMode {
         drive = new DriveTrain(hardwareMap);
         gamepadEx1 = new GamepadEx(gamepad1);
 
+        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
 
 

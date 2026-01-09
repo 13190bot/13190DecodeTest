@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.TestOps;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -23,13 +25,18 @@ public class ShootingTest extends LinearOpMode {
     boolean lastDown = false;
 
     boolean lastRB = false;
+    boolean lastLB = false;
+
+
+    FtcDashboard dashboard = FtcDashboard.getInstance();
+
 
 
     @Override
     public void runOpMode() throws InterruptedException {
 
         shooting = new Shooting(hardwareMap);
-
+        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
         waitForStart();
 
@@ -38,11 +45,14 @@ public class ShootingTest extends LinearOpMode {
         while (opModeIsActive() && !isStopRequested()) {
 
 
-            if (gamepad1.left_bumper){
+            if (gamepad1.left_bumper && !lastLB){
                 shooting.intakeMotor.setPower(0.7);
             }else {
                 shooting.intakeMotor.setPower(0);
             }
+
+
+            lastLB = gamepad1.left_bumper;
 
 
             if (gamepad1.right_bumper && !lastRB){

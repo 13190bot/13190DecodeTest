@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.TestOps;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -12,6 +14,7 @@ import org.firstinspires.ftc.teamcode.Utils.Subsystem.ColorSensor;
 public class ColorSensorTest extends LinearOpMode {
 
     private ColorSensor colorSensor;
+    FtcDashboard dashboard = FtcDashboard.getInstance();
 
 
 
@@ -20,6 +23,7 @@ public class ColorSensorTest extends LinearOpMode {
 
         colorSensor = new ColorSensor(hardwareMap);
 
+        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
 
 
