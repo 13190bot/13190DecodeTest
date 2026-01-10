@@ -15,6 +15,8 @@ package org.firstinspires.ftc.teamcode.TestOps;
 
 
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.*;
@@ -43,6 +45,7 @@ public class SigmaEncoderTest extends LinearOpMode {
     DcMotor intakeMotor;
 
 
+    FtcDashboard dashboard = FtcDashboard.getInstance();
 
 
 
@@ -80,6 +83,7 @@ public class SigmaEncoderTest extends LinearOpMode {
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
 
 
+        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
 
 
@@ -140,18 +144,6 @@ public class SigmaEncoderTest extends LinearOpMode {
 
 
 
-            telemetry.addData("frontRight", frontRightMotor.getPower());
-
-
-            telemetry.addData("backRight", backRightMotor.getPower());
-
-
-            telemetry.addData("backLeft", backLeftMotor.getPower());
-
-
-            telemetry.addData("frontLeft", frontLeftMotor.getPower());
-
-
 
 
 
@@ -166,7 +158,6 @@ public class SigmaEncoderTest extends LinearOpMode {
 
 
 
-                telemetry.addData("Triangle pressed", TrianglePressed);
 
 
             }else {
@@ -186,7 +177,6 @@ public class SigmaEncoderTest extends LinearOpMode {
 
 
 
-                telemetry.addData("RB pressed", RBPressed);
 
 
             }else {
@@ -207,7 +197,6 @@ public class SigmaEncoderTest extends LinearOpMode {
 
 
 
-                telemetry.addData("LB pressed", LBPressed);
 
 
             }else {
@@ -219,7 +208,7 @@ public class SigmaEncoderTest extends LinearOpMode {
 
 
 
-            if (gamepad1.left_bumper && !lastLB) {
+            if (gamepad1.circle) {
 
 
                 frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -236,14 +225,52 @@ public class SigmaEncoderTest extends LinearOpMode {
                 backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
-                telemetry.addData("button pressed", "6");
 
 
 
 
             }
-            lastLB = gamepad1.left_bumper;
 
+
+
+
+            telemetry.addData("frontRightpower", frontRightMotor.getPower());
+
+
+            telemetry.addData("backRightpower", backRightMotor.getPower());
+
+
+            telemetry.addData("backLeftpower", backLeftMotor.getPower());
+
+
+            telemetry.addData("frontLeftpower", frontLeftMotor.getPower());
+
+
+            telemetry.addData("frontRightticks", frontRightMotor.getCurrentPosition());
+
+
+            telemetry.addData("backRightticks", backRightMotor.getCurrentPosition());
+
+
+            telemetry.addData("backLeftticks", backLeftMotor.getCurrentPosition());
+
+
+            telemetry.addData("frontLeftticks", frontLeftMotor.getCurrentPosition());
+
+
+            telemetry.addData("button pressed", "6");
+
+            telemetry.addData("LB pressed", LBPressed);
+
+            telemetry.addData("RB pressed", RBPressed);
+
+
+            telemetry.addData("Triangle pressed", TrianglePressed);
+
+            telemetry.addLine("Triangle 0.5 forward, LB CC, RB Clockwise, circle reset");
+
+
+            
 
             telemetry.update();
 

@@ -1,31 +1,46 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import com.arcrobotics.ftclib.gamepad.*;
-import com.qualcomm.robotcore.hardware.Gamepad;
+
+import com.arcrobotics.ftclib.command.*;
+
 
 import org.firstinspires.ftc.teamcode.Utils.Subsystem.*;
 
 
 @TeleOp
-public class SigmaTeleOp2p extends LinearOpMode {
+public class CommandTeleOp extends CommandOpMode  {
 
     private DriveTrain drive;
     private Shooting shooting;
 
     GamepadEx gamepadEx1;
     GamepadEx gamepadEx2;
-
+    RevIMU imu;
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void initialize(){
 
         drive = new DriveTrain(hardwareMap);
         shooting = new Shooting(hardwareMap);
         gamepadEx1 = new GamepadEx(gamepad1);
         gamepadEx2 = new GamepadEx(gamepad2);
+        imu = new RevIMU(hardwareMap);
+
+
+        telemetry.addLine("initalized");
+        telemetry.update();
+    }
+
+
+
+    @Override
+    public void run(){
+        double heading = imu.getHeading();
+
 
 
 
@@ -36,8 +51,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
         while (opModeIsActive() && !isStopRequested()) {
 
-
-
+            CommandScheduler.getInstance().run();
 
 
             double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
@@ -59,36 +73,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
             drive.backRightMotor.setPower(backRightMotorPower);
 
 
-            if (gamepad2.right_trigger > 0.7) {
-                shooting.outtakeMotor.setPower(0.7);
-            }
-            else if (gamepad2.left_trigger > 0.7) {
-                shooting.outtakeMotor.setPower(0.4);
-            }
-            else {
-                shooting.outtakeMotor.setPower(0);
-            }
-
-
-            if (gamepad2.right_bumper) {
-                shooting.platformRight.setPosition(1);
-                shooting.platformLeft.setPosition(1);
-
-            } else {
-                shooting.platformRight.setPosition(0);
-                shooting.platformLeft.setPosition(0);
-            }
-
-
-
-
-
-
 // TELEMETRY
-
-            telemetry.addLine("Intake: Left Bumper");
-            telemetry.addLine("Platform: Right Bumper");
-            telemetry.addLine("Outtake Power: 0.7 right trigger, 0.4 left trigger");
 
             telemetry.addData("Platform", shooting.platformRight.getPosition());
             telemetry.addData("Platform", shooting.platformLeft.getPosition());
@@ -97,7 +82,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
             telemetry.addData("front left", drive.frontLeftMotor.getPower());
             telemetry.addData("back left", drive.backLeftMotor.getPower());
             telemetry.addData("front right", drive.frontRightMotor.getPower());
-            telemetry.addData("back right", drive.backRightMotor.getPower());
+            telemetry.addData("back left", drive.frontRightMotor.getPower());
 
 
             telemetry.update();
