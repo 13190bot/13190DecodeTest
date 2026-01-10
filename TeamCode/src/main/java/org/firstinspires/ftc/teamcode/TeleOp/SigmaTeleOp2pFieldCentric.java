@@ -31,14 +31,6 @@ public class SigmaTeleOp2pFieldCentric extends LinearOpMode {
         gamepadEx2 = new GamepadEx(gamepad2);
 
 
-        // Retrieve the IMU from the hardware map
-        IMU imu = hardwareMap.get(IMU.class, "imu");
-        // Adjust the orientation parameters to match your robot
-        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
-        // Without this, the REV Hub's orientation is assumed to be logo up / USB forward
-        imu.initialize(parameters);
 
         waitForStart();
 
@@ -54,12 +46,12 @@ public class SigmaTeleOp2pFieldCentric extends LinearOpMode {
             double rx = gamepad1.right_stick_x;
 
             if (gamepad1.options) {
-                imu.resetYaw();
+                drive.imu.resetYaw();
             }
 
 
 
-            double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+            double botHeading = drive.imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
 
             // Rotate the movement direction counter to the bot's rotation
             double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
