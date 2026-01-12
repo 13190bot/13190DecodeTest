@@ -1,4 +1,8 @@
 package org.firstinspires.ftc.teamcode.Utils.Subsystem;
+import androidx.annotation.NonNull;
+
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.Action;
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.arcrobotics.ftclib.controller.PIDFController;
 import com.arcrobotics.ftclib.controller.wpilibcontroller.SimpleMotorFeedforward;
@@ -95,5 +99,39 @@ public class Shooting extends SubsystemBase {
         outtakeMotor.setVelocityPIDFCoefficients(kP, kI, kD, 0);
         feedforward = new SimpleMotorFeedforward(kS, kV);
         pidfController.setTolerance(tolerance);
+    }
+
+
+
+
+
+
+    public class Shoot implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                outtakeMotor.setPower(1);
+                initialized = true;
+            }
+
+            double vel = outtakeMotor.getVelocity();
+            packet.put("outtakeVelocity", vel);
+            updatePID();
+
+
+            if (vel>0.95){
+                platformRight.setPosition(1);
+                platformLeft.setPosition(1);
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+    public Action shoot() {
+        return new Shooting.Shoot();
     }
 }
