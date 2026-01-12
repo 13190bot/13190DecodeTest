@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.TestOps;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.InstantAction;
@@ -32,6 +33,7 @@ public class RRTestTeleOp extends LinearOpMode {
 
     GamepadEx gamepadEx2;
 
+    FtcDashboard dashboard = FtcDashboard.getInstance();
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -41,6 +43,7 @@ public class RRTestTeleOp extends LinearOpMode {
         gamepadEx1 = new GamepadEx(gamepad1);
         gamepadEx2 = new GamepadEx(gamepad2);
 
+        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
 
 
@@ -51,6 +54,7 @@ public class RRTestTeleOp extends LinearOpMode {
         while (opModeIsActive() && !isStopRequested()) {
 
 
+            shooting.updatePID();
 
 
 
@@ -73,25 +77,46 @@ public class RRTestTeleOp extends LinearOpMode {
             drive.rightBack.setPower(backRightMotorPower);
 
 
-            if (gamepad2.right_trigger > 0.7) {
-                shooting.outtakeMotor.setPower(0.7);
+            if (gamepad2.right_bumper){
+                shooting.intakeMotor.setPower(0.7);
             }
-            else if (gamepad2.left_trigger > 0.7) {
-                shooting.outtakeMotor.setPower(0.4);
+            if (gamepad2.left_bumper){
+                shooting.intakeMotor.setPower(0);
             }
-            else {
+
+            if (gamepad2.dpad_up){
+                shooting.intakeMotor.setPower(0);
                 shooting.outtakeMotor.setPower(0);
-            }
-
-
-            if (gamepad2.right_bumper) {
-                shooting.platformRight.setPosition(1);
-                shooting.platformLeft.setPosition(1);
-
-            } else {
                 shooting.platformRight.setPosition(0);
                 shooting.platformLeft.setPosition(0);
             }
+
+            if (gamepad2.square){
+                shooting.outtakeMotor.setPower(1);
+            }else if (gamepad2.cross){
+                shooting.outtakeMotor.setPower(0);
+            }
+
+            if (gamepad2.triangle) {
+                shooting.platformRight.setPosition(1);
+                shooting.platformLeft.setPosition(1);
+
+            } else if (gamepad2.circle){
+                shooting.platformRight.setPosition(0);
+                shooting.platformLeft.setPosition(0);
+            }
+
+            telemetry.addLine("gamepad 2");
+            telemetry.addLine("intake: 0.7 right bumper, 0 left bumper");
+            telemetry.addLine("outtake: 1 square, 0 cross");
+            telemetry.addLine("platform: 1 triangle, 0 circle");
+            telemetry.addLine("everything stops: dpad up");
+            telemetry.addLine("gamepad 1: right bumper = road runner shoot");
+            telemetry.addData("xValue", drive.localizer.getPose().position.x);
+            telemetry.addData("yValue", drive.localizer.getPose().position.x);
+            telemetry.addData("heading", drive.localizer.getPose().heading);
+
+            telemetry.addData("outtake vel", shooting.outtakeMotor.getCurrentPosition());
 
 
 
@@ -124,15 +149,7 @@ public class RRTestTeleOp extends LinearOpMode {
 // TELEMETRY
 
 
-            telemetry.addData("xValue", drive.localizer.getPose().position.x);
-            telemetry.addData("yValue", drive.localizer.getPose().position.x);
-            telemetry.addData("heading", drive.localizer.getPose().heading);
 
-
-
-            telemetry.addLine("Intake: Left Bumper");
-            telemetry.addLine("Platform: Right Bumper");
-            telemetry.addLine("Outtake Power: 0.7 right trigger, 0.4 left trigger");
 
             telemetry.addData("Platform", shooting.platformRight.getPosition());
             telemetry.addData("Platform", shooting.platformLeft.getPosition());
