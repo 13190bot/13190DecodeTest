@@ -62,6 +62,7 @@ public class PIDTuning extends LinearOpMode {
 
 
 
+            shooting.updatePID();
 
 
 
@@ -113,14 +114,13 @@ public class PIDTuning extends LinearOpMode {
             }
 
 
+            if (gamepad1.dpad_up){
+                shooting.setTargetVelocity(shooting.targetVelocity + 1000);
+            }
 
-            shooting.updatePID();
-
-
-
-
-
-
+            if (gamepad1.dpad_down){
+                shooting.setTargetVelocity(shooting.targetVelocity - 1000);
+            }
 
 
 
