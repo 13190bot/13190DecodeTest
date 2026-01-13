@@ -31,6 +31,8 @@ public class Shooting extends SubsystemBase {
     public static double kD = 0.0;
     public static double kS = 0.0;
     public static double kV = 0.0;
+
+    public final static double conversionAmount = 60/28;
     public static double targetVelocity = 1500;
     public static double tolerance = 10;
     public static double outtakeTolerance = 0.05;
@@ -60,8 +62,10 @@ public class Shooting extends SubsystemBase {
         platformRight.setPosition(0);
     }
 
-    public void setTargetVelocity(double velocity) {
-        targetVelocity = velocity;
+
+
+    public void setTargetVelocity(double RPM) {
+        targetVelocity = RPM * conversionAmount;
     }
 
     public double getCurrentVelocity() {
