@@ -6,6 +6,8 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.InstantAction;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.PoseVelocity2d;
+import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -54,6 +56,7 @@ public class RRTestTeleOp extends LinearOpMode {
         while (opModeIsActive() && !isStopRequested()) {
 
 
+            drive.updatePoseEstimate();
             shooting.updatePID();
 
 
@@ -62,19 +65,13 @@ public class RRTestTeleOp extends LinearOpMode {
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = gamepad1.right_stick_x;
 
-            // Denominator is the largest motor power (absolute value) or 1
-            // This ensures all the powers maintain the same ratio,
-            // but only if at least one is out of the range [-1, 1]
-            double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-            double frontLeftMotorPower = (y + x + rx) / denominator;
-            double backLeftMotorPower = (y - x + rx) / denominator;
-            double frontRightMotorPower = (y - x - rx) / denominator;
-            double backRightMotorPower = (y + x - rx) / denominator;
+            drive.setDrivePowers(
 
-            drive.leftFront.setPower(frontLeftMotorPower);
-            drive.leftBack.setPower(backLeftMotorPower);
-            drive.rightFront.setPower(frontRightMotorPower);
-            drive.rightBack.setPower(backRightMotorPower);
+                    new PoseVelocity2d(
+                            new Vector2d(x, y),
+                            rx
+                    )
+            );
 
 
             if (gamepad2.right_bumper){
@@ -144,7 +141,13 @@ public class RRTestTeleOp extends LinearOpMode {
 
 
 
-
+//drive.updatePoseEstimate or smth
+//            drive.localizer.getPose().position.x
+//
+//            drive.localizer.getPose().position.y
+//
+//
+//            Math.toDegrees(drive.localizer.getPose().heading.toDouble())
 
 // TELEMETRY
 
