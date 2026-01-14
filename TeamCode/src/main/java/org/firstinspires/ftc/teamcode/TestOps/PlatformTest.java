@@ -187,7 +187,7 @@ public class PlatformTest extends LinearOpMode {
 
 
         while (opModeIsActive() && !isStopRequested()) {
-            // Put loop blocks here
+            // Putloop blocks here
 
 
 
