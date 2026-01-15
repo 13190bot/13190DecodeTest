@@ -68,29 +68,6 @@ public class PIDTuning extends LinearOpMode {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             shooting.setTargetVelocity(1);
 
             if (gamepad1.circle) {
@@ -114,15 +91,15 @@ public class PIDTuning extends LinearOpMode {
             }
 
 
-            if (gamepad1.dpad_up){
-                shooting.setTargetVelocity(shooting.targetVelocity + 1000);
-            }
-
-            if (gamepad1.dpad_down){
-                shooting.setTargetVelocity(shooting.targetVelocity - 1000);
-            }
-
-
+//            if (gamepad1.dpad_up){
+//                shooting.setTargetVelocity(shooting.targetVelocity + 1000);
+//            }
+//
+//            if (gamepad1.dpad_down){
+//                shooting.setTargetVelocity(shooting.targetVelocity - 1000);
+//            }
+//
+//
 
 
 

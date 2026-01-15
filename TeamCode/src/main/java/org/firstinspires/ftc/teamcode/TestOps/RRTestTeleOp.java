@@ -110,7 +110,7 @@ public class RRTestTeleOp extends LinearOpMode {
             telemetry.addLine("everything stops: dpad up");
             telemetry.addLine("gamepad 1: right bumper = road runner shoot");
             telemetry.addData("xValue", drive.localizer.getPose().position.x);
-            telemetry.addData("yValue", drive.localizer.getPose().position.x);
+            telemetry.addData("yValue", drive.localizer.getPose().position.y);
             telemetry.addData("heading", drive.localizer.getPose().heading);
 
             telemetry.addData("outtake vel", shooting.outtakeMotor.getCurrentPosition());

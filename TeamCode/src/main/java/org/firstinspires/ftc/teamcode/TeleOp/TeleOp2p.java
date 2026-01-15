@@ -1,11 +1,16 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
+
+
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import com.arcrobotics.ftclib.gamepad.*;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.Utils.Subsystem.*;
 
 
@@ -18,6 +23,9 @@ public class TeleOp2p extends LinearOpMode {
     GamepadEx gamepadEx1;
     GamepadEx gamepadEx2;
 
+    boolean fieldCentric = true;
+
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -29,29 +37,30 @@ public class TeleOp2p extends LinearOpMode {
 
 
 
-
         waitForStart();
 
         if (isStopRequested()) return;
 
         while (opModeIsActive() && !isStopRequested()) {
+            gamepadEx1.readButtons();
 
+            if (gamepadEx1.wasJustPressed(GamepadKeys.Button.B)) {
+                fieldCentric = false;
+            }
 
+    double botHeading = drive.imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+    double y = -gamepadEx1.getLeftY(); // Remember, Y stick value is reversed
+    double x = gamepadEx1.getLeftX() * 1.1; // Counteract imperfect strafing
+    double rx = gamepadEx1.getRightX();
+if (fieldCentric){
+    // Rotate the movement direction counter to the bot's rotation
+    double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
+    double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
+    rotX = rotX * 1.1;
 
+} else {
 
-
-            double y = -gamepadEx1.getLeftY(); // Remember, Y stick value is reversed
-            double x = gamepadEx1.getLeftX() * 1.1; // Counteract imperfect strafing
-            double rx = gamepadEx1.getRightX();
-
-            // Denominator is the largest motor power (absolute value) or 1
-            // This ensures all the powers maintain the same ratio,
-            // but only if at least one is out of the range [-1, 1]
-            double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-            double frontLeftMotorPower = (y + x + rx) / denominator;
-            double backLeftMotorPower = (y - x + rx) / denominator;
-            double frontRightMotorPower = (y - x - rx) / denominator;
-            double backRightMotorPower = (y + x - rx) / denominator;
+}
 
             drive.frontLeftMotor.setPower(frontLeftMotorPower);
             drive.backLeftMotor.setPower(backLeftMotorPower);
@@ -60,6 +69,8 @@ public class TeleOp2p extends LinearOpMode {
             gamepadEx2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER);
             gamepadEx2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER);
             gamepadEx2.getButton(GamepadKeys.Button.LEFT_BUMPER);
+
+
 
 
 
@@ -83,6 +94,9 @@ public class TeleOp2p extends LinearOpMode {
                 shooting.platformLeft.setPosition(0);
             }
 
+            if (gamepadEx2.getButton(GamepadKeys.Button.A)) {
+                //shooting.platformRight.setPosition(1);
+                shooting.platformLeft.setPosition(1);
 
 
 
