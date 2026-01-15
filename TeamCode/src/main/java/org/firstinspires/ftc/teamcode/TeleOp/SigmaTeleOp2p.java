@@ -71,11 +71,11 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
             if (gamepad2.right_bumper) {
-                shooting.platformRight.setPosition(1);
+                //shooting.platformRight.setPosition(1);
                 shooting.platformLeft.setPosition(1);
 
             } else {
-                shooting.platformRight.setPosition(0);
+                //shooting.platformRight.setPosition(0);
                 shooting.platformLeft.setPosition(0);
             }
 
@@ -90,7 +90,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
             telemetry.addLine("Platform: Right Bumper");
             telemetry.addLine("Outtake Power: 0.7 right trigger, 0.4 left trigger");
 
-            telemetry.addData("Platform", shooting.platformRight.getPosition());
+            //telemetry.addData("Platform", shooting.platformRight.getPosition());
             telemetry.addData("Platform", shooting.platformLeft.getPosition());
             telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
             telemetry.addData("Intake", shooting.intakeMotor.getPower());
