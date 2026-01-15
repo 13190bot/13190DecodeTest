@@ -135,7 +135,8 @@ public class PlatformTest extends LinearOpMode {
     boolean lastUp = false;
     boolean lastDown = false;
 
-
+    boolean lastRight = false;
+    boolean lastLeft = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -230,6 +231,27 @@ public class PlatformTest extends LinearOpMode {
 
 
 
+            if (gamepad1.dpad_right & !lastRight){
+                if (platformRight.getDirection() == Servo.Direction.FORWARD){
+                    platformRight.setDirection(Servo.Direction.REVERSE);
+
+                }else{
+                    platformRight.setDirection(Servo.Direction.FORWARD);
+                }
+
+
+
+            }
+
+
+            if (gamepad1.dpad_left & !lastLeft){
+                if (platformLeft.getDirection() == Servo.Direction.FORWARD){
+                    platformLeft.setDirection(Servo.Direction.REVERSE);
+
+                }else{
+                    platformLeft.setDirection(Servo.Direction.FORWARD);
+                }
+            }
 
 
 
@@ -249,6 +271,14 @@ public class PlatformTest extends LinearOpMode {
             lastDown = gamepad1.dpad_down;
 
 
+            lastRight = gamepad1.dpad_right;
+
+            lastLeft = gamepad1.dpad_left;
+
+            telemetry.addData("Platform Right", platformRight.getPosition());
+            telemetry.addData("Platform Left", platformLeft.getPosition());
+            telemetry.addData("Platform Right Direction:", platformRight.getDirection());
+            telemetry.addData("Platform Left Direction:", platformLeft.getDirection());
 
 
 
@@ -266,8 +296,7 @@ public class PlatformTest extends LinearOpMode {
 
 
 
-            telemetry.addData("Platform Right", platformRight.getPosition());
-            telemetry.addData("Platform Left", platformLeft.getPosition());
+
 
 
 
