@@ -31,7 +31,9 @@ public class Shooting extends SubsystemBase {
     public static double kD = 0.0;
     public static double kS = 0.0;
     public static double kV = 0.0;
-    public static double targetVelocity = 1500;
+
+    public final static double conversionAmount = 60/28;
+    public double targetVelocity = 0;
     public static double tolerance = 10;
     public static double outtakeTolerance = 0.05;
     SimpleMotorFeedforward feedforward;
@@ -42,7 +44,8 @@ public class Shooting extends SubsystemBase {
         outtakeMotor = hardwareMap.get(DcMotorEx.class, "outtakeMotor");
         platformRight = hardwareMap.get(Servo.class, "platformRight");
         platformLeft = hardwareMap.get(Servo.class, "platformLeft");
-        platformRight.setDirection(Servo.Direction.REVERSE);
+        platformRight.setDirection(Servo.Direction.FORWARD);
+        platformLeft.setDirection(Servo.Direction.REVERSE);
 
 
         feedforward = new SimpleMotorFeedforward(kS, kV);
@@ -60,8 +63,10 @@ public class Shooting extends SubsystemBase {
         platformRight.setPosition(0);
     }
 
-    public void setTargetVelocity(double velocity) {
-        targetVelocity = velocity;
+
+
+    public void setTargetVelocity(double RPM) {
+        targetVelocity = RPM * conversionAmount;
     }
 
     public double getCurrentVelocity() {
