@@ -63,6 +63,7 @@ public class PIDTuning extends LinearOpMode {
 
 
             shooting.updatePID();
+            shooting.updateCoeff();
 
 
 
@@ -134,7 +135,11 @@ public class PIDTuning extends LinearOpMode {
 
             telemetry.addLine("right bumper: 0");
             telemetry.addLine("left bumper: 500");
-
+            telemetry.addData("P: ", Shooting.kP);
+            telemetry.addData("I: ", Shooting.kI);
+            telemetry.addData("D: ", Shooting.kD);
+            telemetry.addData("setpoint: ", Shooting.setPoint);
+//e
 
             telemetry.addLine("triangle: 2k");
             telemetry.addLine("square: 3k");

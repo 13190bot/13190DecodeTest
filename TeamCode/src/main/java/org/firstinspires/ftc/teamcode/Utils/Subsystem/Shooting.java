@@ -29,12 +29,14 @@ public class Shooting extends SubsystemBase {
     public static double kP = 0.0;
     public static double kI = 0.0;
     public static double kD = 0.0;
+    public static double kF = 0.0;
     public static double kS = 0.0;
     public static double kV = 0.0;
-//e
-    public final static double conversionAmount = 28/60;
+
+    public final static double conversionAmount = (double) 28 /60;
     public double targetVelocity = 0;
-    public static double tolerance = 10;
+    public static double tolerance = 100;
+    public static double setPoint = 1000;
     public static double outtakeTolerance = 0.05;
     SimpleMotorFeedforward feedforward;
 
@@ -52,8 +54,9 @@ public class Shooting extends SubsystemBase {
         outtakeMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         outtakeMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         outtakeMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
-        pidfController = new PIDFController(kP, kI, kD, 0, outtakeMotor.getVelocity(), outtakeMotor.getVelocity());
+        pidfController = new PIDFController(kP, kI, kD, 0);
         pidfController.setTolerance(tolerance);
+        pidfController.setSetPoint(setPoint);
 
     }
     public void stopShooting(){
@@ -101,12 +104,13 @@ public class Shooting extends SubsystemBase {
     }
 
     public void updateCoeff() {
-        outtakeMotor.setVelocityPIDFCoefficients(kP, kI, kD, 0);
+        pidfController.setPIDF(kP, kI, kD, 0);
         feedforward = new SimpleMotorFeedforward(kS, kV);
         pidfController.setTolerance(tolerance);
+        pidfController.setSetPoint(setPoint);
     }
 
-
+//e
 
 
 
@@ -135,7 +139,7 @@ public class Shooting extends SubsystemBase {
             return true;
         }
     }
-
+//e
     public Action shoot() {
         return new Shooting.Shoot();
     }
