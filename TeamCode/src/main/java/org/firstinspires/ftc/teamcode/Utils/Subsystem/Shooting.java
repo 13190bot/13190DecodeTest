@@ -31,7 +31,7 @@ public class Shooting extends SubsystemBase {
     public static double kD = 0.0;
     public static double kS = 0.0;
     public static double kV = 0.0;
-
+//e
     public final static double conversionAmount = 28/60;
     public double targetVelocity = 0;
     public static double tolerance = 10;
