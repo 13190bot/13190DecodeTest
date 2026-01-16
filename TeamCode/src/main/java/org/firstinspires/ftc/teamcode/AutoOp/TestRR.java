@@ -33,6 +33,7 @@ import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.ParallelRaceGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -46,7 +47,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import java.lang.Math;
 import java.util.List;
 
-
+@Disabled
 @Autonomous
 public class TestRR extends LinearOpMode {
 

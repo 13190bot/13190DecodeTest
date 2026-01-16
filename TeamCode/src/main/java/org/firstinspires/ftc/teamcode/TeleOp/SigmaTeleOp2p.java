@@ -41,8 +41,8 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
 
             double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
-            double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
-            double rx = gamepad1.right_stick_x;
+            double rx = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
+            double x = gamepad1.right_stick_x;
 
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio,
@@ -73,13 +73,16 @@ public class SigmaTeleOp2p extends LinearOpMode {
             if (gamepad2.right_bumper) {
                 shooting.platformRight.setPosition(1);
                 shooting.platformLeft.setPosition(1);
-
             } else {
                 shooting.platformRight.setPosition(0);
                 shooting.platformLeft.setPosition(0);
             }
 
-
+            if (gamepad2.left_bumper) {
+                shooting.intakeMotor.setPower(0.7);
+            } else {
+                shooting.intakeMotor.setPower(0);
+            }
 
 
 
@@ -90,7 +93,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
             telemetry.addLine("Platform: Right Bumper");
             telemetry.addLine("Outtake Power: 0.7 right trigger, 0.4 left trigger");
 
-            telemetry.addData("Platform", shooting.platformRight.getPosition());
+            //telemetry.addData("Platform", shooting.platformRight.getPosition());
             telemetry.addData("Platform", shooting.platformLeft.getPosition());
             telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
             telemetry.addData("Intake", shooting.intakeMotor.getPower());

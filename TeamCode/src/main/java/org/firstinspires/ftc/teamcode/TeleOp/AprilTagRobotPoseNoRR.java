@@ -7,6 +7,7 @@ import com.acmerobotics.roadrunner.InstantAction;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.arcrobotics.ftclib.command.*;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -24,7 +25,7 @@ import java.util.List;
 
 
 
-
+@Disabled
 @TeleOp
 public class AprilTagRobotPoseNoRR extends LinearOpMode {
 
