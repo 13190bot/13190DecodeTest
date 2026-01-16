@@ -101,7 +101,7 @@ public class Shooting extends SubsystemBase {
     }
 
     public void updateCoeff() {
-        outtakeMotor.setVelocityPIDFCoefficients(kP, kI, kD, 0);
+        pidfController.setPIDF(kP, kI, kD, 0);
         feedforward = new SimpleMotorFeedforward(kS, kV);
         pidfController.setTolerance(tolerance);
     }
