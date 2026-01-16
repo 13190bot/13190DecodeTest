@@ -6,16 +6,16 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.teamcode.Utils.Subsystem.DriveTrain;
+
 
 @Autonomous
 public class BACKUPAutoOpBotCantShootThisOnlyMovesForward extends LinearOpMode {
 
     int stop = 500;
 
-    DcMotor backLeftMotor;
-    DcMotor backRightMotor;
-    DcMotor frontLeftMotor;
-    DcMotor frontRightMotor;
+    private DriveTrain drive;
+
 
 
 
@@ -23,21 +23,10 @@ public class BACKUPAutoOpBotCantShootThisOnlyMovesForward extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        // Initialize hardware
-        backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
-        backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
-        frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
-        frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
 
 
 
-
-        // Set motor directions
-        frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
+        drive = new DriveTrain(hardwareMap);
 
 
 
@@ -54,16 +43,13 @@ public class BACKUPAutoOpBotCantShootThisOnlyMovesForward extends LinearOpMode {
 
         // === Autonomous Sequence ==
         sleep(5000);
-        frontLeftMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
-        frontRightMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
+
+        drive.forwardtime(0.5);
+
         sleep(1500);
 
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
+        drive.forwardtime(0.5);
+
 
 
 

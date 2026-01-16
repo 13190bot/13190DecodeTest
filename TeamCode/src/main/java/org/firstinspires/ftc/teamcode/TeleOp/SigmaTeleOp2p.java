@@ -73,13 +73,16 @@ public class SigmaTeleOp2p extends LinearOpMode {
             if (gamepad2.right_bumper) {
                 shooting.platformRight.setPosition(1);
                 shooting.platformLeft.setPosition(1);
-
             } else {
                 shooting.platformRight.setPosition(0);
                 shooting.platformLeft.setPosition(0);
             }
 
-
+            if (gamepad2.left_bumper) {
+                shooting.intakeMotor.setPower(0.7);
+            } else {
+                shooting.intakeMotor.setPower(0);
+            }
 
 
 
