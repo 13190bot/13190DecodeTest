@@ -126,7 +126,8 @@ public class PlatformTest extends LinearOpMode {
     FtcDashboard dashboard = FtcDashboard.getInstance();
 
 
-
+//RIGHT PLATFORM IS REVERSED
+    //LEFT IS NORAML:
 
 
 
