@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.arcrobotics.ftclib.hardware.RevIMU;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import com.arcrobotics.ftclib.gamepad.*;
@@ -10,7 +11,7 @@ import com.arcrobotics.ftclib.command.*;
 
 import org.firstinspires.ftc.teamcode.Utils.Subsystem.*;
 
-
+@Disabled
 @TeleOp
 public class CommandTeleOp extends CommandOpMode  {
 

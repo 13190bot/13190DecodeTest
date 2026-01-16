@@ -3,12 +3,14 @@
 package org.firstinspires.ftc.teamcode.AutoOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+@Disabled
 @Autonomous
 public class SigmaAutoOpEncoder1BallperRedFar extends LinearOpMode {
     final int ticks = 1000;
