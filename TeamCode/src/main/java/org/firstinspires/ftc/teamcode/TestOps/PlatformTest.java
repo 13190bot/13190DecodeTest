@@ -131,6 +131,9 @@ public class PlatformTest extends LinearOpMode {
 
 
 
+    boolean lastSquare = false;
+    boolean lastCircle = false;
+
 
     boolean lastUp = false;
     boolean lastDown = false;
@@ -198,22 +201,9 @@ public class PlatformTest extends LinearOpMode {
             }
 
 
-            if (gamepad1.square) {
-                platformLeft.setPosition(0.7);
-                platformRight.setPosition(0.7);
-            }
 
 
-            if (gamepad1.cross) {
-                platformLeft.setPosition(0.4);
-                platformRight.setPosition(0.4);
-            }
 
-
-            if (gamepad1.circle) {
-                platformLeft.setPosition(0.2);
-                platformRight.setPosition(0.2);
-            }
 
 
             if (gamepad1.right_bumper) {
@@ -266,6 +256,16 @@ public class PlatformTest extends LinearOpMode {
                 platformRight.setPosition(platformRight.getPosition()-0.1);
             }
 
+
+            if (gamepad1.square & !lastSquare) {
+                platformLeft.setPosition(platformLeft.getPosition()+0.1);
+            }
+            if (gamepad1.circle & !lastCircle) {
+                platformRight.setPosition(platformRight.getPosition()+0.1);
+            }
+
+
+
             lastUp = gamepad1.dpad_up;
 
             lastDown = gamepad1.dpad_down;
@@ -274,6 +274,11 @@ public class PlatformTest extends LinearOpMode {
             lastRight = gamepad1.dpad_right;
 
             lastLeft = gamepad1.dpad_left;
+
+
+            lastCircle = gamepad1.circle;
+
+            lastSquare = gamepad1.square;
 
             telemetry.addData("Platform Right", platformRight.getPosition());
             telemetry.addData("Platform Left", platformLeft.getPosition());
@@ -286,6 +291,9 @@ public class PlatformTest extends LinearOpMode {
             telemetry.addLine("dpad down: goes down 0.1");
             telemetry.addLine("right bumper: platform = 0");
             telemetry.addLine("left bumper: platform = 1");
+            telemetry.addLine("square: left goes up 0.1");
+            telemetry.addLine("circle: right goes up 0.1");
+
 
 
             telemetry.addLine("triangle: platform = 1");
