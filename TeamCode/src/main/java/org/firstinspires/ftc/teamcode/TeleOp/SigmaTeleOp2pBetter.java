@@ -26,6 +26,10 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
     private ElapsedTime rumbleTime = new ElapsedTime();
 
 
+    private boolean rightTriggerPressed;
+    private boolean leftTriggerPressed;
+
+
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -50,6 +54,7 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
 
             previousGamepad2.copy(currentGamepad2);
 
+            currentGamepad2.copy(gamepad2);
 
 
 
@@ -87,21 +92,27 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
 
 
 
-            if (!(currentGamepad2.right_trigger > 0.7) && previousGamepad2.right_trigger > 0.7){
-                //whatever far is
-                toggleOuttake(0.8);
-            } else if (!(currentGamepad2.left_trigger > 0.7) && previousGamepad2.left_trigger > 0.7){
-                //whatever close is
+
+
+
+
+            leftTriggerPressed = currentGamepad2.left_trigger > 0.7 && !(previousGamepad2.left_trigger > 0.7);
+
+            rightTriggerPressed = currentGamepad2.left_trigger > 0.7 && !(previousGamepad2.left_trigger > 0.7);
+
+            if (leftTriggerPressed){
                 toggleOuttake(0.4);
+            }else if (rightTriggerPressed){
+                toggleOuttake(0.8);
             }
 
 
-            if (!(currentGamepad2.cross) && previousGamepad2.cross){
+            if (currentGamepad2.cross && !previousGamepad2.cross){
                 platformOn = !platformOn;
             }
 
 
-            if (!(currentGamepad2.circle) && previousGamepad2.circle){
+            if (currentGamepad2.circle && !previousGamepad2.circle){
                 intakeOn = !intakeOn;
             }
 
@@ -177,7 +188,6 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
             telemetry.update();
 
 
-            currentGamepad2.copy(gamepad2);
 
 
         }
