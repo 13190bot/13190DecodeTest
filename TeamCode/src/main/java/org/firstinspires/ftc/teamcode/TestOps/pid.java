@@ -13,7 +13,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.*;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Utils.Subsystem.Shooting;
 
 
 @TeleOp
@@ -31,7 +30,7 @@ public class pid extends LinearOpMode {
 
         double currentVelocity = outtakeMotor.getVelocity();
 
-        double output = pidfController.calculate(currentVelocity, targetVelocity) + feedforward.calculate(targetVelocity);
+        double output = pidfController.calculate(currentVelocity) + feedforward.calculate(targetVelocity);
 
         output = Range.clip(output, -1.0, 1.0);
 
@@ -41,7 +40,7 @@ public class pid extends LinearOpMode {
         pidfController.setPIDF(kP, kI, kD, 0);
         feedforward = new SimpleMotorFeedforward(kS, kV);
         pidfController.setTolerance(tolerance);
-        pidfController.setSetPoint(setPoint);
+        pidfController.setSetPoint(targetVelocity);
     }
     public double getCurrentVelocity() {
         return outtakeMotor.getVelocity();
@@ -66,16 +65,15 @@ public class pid extends LinearOpMode {
     public static double kP = 0.0;
     public static double kI = 0.0;
     public static double kD = 0.0;
-    public static double kF = 0.0;
     public static double kS = 0.0;
     public static double kV = 0.0;
 
     public final static double conversionAmount = (double) 28 /60;
-    public double targetVelocity = 0;
+    public double targetVelocity = 1000;
     public static double tolerance = 100;
-    public static double setPoint = 1000;
-    public static double outtakeTolerance = 0.05;
     SimpleMotorFeedforward feedforward;
+
+
 
 
     @Override
@@ -85,15 +83,11 @@ public class pid extends LinearOpMode {
 
 
 
-//e
 
-        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotorEx.class, "outtakeMotor");
-        platformRight = hardwareMap.get(Servo.class, "platformRight");
-        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
-        platformRight.setDirection(Servo.Direction.FORWARD);
-        platformLeft.setDirection(Servo.Direction.REVERSE);
 
+
+        outtakeMotor.setDirection(DcMotorEx.Direction.FORWARD);
 
         feedforward = new SimpleMotorFeedforward(kS, kV);
         outtakeMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -101,7 +95,7 @@ public class pid extends LinearOpMode {
         outtakeMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
         pidfController = new PIDFController(kP, kI, kD, 0);
         pidfController.setTolerance(tolerance);
-        pidfController.setSetPoint(setPoint);
+        pidfController.setSetPoint(targetVelocity);
 
         waitForStart();
 
@@ -115,8 +109,6 @@ public class pid extends LinearOpMode {
 
 
 
-            updatePID();
-            updateCoeff();
 
 
 
@@ -145,7 +137,6 @@ public class pid extends LinearOpMode {
 
 
 
-            setTargetVelocity(1);
 
             if (gamepad1.circle) {
                 setTargetVelocity(1000);
@@ -169,14 +160,28 @@ public class pid extends LinearOpMode {
 
 
             if (gamepad1.dpad_up){
-                setTargetVelocity(targetVelocity + 1000);
+                setTargetVelocity(targetVelocity + 30);
             }
 
             if (gamepad1.dpad_down){
-                setTargetVelocity(targetVelocity - 1000);
+                setTargetVelocity(targetVelocity - 30);
             }
 
 
+
+
+
+            if (gamepad2.dpad_up){
+                outtakeMotor.setPower(outtakeMotor.getPower() + 0.01);
+            }
+
+            if (gamepad2.dpad_down){
+                outtakeMotor.setPower(outtakeMotor.getPower() - 0.01);
+            }
+
+
+            updateCoeff();
+            updatePID();
 
 
 
@@ -191,9 +196,10 @@ public class pid extends LinearOpMode {
             telemetry.addData("P: ", kP);
             telemetry.addData("I: ", kI);
             telemetry.addData("D: ", kD);
-            telemetry.addData("setpoint: ", setPoint);
-//e
-
+            telemetry.addData("setpoint: ", targetVelocity);
+            telemetry.addData("velocity from encoder", outtakeMotor.getVelocity());
+            telemetry.addData("curr velo: ", getCurrentVelocity());
+            telemetry.addData("curr power: ", outtakeMotor.getPower());
             telemetry.addLine("triangle: 2k");
             telemetry.addLine("square: 3k");
             telemetry.addLine("cross: 4k");
