@@ -21,7 +21,7 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
 
 
     private boolean rumble = false;
-
+    private static double MAX_TICKS = 2500;
 
     private ElapsedTime rumbleTime = new ElapsedTime();
 
@@ -126,7 +126,7 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
 
 
 
-            if (( Math.abs(shooting.outtakeMotor.getVelocity() - shooting.outtakeMotor.getPower()) > Shooting.outtakeTolerance ) && rumbleTime.seconds()>1){
+            if (( Math.abs(shooting.outtakeMotor.getVelocity() - shooting.outtakeMotor.getPower() * MAX_TICKS) < Shooting.outtakeTolerance ) && rumbleTime.seconds()>1){
                 rumble = true;
                 rumbleTime.reset();
             }

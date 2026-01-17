@@ -38,7 +38,7 @@ public class Shooting extends SubsystemBase {
     public double targetVelocity = 0;
     public static double tolerance = 100;
     public static double setPoint = 1000;
-    public static double outtakeTolerance = 0.05;
+    public static double outtakeTolerance = 80; // should be ticks per seconds
     SimpleMotorFeedforward feedforward;
 
 
