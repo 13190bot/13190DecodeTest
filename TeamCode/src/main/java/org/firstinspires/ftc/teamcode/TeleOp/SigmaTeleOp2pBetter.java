@@ -103,7 +103,7 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
             if (leftTriggerPressed){
                 toggleOuttake(0.8);
            }else if (rightTriggerPressed){
-                toggleOuttake(0.7);
+                toggleOuttake(1);
             }
 
             if (intakeOn) {
@@ -163,7 +163,7 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
 
             telemetry.addLine("Intake: O");
             telemetry.addLine("Platform: X");
-            telemetry.addLine("Outtake Power: 0.8 for right trigger, 0.4 for left trigger");
+            telemetry.addLine("Outtake Power: 1 for right trigger, 0.8 for left trigger");
 
             if (platformOn){
                 telemetry.addLine("platform ON");
