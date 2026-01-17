@@ -24,6 +24,7 @@ public class pid extends LinearOpMode {
 
 
 
+    public double output;
 
 
     public void updatePID(){
@@ -47,7 +48,7 @@ public class pid extends LinearOpMode {
         //Sarvesh madullapalli pro advice ^^^
     }
     public void setTargetVelocity(double RPM) {
-        targetVelocity = RPM * conversionAmount;
+        targetVelocity = RPM * RPM_TO_TICKS_PER_SEC;
     }
 
 
@@ -68,7 +69,10 @@ public class pid extends LinearOpMode {
     public static double kS = 0.0;
     public static double kV = 0.0;
 
-    public final static double conversionAmount = (double) 28 /60;
+
+    public static final double TICKS_PER_REV = 28.0 * 139.0; // 3892
+    public static final double RPM_TO_TICKS_PER_SEC = TICKS_PER_REV / 60.0;
+//    public final static double conversionAmount = (double) 28 /60;
     public double targetVelocity = 1000;
     public static double tolerance = 100;
     SimpleMotorFeedforward feedforward;
@@ -139,17 +143,17 @@ public class pid extends LinearOpMode {
 
 
             if (gamepad1.circle) {
-                setTargetVelocity(1000);
+                setTargetVelocity(800);
             }
 
             if (gamepad1.triangle) {
-                setTargetVelocity(2000);
+                setTargetVelocity(1400);
             }
             if (gamepad1.square) {
-                setTargetVelocity(3000);
+                setTargetVelocity(2000);
             }
             if (gamepad1.cross) {
-                setTargetVelocity(4000);
+                setTargetVelocity(2600);
             }
             if (gamepad1.right_bumper) {
                 setTargetVelocity(0);
@@ -190,9 +194,6 @@ public class pid extends LinearOpMode {
 
 
 
-
-            telemetry.addLine("right bumper: 0");
-            telemetry.addLine("left bumper: 500");
             telemetry.addData("P: ", kP);
             telemetry.addData("I: ", kI);
             telemetry.addData("D: ", kD);
@@ -200,10 +201,7 @@ public class pid extends LinearOpMode {
             telemetry.addData("velocity from encoder", outtakeMotor.getVelocity());
             telemetry.addData("curr velo: ", getCurrentVelocity());
             telemetry.addData("curr power: ", outtakeMotor.getPower());
-            telemetry.addLine("triangle: 2k");
-            telemetry.addLine("square: 3k");
-            telemetry.addLine("cross: 4k");
-            telemetry.addLine("circle: 1k");
+            telemetry.addData("output: ", output);
 
 
 

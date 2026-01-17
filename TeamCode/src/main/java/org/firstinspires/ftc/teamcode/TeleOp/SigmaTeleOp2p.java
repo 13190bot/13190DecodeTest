@@ -14,6 +14,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
 
     private DriveTrain drive;
     private Shooting shooting;
+    private double platformPower;
 
     GamepadEx gamepadEx1;
     GamepadEx gamepadEx2;
@@ -62,20 +63,35 @@ public class SigmaTeleOp2p extends LinearOpMode {
             if (gamepad2.right_trigger > 0.7) {
                 shooting.outtakeMotor.setPower(0.7);
             }
-            else if (gamepad2.left_trigger > 0.7) {
-                shooting.outtakeMotor.setPower(0.4);
-            }
+
+
+
+//            else if (gamepad2.left_trigger > 0.7) {
+//
+//
+//
+//
+//                    shooting.outtakeMotor.setPower(shooting.outtakeMotor.getPower() + 0.01);
+//
+//
+//            }
+
             else {
                 shooting.outtakeMotor.setPower(0);
             }
 
 
             if (gamepad2.right_bumper) {
-                shooting.platformRight.setPosition(1);
-                shooting.platformLeft.setPosition(1);
-            } else {
-                shooting.platformRight.setPosition(0);
-                shooting.platformLeft.setPosition(0);
+                platformPower = 1;
+            }else if (gamepad2.left_trigger > 0.7) {
+                platformPower += 0.01;
+
+            }
+
+
+
+            else {
+                platformPower = 0;
             }
 
             if (gamepad2.left_bumper) {
@@ -84,7 +100,8 @@ public class SigmaTeleOp2p extends LinearOpMode {
                 shooting.intakeMotor.setPower(0);
             }
 
-
+            shooting.platformRight.setPosition(platformPower);
+            shooting.platformLeft.setPosition(platformPower);
 
 
 // TELEMETRY
