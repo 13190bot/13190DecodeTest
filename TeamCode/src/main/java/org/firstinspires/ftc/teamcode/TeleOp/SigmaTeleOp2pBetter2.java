@@ -54,11 +54,9 @@ public class SigmaTeleOp2pBetter2 extends LinearOpMode {
             drive.frontRightMotor.setPower((y - x - rx) / denominator);
             drive.backRightMotor.setPower((y + x - rx) / denominator);
 
-            leftTriggerPressed =
-                    currentGamepad2.left_trigger > 0.7 && !(previousGamepad2.left_trigger > 0.7);
+            leftTriggerPressed = currentGamepad2.left_trigger > 0.7 && !(previousGamepad2.left_trigger > 0.7);
 
-            rightTriggerPressed =
-                    currentGamepad2.right_trigger > 0.7 && !previousGamepad2.right_trigger > 0.7);
+            rightTriggerPressed = currentGamepad2.right_trigger > 0.7 && !(previousGamepad2.right_trigger > 0.7);
 
             if (leftTriggerPressed) {
                 intakeOn = !intakeOn;
