@@ -126,7 +126,7 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
 
 
 
-            if (( Math.abs(shooting.outtakeMotor.getVelocity() - shooting.outtakeMotor.getPower() * MAX_TICKS) < Shooting.outtakeTolerance ) && rumbleTime.seconds()>1){
+            if (( Math.abs(shooting.outtakeMotor.getVelocity() - shooting.outtakeMotor.getPower() * MAX_TICKS) < Shooting.outtakeTolerance ) && rumbleTime.seconds()>1 && shooting.outtakeMotor.getPower()>0.3){
                 rumble = true;
                 rumbleTime.reset();
             }
