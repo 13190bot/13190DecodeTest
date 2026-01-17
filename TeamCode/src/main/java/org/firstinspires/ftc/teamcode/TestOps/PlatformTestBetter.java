@@ -71,7 +71,7 @@ import com.qualcomm.robotcore.hardware.*;
 
 @TeleOp
 @Config
-public class PlatformTest extends LinearOpMode {
+public class PlatformTestBetter extends LinearOpMode {
 
 
 
