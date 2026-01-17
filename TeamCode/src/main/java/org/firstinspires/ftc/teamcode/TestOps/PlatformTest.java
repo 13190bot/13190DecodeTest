@@ -129,7 +129,8 @@ public class PlatformTest extends LinearOpMode {
 //RIGHT PLATFORM IS REVERSED
     //LEFT IS NORAML:
 
-
+    public double lowerRange =0;
+    public double higherRange =1;
 
 
     boolean lastSquare = false;
@@ -141,6 +142,10 @@ public class PlatformTest extends LinearOpMode {
 
     boolean lastRight = false;
     boolean lastLeft = false;
+
+
+    boolean lastDownTwo = false;
+    boolean lastUpTwo = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -158,6 +163,12 @@ public class PlatformTest extends LinearOpMode {
 
 
 
+
+        platformLeft.scaleRange(0,1);
+        platformRight.scaleRange(0,1);
+
+
+
         waitForStart();
         // Put run blocks here
 
@@ -169,7 +180,8 @@ public class PlatformTest extends LinearOpMode {
 
 
 
-
+        platformLeft.setPosition(0);
+        platformRight.setPosition(0);
 
 
 
@@ -248,14 +260,14 @@ public class PlatformTest extends LinearOpMode {
 
 
             if (gamepad1.dpad_up & !lastUp) {
-                platformLeft.setPosition(platformLeft.getPosition()+0.1);
-                platformRight.setPosition(platformRight.getPosition()+0.1);
+                platformLeft.setPosition(platformLeft.getPosition()+0.025);
+                platformRight.setPosition(platformRight.getPosition()+0.025);
             }
 
 
             if (gamepad1.dpad_down & !lastDown) {
-                platformLeft.setPosition(platformLeft.getPosition()-0.1);
-                platformRight.setPosition(platformRight.getPosition()-0.1);
+                platformLeft.setPosition(platformLeft.getPosition()-0.025);
+                platformRight.setPosition(platformRight.getPosition()-0.025);
             }
 
 
@@ -302,6 +314,33 @@ public class PlatformTest extends LinearOpMode {
             }
 
 
+
+
+
+            if (gamepad2.dpad_up && !lastUpTwo){
+                lowerRange += 0.025;
+            }
+
+
+            if (gamepad2.dpad_down && !lastDownTwo){
+                higherRange -= 0.025;
+            }
+
+
+            lastUpTwo = gamepad2.dpad_up;
+
+            lastDownTwo = gamepad1.dpad_down;
+
+
+            platformLeft.scaleRange(lowerRange,higherRange);
+            platformRight.scaleRange(lowerRange,higherRange);
+
+
+
+
+
+            telemetry.addData("lowerRange", lowerRange);
+            telemetry.addData("higherRange", higherRange);
 
 
             if (platformRight.getDirection() == Servo.Direction.REVERSE){
