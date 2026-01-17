@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Utils.Subsystem;
 import androidx.annotation.NonNull;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.arcrobotics.ftclib.controller.PIDController;
@@ -15,7 +16,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 
-
+@Config
 public class Shooting extends SubsystemBase {
 
 
@@ -139,7 +140,7 @@ public class Shooting extends SubsystemBase {
             return true;
         }
     }
-//e
+//eeee
     public Action shoot() {
         return new Shooting.Shoot();
     }

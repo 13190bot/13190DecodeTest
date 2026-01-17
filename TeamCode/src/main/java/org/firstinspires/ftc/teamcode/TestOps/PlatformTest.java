@@ -153,6 +153,7 @@ public class PlatformTest extends LinearOpMode {
 
 
         platformRight.setDirection(Servo.Direction.REVERSE);
+        platformLeft.setDirection(Servo.Direction.FORWARD);
 
 
 
@@ -191,7 +192,7 @@ public class PlatformTest extends LinearOpMode {
 
 
         while (opModeIsActive() && !isStopRequested()) {
-            // Put loop blocks here
+            // Putloop blocks here
 
 
 
@@ -288,8 +289,38 @@ public class PlatformTest extends LinearOpMode {
 
 
 
+            if (gamepad1.dpad_right) {
+                platformRight.setDirection(Servo.Direction.REVERSE);
+                platformLeft.setDirection(Servo.Direction.FORWARD);
+            }
+
+
+
+            if (gamepad1.dpad_left) {
+                platformRight.setDirection(Servo.Direction.FORWARD);
+                platformLeft.setDirection(Servo.Direction.REVERSE);
+            }
+
+
+
+
+            if (platformRight.getDirection() == Servo.Direction.REVERSE){
+                telemetry.addLine("right reversed");
+
+
+            }else if (platformLeft.getDirection() == Servo.Direction.REVERSE){
+                telemetry.addLine("left reversed");
+
+
+            }
+
+
             telemetry.addLine("dpad up: goes up 0.1");
             telemetry.addLine("dpad down: goes down 0.1");
+            telemetry.addLine("dpad right: right reversed");
+            telemetry.addLine("dpad left: left reversed");
+
+
             telemetry.addLine("right bumper: platform = 0");
             telemetry.addLine("left bumper: platform = 1");
             telemetry.addLine("square: left goes up 0.1");
