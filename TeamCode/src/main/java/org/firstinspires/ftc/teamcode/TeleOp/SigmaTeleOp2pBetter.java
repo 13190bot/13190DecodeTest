@@ -101,9 +101,22 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
             rightTriggerPressed = currentGamepad2.right_trigger > 0.7 && !(previousGamepad2.right_trigger > 0.7);
 
             if (leftTriggerPressed){
-                toggleOuttake(0.4);
-            }else if (rightTriggerPressed){
                 toggleOuttake(0.8);
+           }else if (rightTriggerPressed){
+                toggleOuttake(0.7);
+            }
+
+            if (intakeOn) {
+                shooting.intakeMotor.setPower(0.7);
+            } else {
+                shooting.intakeMotor.setPower(0);
+            }
+
+// Outtake motor
+            if (outtakeOn) {
+                shooting.outtakeMotor.setPower(0.8);
+            } else {
+                shooting.outtakeMotor.setPower(0);
             }
 
 
