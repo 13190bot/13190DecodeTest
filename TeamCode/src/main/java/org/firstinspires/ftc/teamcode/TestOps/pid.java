@@ -159,7 +159,7 @@ public class pid extends LinearOpMode {
                 setTargetVelocity(0);
             }
             if (gamepad1.left_bumper) {
-                setTargetVelocity(500);
+                setTargetVelocity(0);
             }
 
 
