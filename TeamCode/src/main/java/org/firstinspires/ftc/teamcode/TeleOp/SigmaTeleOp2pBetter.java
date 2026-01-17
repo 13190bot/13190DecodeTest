@@ -98,7 +98,7 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
 
             leftTriggerPressed = currentGamepad2.left_trigger > 0.7 && !(previousGamepad2.left_trigger > 0.7);
 
-            rightTriggerPressed = currentGamepad2.left_trigger > 0.7 && !(previousGamepad2.left_trigger > 0.7);
+            rightTriggerPressed = currentGamepad2.right_trigger > 0.7 && !(previousGamepad2.right_trigger > 0.7);
 
             if (leftTriggerPressed){
                 toggleOuttake(0.4);
