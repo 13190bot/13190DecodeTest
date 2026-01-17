@@ -34,6 +34,7 @@ public class PIDTuning extends LinearOpMode {
 
     public Shooting shooting;
 
+    public static double test = 0;
 
 
 
@@ -138,6 +139,8 @@ public class PIDTuning extends LinearOpMode {
             telemetry.addData("P: ", Shooting.kP);
             telemetry.addData("I: ", Shooting.kI);
             telemetry.addData("D: ", Shooting.kD);
+
+            telemetry.addData("test: ", test);
             telemetry.addData("setpoint: ", Shooting.setPoint);
 //e
 
