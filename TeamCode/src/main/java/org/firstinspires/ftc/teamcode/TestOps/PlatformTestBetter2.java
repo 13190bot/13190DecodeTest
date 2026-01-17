@@ -118,6 +118,20 @@ public class PlatformTestBetter2 extends LinearOpMode {
             lastRight = gamepad2.dpad_right;
             lastLeft = gamepad2.dpad_left;
 
+
+            if (gamepad1.right_bumper){
+                platformLeft.setPosition(1);
+                platformRight.setPosition(1);
+
+            }
+
+
+            if (gamepad1.left_bumper){
+                platformLeft.setPosition(0);
+                platformRight.setPosition(0);
+            }
+
+
             // Telemetry
             telemetry.addData("Left Servo Range", "Lower: %.3f, Higher: %.3f", lowerRangeLeft, higherRangeLeft);
             telemetry.addData("Right Servo Range", "Lower: %.3f, Higher: %.3f", lowerRangeRight, higherRangeRight);

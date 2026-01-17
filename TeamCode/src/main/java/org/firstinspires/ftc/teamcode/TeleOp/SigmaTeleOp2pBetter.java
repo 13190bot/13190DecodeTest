@@ -130,11 +130,6 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
             }
 
 
-            if (intakeOn){
-                shooting.intakeMotor.setPower(0.7);
-            }else{
-                shooting.intakeMotor.setPower(0);
-            }
 
 
 
