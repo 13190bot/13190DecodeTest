@@ -60,12 +60,10 @@ public class SigmaTeleOp2pBetter2 extends LinearOpMode {
 
             if (leftTriggerPressed) {
                 intakeOn = !intakeOn;
-                if (intakeOn) outtakeOn = false;
             }
 
             if (rightTriggerPressed) {
                 outtakeOn = !outtakeOn;
-                if (outtakeOn) intakeOn = false;
             }
 
             shooting.intakeMotor.setPower(intakeOn ? 0.7 : 0);
