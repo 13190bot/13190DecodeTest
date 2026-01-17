@@ -209,7 +209,7 @@ public class PlatformTestBetter extends LinearOpMode {
 
 
 
-            if (gamepad1.triangle) {
+            if (gamepad2.triangle) {
                 platformLeft.setPosition(1);
                 platformRight.setPosition(1);
             }
@@ -220,7 +220,7 @@ public class PlatformTestBetter extends LinearOpMode {
 
 
 
-            if (gamepad1.right_bumper) {
+            if (gamepad2.right_bumper) {
                 platformLeft.setPosition(0);
                 platformRight.setPosition(0);
             }
@@ -228,14 +228,14 @@ public class PlatformTestBetter extends LinearOpMode {
 
 
 
-            if (gamepad1.left_bumper) {
+            if (gamepad2.left_bumper) {
                 platformLeft.setPosition(platformPower);
                 platformRight.setPosition(platformPower);
             }
 
 
 
-            if (gamepad1.dpad_right & !lastRight){
+            if (gamepad2.dpad_right & !lastRight){
                 if (platformRight.getDirection() == Servo.Direction.FORWARD){
                     platformRight.setDirection(Servo.Direction.REVERSE);
 
@@ -248,7 +248,7 @@ public class PlatformTestBetter extends LinearOpMode {
             }
 
 
-            if (gamepad1.dpad_left & !lastLeft){
+            if (gamepad2.dpad_left & !lastLeft){
                 if (platformLeft.getDirection() == Servo.Direction.FORWARD){
                     platformLeft.setDirection(Servo.Direction.REVERSE);
 
@@ -259,40 +259,40 @@ public class PlatformTestBetter extends LinearOpMode {
 
 
 
-            if (gamepad1.dpad_up & !lastUp) {
+            if (gamepad2.dpad_up & !lastUp) {
                 platformLeft.setPosition(platformLeft.getPosition()+0.025);
                 platformRight.setPosition(platformRight.getPosition()+0.025);
             }
 
 
-            if (gamepad1.dpad_down & !lastDown) {
+            if (gamepad2.dpad_down & !lastDown) {
                 platformLeft.setPosition(platformLeft.getPosition()-0.025);
                 platformRight.setPosition(platformRight.getPosition()-0.025);
             }
 
 
-            if (gamepad1.square & !lastSquare) {
+            if (gamepad2.square & !lastSquare) {
                 platformLeft.setPosition(platformLeft.getPosition()+0.1);
             }
-            if (gamepad1.circle & !lastCircle) {
+            if (gamepad2.circle & !lastCircle) {
                 platformRight.setPosition(platformRight.getPosition()+0.1);
             }
 
 
 
-            lastUp = gamepad1.dpad_up;
+            lastUp = gamepad2.dpad_up;
 
-            lastDown = gamepad1.dpad_down;
-
-
-            lastRight = gamepad1.dpad_right;
-
-            lastLeft = gamepad1.dpad_left;
+            lastDown = gamepad2.dpad_down;
 
 
-            lastCircle = gamepad1.circle;
+            lastRight = gamepad2.dpad_right;
 
-            lastSquare = gamepad1.square;
+            lastLeft = gamepad2.dpad_left;
+
+
+            lastCircle = gamepad2.circle;
+
+            lastSquare = gamepad2.square;
 
             telemetry.addData("Platform Right", platformRight.getPosition());
             telemetry.addData("Platform Left", platformLeft.getPosition());
@@ -315,7 +315,7 @@ public class PlatformTestBetter extends LinearOpMode {
 
             lastUpTwo = gamepad2.dpad_up;
 
-            lastDownTwo = gamepad1.dpad_down;
+            lastDownTwo = gamepad2.dpad_down;
 
 
             platformLeft.scaleRange(lowerRange,higherRange);
