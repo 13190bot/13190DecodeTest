@@ -161,6 +161,18 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
 
 // TELEMETRY
 
+            telemetry.addData("backleft", drive.backLeftMotor.getPortNumber());
+            telemetry.addData("backright", drive.backRightMotor.getPortNumber());
+            telemetry.addData("frontleft", drive.frontLeftMotor.getPortNumber());
+            telemetry.addData("frontright", drive.frontRightMotor.getPortNumber());
+
+            telemetry.addData("outtake", shooting.outtakeMotor.getPortNumber());
+            telemetry.addData("intake", shooting.intakeMotor.getPortNumber());
+            telemetry.addData("rightservo", shooting.platformRight.getPortNumber());
+            telemetry.addData("leftservo", shooting.platformLeft.getPortNumber());
+
+
+
             telemetry.addLine("Intake: O");
             telemetry.addLine("Platform: X");
             telemetry.addLine("Outtake Power: 1 for right trigger, 0.8 for left trigger");
