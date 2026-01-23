@@ -81,8 +81,7 @@ public class TestRR extends LinearOpMode {
 
 
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(70, 37, 0));
-        Pose2d initialPosition = new Pose2d(70, 37, 0);
-        localizer = new OTOSLocalizer(hardwareMap, new Pose2d(70, 37, 0));
+//        localizer = new TwoDeadWheelLocalizer(hardwareMap, new Pose2d(70, 37, 0));
 
 
 
