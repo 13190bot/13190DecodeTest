@@ -42,7 +42,7 @@ public class OuttakeSubsystem extends SubsystemBase {
         currentPower = Range.clip(currentPower, -1, 1);
         outtake.setPower(currentPower);
     }
-//e
+//ee
     public double getCurrentRPM() {
         double ticksPerSecond = outtake.getVelocity();
         double revolutionsPerSecond = ticksPerSecond / TICKS_PER_REV;
