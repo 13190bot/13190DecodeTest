@@ -73,7 +73,7 @@ public class pid extends LinearOpMode {
     public static final double TICKS_PER_REV = 28.0 * 139.0; // 3892
     public static final double RPM_TO_TICKS_PER_SEC = TICKS_PER_REV / 60.0;
 //    public final static double conversionAmount = (double) 28 /60;
-    public double targetVelocity = 1000;
+    public static double targetVelocity = 1000;
     public static double tolerance = 100;
     SimpleMotorFeedforward feedforward;
 
@@ -159,7 +159,7 @@ public class pid extends LinearOpMode {
                 setTargetVelocity(0);
             }
             if (gamepad1.left_bumper) {
-                setTargetVelocity(500);
+                setTargetVelocity(0);
             }
 
 

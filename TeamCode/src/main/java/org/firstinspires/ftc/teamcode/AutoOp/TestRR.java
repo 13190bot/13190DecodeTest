@@ -81,8 +81,7 @@ public class TestRR extends LinearOpMode {
 
 
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(70, 37, 0));
-        Pose2d initialPosition = new Pose2d(70, 37, 0);
-        localizer = new OTOSLocalizer(hardwareMap, new Pose2d(70, 37, 0));
+//        localizer = new TwoDeadWheelLocalizer(hardwareMap, new Pose2d(70, 37, 0));
 
 
 
@@ -227,11 +226,179 @@ public class TestRR extends LinearOpMode {
 
 
     }
-}
+ }
+// Blue Close
 
+//CommandScheduler.getInstance().schedule(
+//        new SequentialCommandGroup(
+//)
+//);
+//
+//waitForStart();
+//
+//if (isStopRequested()) return;
+//
+//CommandScheduler.getInstance().run();
+//
+//Action shoot = new SequentialAction(
+//        new InstantAction(() -> shooting.outtakeMotor.setPower(1)),
+//        new ParallelAction(
+//                new InstantAction(() -> shooting.platformRight.setPosition(1)),
+//                new InstantAction(() -> shooting.platformLeft.setPosition(1))
+//        )
+//);
+//
+//Actions.runBlocking(
+//        drive.actionBuilder(new Pose2d(-58.05327 + 8, -58.05327 + 8, Math.toRadians(180)))
+//
+//
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(135))
+//
+//        .splineTo(new Vector2d(-12, -40.65 + 8), Math.toRadians(270))
+//        .splineTo(new Vector2d(-12, -55.35 - 8), Math.toRadians(270))
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(135))
+//
+//        .splineTo(new Vector2d(12, -40.65 + 8), Math.toRadians(270))
+//        .splineTo(new Vector2d(12, -55.35 - 8), Math.toRadians(270))
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(135))
+//
+//        .splineTo(new Vector2d(36, -40.65 + 8), Math.toRadians(270))
+//        .splineTo(new Vector2d(36, -55.35 - 8), Math.toRadians(270))
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(135))
+//
+//        .build()
+//);
 
+//
+//
+//
+//
+// Blue Far
+//
+ //
+ //
+//CommandScheduler.getInstance().schedule(
+//        new SequentialCommandGroup(
+//)
+//);
+//
+//waitForStart();
+//
+//if (isStopRequested()) return;
+//
+//CommandScheduler.getInstance().run();
+//
+//Action shoot = new SequentialAction(
+//        new InstantAction(() -> shooting.outtakeMotor.setPower(1)),
+//        new ParallelAction(
+//                new InstantAction(() -> shooting.platformRight.setPosition(1)),
+//                new InstantAction(() -> shooting.platformLeft.setPosition(1))
+//        )
+//);
+//
+//Actions.runBlocking(
+//        drive.actionBuilder(new Pose2d(60, -12, Math.toRadians(180)))
+//
+//
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(135))
+//
+//        .splineTo(new Vector2d(-12, -40.65 + 8), Math.toRadians(270))
+//        .splineTo(new Vector2d(-12, -55.35 - 8), Math.toRadians(270))
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(135))
+//
+//        .splineTo(new Vector2d(12, -40.65 + 8), Math.toRadians(270))
+//        .splineTo(new Vector2d(12, -55.35 - 8), Math.toRadians(270))
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(135))
+//
+//        .splineTo(new Vector2d(36, -40.65 + 8), Math.toRadians(270))
+//        .splineTo(new Vector2d(36, -55.35 - 8), Math.toRadians(270))
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(135))
+//
+//        .build()
+//);
 
+// Red Far
 
+//CommandScheduler.getInstance().schedule(
+//        new SequentialCommandGroup(
+//)
+//);
+//
+//waitForStart();
+//
+//if (isStopRequested()) return;
+//
+//CommandScheduler.getInstance().run();
+//
+//Action shoot = new SequentialAction(
+//        new InstantAction(() -> shooting.outtakeMotor.setPower(1)),
+//        new ParallelAction(
+//                new InstantAction(() -> shooting.platformRight.setPosition(1)),
+//                new InstantAction(() -> shooting.platformLeft.setPosition(1))
+//        )
+//);
+//
+//Actions.runBlocking(
+//        drive.actionBuilder(new Pose2d(60, 12, Math.toRadians(0)))
+//
+//
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(315))
+//
+//        .splineTo(new Vector2d(36, 32.65), Math.toRadians(90))
+//        .splineTo(new Vector2d(36, 63.35), Math.toRadians(90))
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(315))
+//
+//        .splineTo(new Vector2d(12, 32.65), Math.toRadians(90))
+//        .splineTo(new Vector2d(12, 63.35), Math.toRadians(90))
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(315))
+//
+//        .splineTo(new Vector2d(-12, 32.65), Math.toRadians(90))
+//        .splineTo(new Vector2d(-12, 63.35), Math.toRadians(90))
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(315))
+//
+//        .build()
+//);
 
+// Red Close
+
+//CommandScheduler.getInstance().schedule(
+//        new SequentialCommandGroup(
+//)
+//);
+//
+//waitForStart();
+//
+//if (isStopRequested()) return;
+//
+//CommandScheduler.getInstance().run();
+//
+//Action shoot = new SequentialAction(
+//        new InstantAction(() -> shooting.outtakeMotor.setPower(1)),
+//        new ParallelAction(
+//                new InstantAction(() -> shooting.platformRight.setPosition(1)),
+//                new InstantAction(() -> shooting.platformLeft.setPosition(1))
+//        )
+//);
+//
+//Actions.runBlocking(
+//        drive.actionBuilder( new Pose2d(-58.05327 + 8, 50.05327, Math.toRadians(180)))
+//
+//
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(315))
+//
+//        .splineTo(new Vector2d(-12, 32.65), Math.toRadians(90))
+//        .splineTo(new Vector2d(-12, 63.35), Math.toRadians(90))
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(315))
+//
+//        .splineTo(new Vector2d(12, 32.65), Math.toRadians(90))
+//        .splineTo(new Vector2d(12, 63.35), Math.toRadians(90))
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(315))
+//
+//        .splineTo(new Vector2d(36, 32.65), Math.toRadians(90))
+//        .splineTo(new Vector2d(36, 63.65), Math.toRadians(90))
+//        .splineTo(new Vector2d(0, 0), Math.toRadians(315))
+//
+//        .build()
+//);
 
 
