@@ -11,8 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Config
 public class PlatformTestBetter2 extends LinearOpMode {
 
-    Servo platformRight;
-    Servo platformLeft;
+    Servo platformServo;
 
     public static double platformPower = 1;
 
@@ -40,19 +39,15 @@ public class PlatformTestBetter2 extends LinearOpMode {
 
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
-        platformRight = hardwareMap.get(Servo.class, "platformRight");
-        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
+        platformServo = hardwareMap.get(Servo.class, "platformServo");
 
-        platformRight.setDirection(Servo.Direction.REVERSE);
-        platformLeft.setDirection(Servo.Direction.FORWARD);
+        platformServo.setDirection(Servo.Direction.FORWARD);
 
-        platformLeft.scaleRange(lowerRangeLeft, higherRangeLeft);
-        platformRight.scaleRange(lowerRangeRight, higherRangeRight);
+        platformServo.scaleRange(lowerRangeLeft, higherRangeLeft);
 
         waitForStart();
 
-        platformLeft.setPosition(0);
-        platformRight.setPosition(0);
+        platformServo.setPosition(0);
 
         if (isStopRequested()) return;
 
@@ -95,23 +90,14 @@ public class PlatformTestBetter2 extends LinearOpMode {
             lastR1 = gamepad2.right_bumper;
 
             // Apply the ranges
-            platformLeft.scaleRange(lowerRangeLeft, higherRangeLeft);
-            platformRight.scaleRange(lowerRangeRight, higherRangeRight);
+            platformServo.scaleRange(lowerRangeLeft, higherRangeLeft);
 
-            // The Servo Directions
-            if (gamepad2.dpad_right && !lastRight) {
-                if (platformRight.getDirection() == Servo.Direction.FORWARD) {
-                    platformRight.setDirection(Servo.Direction.REVERSE);
-                } else {
-                    platformRight.setDirection(Servo.Direction.FORWARD);
-                }
-            }
 
             if (gamepad2.dpad_left && !lastLeft) {
-                if (platformLeft.getDirection() == Servo.Direction.FORWARD) {
-                    platformLeft.setDirection(Servo.Direction.REVERSE);
+                if (platformServo.getDirection() == Servo.Direction.FORWARD) {
+                    platformServo.setDirection(Servo.Direction.REVERSE);
                 } else {
-                    platformLeft.setDirection(Servo.Direction.FORWARD);
+                    platformServo.setDirection(Servo.Direction.FORWARD);
                 }
             }
 
@@ -120,25 +106,21 @@ public class PlatformTestBetter2 extends LinearOpMode {
 
 
             if (gamepad1.right_bumper){
-                platformLeft.setPosition(1);
-                platformRight.setPosition(1);
+                platformServo.setPosition(1);
 
             }
 
 
             if (gamepad1.left_bumper){
-                platformLeft.setPosition(0);
-                platformRight.setPosition(0);
+                platformServo.setPosition(0);
             }
 
 
             // Telemetry
             telemetry.addData("Left Servo Range", "Lower: %.3f, Higher: %.3f", lowerRangeLeft, higherRangeLeft);
             telemetry.addData("Right Servo Range", "Lower: %.3f, Higher: %.3f", lowerRangeRight, higherRangeRight);
-            telemetry.addData("Platform Left Position", platformLeft.getPosition());
-            telemetry.addData("Platform Right Position", platformRight.getPosition());
-            telemetry.addData("Left Direction", platformLeft.getDirection());
-            telemetry.addData("Right Direction", platformRight.getDirection());
+            telemetry.addData("Platform Left Position", platformServo.getPosition());
+            telemetry.addData("Left Direction", platformServo.getDirection());
             telemetry.update();
         }
     }
