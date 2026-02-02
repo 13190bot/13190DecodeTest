@@ -30,7 +30,6 @@ public class outtake extends SubsystemBase {
 
     public void stopOuttake(){
         hoodServo.setPosition(0);
-        outtakeMotor.setPower(0);
         platformServo.setPosition(0);
     }
 
@@ -40,6 +39,9 @@ public class outtake extends SubsystemBase {
 
     public void off() {
         outtakeMotor.setPower(0);
+
+        hoodServo.setPosition(0);
+        platformServo.setPosition(0);
     }
 //    public class Outtake implements Action {
 //        private boolean initialized = false;
