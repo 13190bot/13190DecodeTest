@@ -1,15 +1,17 @@
 package org.firstinspires.ftc.teamcode.Utils.Subsystem;
 
-import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.controller.PIDFController;
 import com.arcrobotics.ftclib.controller.wpilibcontroller.SimpleMotorFeedforward;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.*;
 
-@Config
 public class OuttakeSubsystem extends SubsystemBase {
-    DcMotorEx outtake;
+    public DcMotorEx outtakeMotor;
+    public Servo hoodServo;
+    public Servo platformServo;
     PIDFController pidf;
     SimpleMotorFeedforward feedforward;
     private double targetRPM;
@@ -22,10 +24,12 @@ public class OuttakeSubsystem extends SubsystemBase {
     public static double ks = 0.2;
     public static double kv = 0.0;
 
-    public OuttakeSubsystem(DcMotorEx outtake) {
-        this.outtake = outtake;
-        outtake.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        outtake.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+    public OuttakeSubsystem(HardwareMap hardwareMap) {
+        outtakeMotor = hardwareMap.get(DcMotorEx.class, "outtakeMotor");
+        hoodServo = hardwareMap.get(Servo.class, "hoodServo");
+        platformServo = hardwareMap.get(Servo.class, "platformServo");
+        outtakeMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        outtakeMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
         pidf = new PIDFController(kP, kI, kD, 0);
         pidf.setTolerance(TOLERANCE);
         feedforward = new SimpleMotorFeedforward(ks, kv, 0);
@@ -40,11 +44,11 @@ public class OuttakeSubsystem extends SubsystemBase {
         double pidCorrection = pidf.calculate(currentRPM, targetRPM);
         currentPower = feedforwardPower + pidCorrection;
         currentPower = Range.clip(currentPower, -1, 1);
-        outtake.setPower(currentPower);
+        outtakeMotor.setPower(currentPower);
     }
 //ee
     public double getCurrentRPM() {
-        double ticksPerSecond = outtake.getVelocity();
+        double ticksPerSecond = outtakeMotor.getVelocity();
         double revolutionsPerSecond = ticksPerSecond / TICKS_PER_REV;
         return revolutionsPerSecond * 60.0;
     }
@@ -77,7 +81,7 @@ public class OuttakeSubsystem extends SubsystemBase {
     }
 
     public void stop() {
-        outtake.setPower(0);
+        outtakeMotor.setPower(0);
         targetRPM = 0;
         currentPower = 0;
         pidf.reset();
