@@ -245,8 +245,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 //            } else
             if (gamepad2.right_bumper && !lastRB) {
                 platformOn = !platformOn;
-                shooting.platformLeft.setPosition(platformOn ? 1 : 0);
-                shooting.platformRight.setPosition(platformOn ? 1 : 0);
+                shooting.platformServo.setPosition(platformOn ? 1 : 0);
             }
 
 
@@ -371,8 +370,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
 
 
             if (gamepad2.dpad_right){
-                shooting.platformLeft.setPosition(0);
-                shooting.platformRight.setPosition(0);
+                shooting.platformServo.setPosition(0);
 
                 platformOn = false;
                 platformreset++;
@@ -383,8 +381,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
             if (gamepad2.dpad_down){
                 shooting.intakeMotor.setPower(0);
                 shooting.outtakeMotor.setPower(0);
-                shooting.platformLeft.setPosition(0);
-                shooting.platformRight.setPosition(0);
+                shooting.platformServo.setPosition(0);
 
 
                 intakeOn = false;
@@ -413,8 +410,7 @@ public class SigmaTeleOp2pToggle extends LinearOpMode {
             telemetry.addLine("Outtake Power: 0.9 triangle, 0.7 square, 0.5 cross, 0.3 circle");
             telemetry.addLine("dpad reset: left intake, up outtake, right platform, down everything");
 
-            telemetry.addData("Platform", shooting.platformRight.getPosition());
-            telemetry.addData("Platform", shooting.platformLeft.getPosition());
+            telemetry.addData("Platform", shooting.platformServo.getPosition());
             telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
             telemetry.addData("Intake", shooting.intakeMotor.getPower());
             telemetry.addData("front left", drive.frontLeftMotor.getPower());

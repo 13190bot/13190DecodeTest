@@ -152,11 +152,9 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
 
 
             if (platformOn) {
-                shooting.platformRight.setPosition(1);
-                shooting.platformLeft.setPosition(1);
+                shooting.platformServo.setPosition(1);
             }else{
-                shooting.platformRight.setPosition(0);
-                shooting.platformLeft.setPosition(0);
+                shooting.platformServo.setPosition(0);
             }
 
 // TELEMETRY
@@ -168,8 +166,7 @@ public class SigmaTeleOp2pBetter extends LinearOpMode {
 
             telemetry.addData("outtake", shooting.outtakeMotor.getPortNumber());
             telemetry.addData("intake", shooting.intakeMotor.getPortNumber());
-            telemetry.addData("rightservo", shooting.platformRight.getPortNumber());
-            telemetry.addData("leftservo", shooting.platformLeft.getPortNumber());
+            telemetry.addData("platformservo", shooting.platformServo.getPortNumber());
 
 
 

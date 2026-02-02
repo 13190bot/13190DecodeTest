@@ -100,8 +100,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
                 shooting.intakeMotor.setPower(0);
             }
 
-            shooting.platformRight.setPosition(platformPower);
-            shooting.platformLeft.setPosition(platformPower);
+            shooting.platformServo.setPosition(platformPower);
 
 
 // TELEMETRY
@@ -111,7 +110,7 @@ public class SigmaTeleOp2p extends LinearOpMode {
             telemetry.addLine("Outtake Power: 0.7 right trigger, 0.4 left trigger");
 
             //telemetry.addData("Platform", shooting.platformRight.getPosition());
-            telemetry.addData("Platform", shooting.platformLeft.getPosition());
+            telemetry.addData("Platform", shooting.platformServo.getPosition());
             telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
             telemetry.addData("Intake", shooting.intakeMotor.getPower());
             telemetry.addData("front left", drive.frontLeftMotor.getPower());

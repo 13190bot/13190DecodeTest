@@ -60,12 +60,10 @@ public class ShootingTest extends LinearOpMode {
 
             if (gamepad1.right_bumper && !lastRB){
 
-                if (shooting.platformRight.getPosition() == platformPower || shooting.platformLeft.getPosition() == platformPower){
-                    shooting.platformRight.setPosition(0);
-                    shooting.platformLeft.setPosition(0);
+                if (shooting.platformServo.getPosition() == platformPower || shooting.platformServo.getPosition() == platformPower){
+                    shooting.platformServo.setPosition(0);
                 }else {
-                    shooting.platformRight.setPosition(platformPower);
-                    shooting.platformLeft.setPosition(platformPower);
+                    shooting.platformServo.setPosition(platformPower);
                 }
 
 
@@ -92,8 +90,7 @@ public class ShootingTest extends LinearOpMode {
             telemetry.addLine("dpad up: outtake + 0.1");
             telemetry.addLine("dpad up: outtake - 0.1");
 
-            telemetry.addData("Platform Right", shooting.platformRight.getPosition());
-            telemetry.addData("Platform Left", shooting.platformLeft.getPosition());
+            telemetry.addData("Platform", shooting.platformServo.getPosition());
             telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
             telemetry.addData("Intake", shooting.intakeMotor.getPower());
 

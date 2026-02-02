@@ -281,8 +281,7 @@ public class AprilTagRobotPoseOnlyRR extends LinearOpMode {
             telemetry.addLine("Intake: Left Bumper");
             telemetry.addLine("Platform: Right Bumper");
             telemetry.addLine("Outtake Power: 0.7 right trigger, 0.4 left trigger");
-            telemetry.addData("Platform R", shooting.platformRight.getPosition());
-            telemetry.addData("Platform L", shooting.platformLeft.getPosition());
+            telemetry.addData("Platform", shooting.platformServo.getPosition());
             telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
             telemetry.addData("Intake", shooting.intakeMotor.getPower());
             telemetry.addData("front left", drive.leftFront.getPower());

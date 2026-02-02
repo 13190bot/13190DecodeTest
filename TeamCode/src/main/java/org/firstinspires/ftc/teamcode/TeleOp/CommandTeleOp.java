@@ -76,8 +76,7 @@ public class CommandTeleOp extends CommandOpMode  {
 
 // TELEMETRY
 
-            telemetry.addData("Platform", shooting.platformRight.getPosition());
-            telemetry.addData("Platform", shooting.platformLeft.getPosition());
+            telemetry.addData("Platform", shooting.platformServo.getPosition());
             telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
             telemetry.addData("Intake", shooting.intakeMotor.getPower());
             telemetry.addData("front left", drive.frontLeftMotor.getPower());

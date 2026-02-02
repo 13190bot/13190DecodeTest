@@ -84,8 +84,7 @@ public class RRTestTeleOp extends LinearOpMode {
             if (gamepad2.dpad_up){
                 shooting.intakeMotor.setPower(0);
                 shooting.outtakeMotor.setPower(0);
-                shooting.platformRight.setPosition(0);
-                shooting.platformLeft.setPosition(0);
+                shooting.platformServo.setPosition(0);
             }
 
             if (gamepad2.square){
@@ -95,12 +94,10 @@ public class RRTestTeleOp extends LinearOpMode {
             }
 
             if (gamepad2.triangle) {
-                shooting.platformRight.setPosition(1);
-                shooting.platformLeft.setPosition(1);
+                 shooting.platformServo.setPosition(1);
 
             } else if (gamepad2.circle){
-                shooting.platformRight.setPosition(0);
-                shooting.platformLeft.setPosition(0);
+                shooting.platformServo.setPosition(0);
             }
 
             telemetry.addLine("gamepad 2");
@@ -154,8 +151,7 @@ public class RRTestTeleOp extends LinearOpMode {
 
 
 
-            telemetry.addData("Platform", shooting.platformRight.getPosition());
-            telemetry.addData("Platform", shooting.platformLeft.getPosition());
+            telemetry.addData("Platform", shooting.platformServo.getPosition());
             telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
             telemetry.addData("Intake", shooting.intakeMotor.getPower());
             telemetry.addData("front left", drive.leftFront.getPower());

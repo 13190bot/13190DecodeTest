@@ -112,8 +112,7 @@ public class TestRR extends LinearOpMode {
         Action shoot = new SequentialAction(
 
                 new InstantAction(() -> shooting.outtakeMotor.setPower(1)),
-                new ParallelAction(new InstantAction(()-> shooting.platformRight.setPosition(1)),
-                        new InstantAction(()-> shooting.platformLeft.setPosition(1))
+                new ParallelAction(new InstantAction(()-> shooting.platformServo.setPosition(1))
                 )
         );
 
@@ -210,8 +209,7 @@ public class TestRR extends LinearOpMode {
         telemetry.addLine("Platform: Right Bumper");
         telemetry.addLine("Outtake Power: 0.7 right trigger, 0.4 left trigger");
 
-        telemetry.addData("Platform", shooting.platformRight.getPosition());
-        telemetry.addData("Platform", shooting.platformLeft.getPosition());
+        telemetry.addData("Platform", shooting.platformServo.getPosition());
         telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
         telemetry.addData("Intake", shooting.intakeMotor.getPower());
         telemetry.addData("front left", drive.leftFront.getPower());

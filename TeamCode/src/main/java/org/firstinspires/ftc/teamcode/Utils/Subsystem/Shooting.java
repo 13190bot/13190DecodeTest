@@ -22,8 +22,7 @@ public class Shooting extends SubsystemBase {
 
     public DcMotor intakeMotor;
     public DcMotorEx outtakeMotor;
-    public Servo platformRight;
-    public Servo platformLeft;
+    public Servo platformServo;
 
     public PIDFController pidfController;
     public static double kP = 0.0;
@@ -44,10 +43,7 @@ public class Shooting extends SubsystemBase {
     public Shooting(HardwareMap hardwareMap) {
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotorEx.class, "outtakeMotor");
-        platformRight = hardwareMap.get(Servo.class, "platformRight");
-        platformLeft = hardwareMap.get(Servo.class, "platformLeft");
-        platformRight.setDirection(Servo.Direction.FORWARD);
-        platformLeft.setDirection(Servo.Direction.REVERSE);
+        platformServo.setDirection(Servo.Direction.FORWARD);
 
 
         feedforward = new SimpleMotorFeedforward(kS, kV);
@@ -62,8 +58,7 @@ public class Shooting extends SubsystemBase {
     public void stopShooting(){
         intakeMotor.setPower(0);
         outtakeMotor.setPower(0);
-        platformLeft.setPosition(0);
-        platformRight.setPosition(0);
+        platformServo.setPosition(0);
     }
 
 
@@ -131,8 +126,7 @@ public class Shooting extends SubsystemBase {
 
 
             if (vel>0.95){
-                platformRight.setPosition(1);
-                platformLeft.setPosition(1);
+                platformServo.setPosition(1);
                 return false;
             }
 
