@@ -43,7 +43,7 @@ public class Shooting extends SubsystemBase {
     public Shooting(HardwareMap hardwareMap) {
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotorEx.class, "outtakeMotor");
-        platformServo.setDirection(Servo.Direction.FORWARD);
+        platformServo = hardwareMap.get(Servo.class,"platformServo");
 
 
         feedforward = new SimpleMotorFeedforward(kS, kV);
