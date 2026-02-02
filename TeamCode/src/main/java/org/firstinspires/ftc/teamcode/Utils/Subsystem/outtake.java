@@ -15,8 +15,8 @@ public class outtake extends SubsystemBase {
 
     public outtake(HardwareMap hardwareMap) {
         outtakeMotor = hardwareMap.get(DcMotorEx.class, "outtakeMotor");
-        hoodServo = hardwareMap.get(Servo.class, "platformRight");
-        platformServo = hardwareMap.get(Servo.class, "platformLeft");
+        hoodServo = hardwareMap.get(Servo.class, "hoodServo");
+        platformServo = hardwareMap.get(Servo.class, "platformServo");
         platformServo.setDirection(Servo.Direction.FORWARD);
         hoodServo.setDirection(Servo.Direction.FORWARD);
         outtakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
