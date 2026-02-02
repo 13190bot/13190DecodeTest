@@ -6,7 +6,7 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
 
-    private DcMotor intakeMotor;
+    public DcMotor intakeMotor;
     public static double power = 0.8;
 
     public Intake(HardwareMap hardwareMap) {
