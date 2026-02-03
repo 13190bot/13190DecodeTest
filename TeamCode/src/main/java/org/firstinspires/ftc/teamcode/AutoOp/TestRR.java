@@ -277,6 +277,12 @@ public class TestRR extends LinearOpMode {
  //
 //CommandScheduler.getInstance().schedule(
 //        new SequentialCommandGroup(
+//           new DriveTrain(m_drive),
+//   new ParallelCommandGroup(
+//      new Intake(),
+//      new OuttakeSubsystem()),
+//        new Shooting(m_wrist));
+
 //)
 //);
 //
