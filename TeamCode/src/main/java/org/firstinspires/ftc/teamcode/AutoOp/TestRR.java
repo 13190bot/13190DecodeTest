@@ -225,6 +225,30 @@ public class TestRR extends LinearOpMode {
 
     }
  }
+//
+// Command Scheduler
+// waitForStart();
+//
+//        if (isStopRequested()) return;
+//
+//        CommandScheduler.getInstance().run();
+//
+//Action shoot = new SequentialAction(
+//
+//        new InstantAction(() -> outtake.outtakeMotor.setPower(1)),
+//        new ParallelAction(new InstantAction(()-> outtake.platformServo.setPosition(1))
+//        )
+//);
+//Action intake = new SequentialAction(
+//
+//        new InstantAction(() -> Intake.intakeMotor.setPower(1))
+//);
+//Action hoodservoup = new SequentialAction(
+//
+//        new InstantAction(() -> outtake.platformServo.setPosition(1))
+//);
+//    }
+//            }
 // Blue Close
 
 //CommandScheduler.getInstance().schedule(
