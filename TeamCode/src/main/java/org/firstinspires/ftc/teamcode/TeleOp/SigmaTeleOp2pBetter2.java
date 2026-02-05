@@ -115,6 +115,7 @@ public class SigmaTeleOp2pBetter2 extends LinearOpMode {
             telemetry.addData("Intake", intakeOn ? "ON" : "OFF");
             telemetry.addData("Outtake", outtakeOn ? "ON" : "OFF");
             telemetry.addData("Platform", platformOn ? "ON" : "OFF");
+            telemetry.addData("Platform pos", shooting.platformServo.getPosition());
 
             telemetry.addData("Outtake Power", shooting.outtakeMotor.getPower());
             telemetry.addData("Outtake Velocity", shooting.outtakeMotor.getVelocity());
