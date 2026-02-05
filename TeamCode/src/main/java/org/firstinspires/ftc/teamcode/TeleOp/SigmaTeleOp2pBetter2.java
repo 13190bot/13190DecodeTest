@@ -76,9 +76,9 @@ public class SigmaTeleOp2pBetter2 extends LinearOpMode {
             }
 
             if (platformOn) {
-                OuttakeSubsystem.platformServo.setPosition(1);
+                shooting.platformServo.setPosition(1);
             } else {
-                OuttakeSubsystem.platformServo.setPosition(0);
+                shooting.platformServo.setPosition(0);
             }
 
             if (Math.abs(shooting.outtakeMotor.getVelocity() - shooting.outtakeMotor.getPower() * MAX_TICKS) < Shooting.outtakeTolerance
@@ -102,6 +102,7 @@ public class SigmaTeleOp2pBetter2 extends LinearOpMode {
             telemetry.addData("Intake", intakeOn ? "ON" : "OFF");
             telemetry.addData("Outtake", outtakeOn ? "ON" : "OFF");
             telemetry.addData("Platform", platformOn ? "ON" : "OFF");
+            telemetry.addData("Platform pos", shooting.platformServo.getPosition());
 
             telemetry.addData("Outtake Power", shooting.outtakeMotor.getPower());
             telemetry.addData("Outtake Velocity", shooting.outtakeMotor.getVelocity());
