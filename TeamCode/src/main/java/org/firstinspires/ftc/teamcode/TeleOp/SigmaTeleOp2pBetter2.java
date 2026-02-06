@@ -46,8 +46,8 @@ public class SigmaTeleOp2pBetter2 extends LinearOpMode {
             currentGamepad2.copy(gamepad2);
 
             double y = gamepad1.left_stick_y;
-            double rx = -gamepad1.left_stick_x * 1.1;
-            double x = -gamepad1.right_stick_x;
+            double rx = -gamepad1.right_stick_x * 1.1;
+            double x = -gamepad1.left_stick_x;
 
             double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
 
@@ -68,18 +68,18 @@ public class SigmaTeleOp2pBetter2 extends LinearOpMode {
                 outtakeOn = !outtakeOn;
             }
 
-            shooting.intakeMotor.setPower(intakeOn ? 0.7 : 0);
+            shooting.intakeMotor.setPower(intakeOn ? 1 : 0);
             shooting.outtakeMotor.setPower(outtakeOn ? 0.8 : 0);
-
-            if (currentGamepad2.cross && !previousGamepad2.cross) {
-                platformOn = !platformOn;
-            }
-
-            if (platformOn) {
-                shooting.platformServo.setPosition(1);
-            } else {
-                shooting.platformServo.setPosition(0);
-            }
+//
+//            if (currentGamepad2.cross && !previousGamepad2.cross) {
+//                platformOn = !platformOn;
+//            }
+//
+//            if (platformOn) {
+//                shooting.platformServo.setPosition(1);
+//            } else {
+//                shooting.platformServo.setPosition(0);
+//            }
 
             if (Math.abs(shooting.outtakeMotor.getVelocity() - shooting.outtakeMotor.getPower() * MAX_TICKS) < Shooting.outtakeTolerance
                     && rumbleTime.seconds() > 1
