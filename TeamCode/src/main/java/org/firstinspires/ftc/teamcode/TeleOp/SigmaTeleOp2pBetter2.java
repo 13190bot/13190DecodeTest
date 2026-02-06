@@ -2,9 +2,7 @@ package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Utils.Subsystem.*;
 
@@ -14,7 +12,7 @@ public class SigmaTeleOp2pBetter2 extends LinearOpMode {
     private DriveTrain drive;
     private Shooting shooting;
 
-//    private OuttakeSubsystem outtakeSubsystem;
+    private outtake OuttakeSubsystem;
 
     private boolean platformOn = false;
     private boolean intakeOn = false;
@@ -31,19 +29,8 @@ public class SigmaTeleOp2pBetter2 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
-        DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-        DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
-        DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
-        Servo platformServo = hardwareMap.servo.get("platformServo");
-        DcMotor intakeMotor = hardwareMap.dcMotor.get("intakeMotor");
-        DcMotor outtakeMotor = hardwareMap.dcMotor.get("outtakeMotor");
-
-
         drive = new DriveTrain(hardwareMap);
         shooting = new Shooting(hardwareMap);
-//        outtakeSubsystem = new OuttakeSubsystem(hardwareMap);
-
 
         Gamepad currentGamepad2 = new Gamepad();
         Gamepad previousGamepad2 = new Gamepad();
@@ -59,8 +46,8 @@ public class SigmaTeleOp2pBetter2 extends LinearOpMode {
             currentGamepad2.copy(gamepad2);
 
             double y = gamepad1.left_stick_y;
-            double rx = -gamepad1.right_stick_x * 1.1;
-            double x = -gamepad1.left_stick_x;
+            double rx = -gamepad1.left_stick_x * 1.1;
+            double x = -gamepad1.right_stick_x;
 
             double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
 

@@ -72,6 +72,7 @@ public class feb2 extends LinearOpMode {
             rightTriggerPressed = currentGamepad2.right_trigger > 0.7 && !(previousGamepad2.right_trigger > 0.7);
 
 
+    }}
             if (leftTriggerPressed) {
                 intakeOn = !intakeOn;
             }
@@ -129,5 +130,3 @@ public class feb2 extends LinearOpMode {
 //        );
 //
 //
-    }
-}
