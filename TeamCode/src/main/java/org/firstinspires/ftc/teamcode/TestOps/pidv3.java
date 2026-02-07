@@ -35,7 +35,7 @@ public class pidv3 extends LinearOpMode {
         outtake.setDirection(DcMotorSimple.Direction.REVERSE);
 
         PIDFController pidfController = new PIDFController(kP, kI, kD, 0);
-        SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(ks, kv, 0);
+//        SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(ks, kv, 0);
 
         boolean running = false;
 
@@ -61,18 +61,18 @@ public class pidv3 extends LinearOpMode {
             // Update PIDF coefficients from dashboard
             pidfController.setPIDF(kP, kI, kD, 0);
             pidfController.setTolerance(TOLERANCE);
-            feedforward = new SimpleMotorFeedforward(ks, kv, 0);
+//            feedforward = new SimpleMotorFeedforward(ks, kv, 0);
 
             double currentRPM = (outtake.getVelocity() / TICKS_PER_REV) * 60.0;
 
             if (running) {
-                double ffPower = feedforward.calculate(TARGET_RPM);
+//                double ffPower = feedforward.calculate(TARGET_RPM);
                 double pidCorrection = pidfController.calculate(currentRPM, TARGET_RPM);
-                double power = Range.clip(ffPower + pidCorrection, -1, 1);
+                double power = Range.clip(pidCorrection, -1, 1);
                 outtake.setPower(power);
                 telemetry.addLine("=== RUNNING ===");
                 telemetry.addData("Power", "%.3f", power);
-                telemetry.addData("FF", "%.3f", ffPower);
+
                 telemetry.addData("PID", "%.3f", pidCorrection);
             } else {
                 telemetry.addLine("=== STOPPED (Press A) ===");
@@ -92,8 +92,8 @@ public class pidv3 extends LinearOpMode {
             telemetry.addData("kP", kP);
             telemetry.addData("kI", kI);
             telemetry.addData("kD", kD);
-            telemetry.addData("ks", ks);
-            telemetry.addData("kv", kv);
+//            telemetry.addData("ks", ks);
+//            telemetry.addData("kv", kv);
 
             telemetry.update();
         }

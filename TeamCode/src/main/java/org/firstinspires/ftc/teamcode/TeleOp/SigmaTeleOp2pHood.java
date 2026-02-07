@@ -33,8 +33,8 @@ public class SigmaTeleOp2pHood extends LinearOpMode {
         drive = new DriveTrain(hardwareMap);
         shooting = new Shooting(hardwareMap);
 
-        Gamepad currentGamepad2 = new Gamepad();
-        Gamepad previousGamepad2 = new Gamepad();
+        Gamepad currentGamepad1 = new Gamepad();
+        Gamepad previousGamepad1 = new Gamepad();
 
         waitForStart();
         if (isStopRequested()) return;
@@ -43,8 +43,8 @@ public class SigmaTeleOp2pHood extends LinearOpMode {
 
         while (opModeIsActive() && !isStopRequested()) {
 
-            previousGamepad2.copy(currentGamepad2);
-            currentGamepad2.copy(gamepad2);
+            previousGamepad1.copy(currentGamepad1);
+            currentGamepad1.copy(gamepad1);
 
             double y = gamepad1.left_stick_y;
             double rx = -gamepad1.right_stick_x * 1.1;
@@ -57,8 +57,8 @@ public class SigmaTeleOp2pHood extends LinearOpMode {
             drive.frontRightMotor.setPower((y - x - rx) / denominator);
             drive.backRightMotor.setPower((y + x - rx) / denominator);
 
-            leftTriggerPressed = currentGamepad2.left_trigger > 0.7 && !(previousGamepad2.left_trigger > 0.7);
-            rightTriggerPressed = currentGamepad2.right_trigger > 0.7 && !(previousGamepad2.right_trigger > 0.7);
+            leftTriggerPressed = currentGamepad1.left_trigger > 0.7 && !(previousGamepad1.left_trigger > 0.7);
+            rightTriggerPressed = currentGamepad1.right_trigger > 0.7 && !(previousGamepad1.right_trigger > 0.7);
 
             if (leftTriggerPressed) {
                 intakeOn = !intakeOn;
@@ -71,7 +71,7 @@ public class SigmaTeleOp2pHood extends LinearOpMode {
             shooting.intakeMotor.setPower(intakeOn ? 1 : 0);
             shooting.outtakeMotor.setPower(outtakeOn ? -1 : 0);
 
-            if (currentGamepad2.cross && !previousGamepad2.cross) {
+            if (currentGamepad1.cross && !previousGamepad1.cross) {
                 platformOn = !platformOn;
             }
 
@@ -81,12 +81,12 @@ public class SigmaTeleOp2pHood extends LinearOpMode {
                 shooting.platformServo.setPosition(0);
             }
 
-            if (currentGamepad2.dpad_down && !previousGamepad2.dpad_down) {
+            if (currentGamepad1.dpad_down && !previousGamepad1.dpad_down) {
                 hoodOn = !hoodOn;
             }
 
             if (hoodOn) {
-                shooting.hoodServo.setPosition(0.5);
+                shooting.hoodServo.setPosition(0.08);
             } else {
                 shooting.hoodServo.setPosition(0);
             }
@@ -101,8 +101,8 @@ public class SigmaTeleOp2pHood extends LinearOpMode {
 
             if (rumble) {
                 rumble = false;
-                gamepad2.rumble(500);
-                gamepad2.setLedColor(29, 67, 107, 1000);
+                gamepad1.rumble(500);
+                gamepad1.setLedColor(29, 67, 107, 1000);
             }
 
             telemetry.addLine("Left Trigger: Intake @ 0.7");
