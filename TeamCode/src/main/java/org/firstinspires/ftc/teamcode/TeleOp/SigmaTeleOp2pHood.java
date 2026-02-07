@@ -67,7 +67,7 @@ public class SigmaTeleOp2pHood extends LinearOpMode {
             if (rightTriggerPressed) {
                 outtakeOn = !outtakeOn;
             }
-
+//e
             shooting.intakeMotor.setPower(intakeOn ? 1 : 0);
             shooting.outtakeMotor.setPower(outtakeOn ? -1 : 0);
 
