@@ -23,6 +23,7 @@ public class Shooting extends SubsystemBase {
     public DcMotor intakeMotor;
     public DcMotorEx outtakeMotor;
     public Servo platformServo;
+    public Servo hoodServo;
 
     public PIDFController pidfController;
     public static double kP = 0.0;
@@ -44,6 +45,7 @@ public class Shooting extends SubsystemBase {
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotorEx.class, "outtakeMotor");
         platformServo = hardwareMap.get(Servo.class,"platformServo");
+        hoodServo = hardwareMap.get(Servo.class,"hoodServo");
 
 
         feedforward = new SimpleMotorFeedforward(kS, kV);
@@ -59,6 +61,8 @@ public class Shooting extends SubsystemBase {
         intakeMotor.setPower(0);
         outtakeMotor.setPower(0);
         platformServo.setPosition(0);
+        hoodServo.setPosition((0));
+
     }
 
 

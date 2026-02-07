@@ -28,7 +28,7 @@ public class pidv3 extends LinearOpMode {
     public void runOpMode() {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
-        DcMotorEx outtake = (DcMotorEx) hardwareMap.dcMotor.get("outtake");
+        DcMotorEx outtake = (DcMotorEx) hardwareMap.dcMotor.get("outtakeMotor");
         outtake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         outtake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         outtake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
