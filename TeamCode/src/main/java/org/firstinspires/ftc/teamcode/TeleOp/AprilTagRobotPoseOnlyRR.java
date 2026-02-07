@@ -128,10 +128,10 @@ public class AprilTagRobotPoseOnlyRR extends LinearOpMode {
                 } else {
 
                     if (gamepad1.right_bumper) {
-                        drive.leftFront.setPower(0.5);
-                        drive.leftBack.setPower(0.5);
-                        drive.rightFront.setPower(-0.5);
-                        drive.rightBack.setPower(-0.5);
+                        drive.frontLeftMotor.setPower(0.5);
+                        drive.backLeftMotor.setPower(0.5);
+                        drive.frontRightMotor.setPower(-0.5);
+                        drive.backRightMotor.setPower(-0.5);
                     }
                 }
             }
@@ -166,10 +166,10 @@ public class AprilTagRobotPoseOnlyRR extends LinearOpMode {
                 } else {
 
                     if (gamepad1.right_bumper) {
-                        drive.leftFront.setPower(0.5);
-                        drive.leftBack.setPower(0.5);
-                        drive.rightFront.setPower(-0.5);
-                        drive.rightBack.setPower(-0.5);
+                        drive.frontLeftMotor.setPower(0.5);
+                        drive.backLeftMotor.setPower(0.5);
+                        drive.frontLeftMotor.setPower(-0.5);
+                        drive.backRightMotor.setPower(-0.5);
                     }
                 }
 
@@ -284,10 +284,10 @@ public class AprilTagRobotPoseOnlyRR extends LinearOpMode {
             telemetry.addData("Platform", shooting.platformServo.getPosition());
             telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
             telemetry.addData("Intake", shooting.intakeMotor.getPower());
-            telemetry.addData("front left", drive.leftFront.getPower());
-            telemetry.addData("back left", drive.leftBack.getPower());
-            telemetry.addData("front right", drive.rightFront.getPower());
-            telemetry.addData("back left", drive.leftBack.getPower());
+            telemetry.addData("front left", drive.frontLeftMotor.getPower());
+            telemetry.addData("back left", drive.backRightMotor.getPower());
+            telemetry.addData("front right", drive.frontRightMotor.getPower());
+            telemetry.addData("back left", drive.backLeftMotor.getPower());
 
 
             telemetry.update();
@@ -303,10 +303,10 @@ public class AprilTagRobotPoseOnlyRR extends LinearOpMode {
 
 
     public void getMotorPosition(){
-        telemetry.addData("fl", drive.leftFront.getCurrentPosition());
-        telemetry.addData("fr",drive.rightFront.getCurrentPosition());
-        telemetry.addData("bl",drive.leftBack.getCurrentPosition());
-        telemetry.addData("br",drive.rightBack.getCurrentPosition());
+        telemetry.addData("fl", drive.frontLeftMotor.getCurrentPosition());
+        telemetry.addData("fr",drive.frontRightMotor.getCurrentPosition());
+        telemetry.addData("bl",drive.backLeftMotor.getCurrentPosition());
+        telemetry.addData("br",drive.backRightMotor.getCurrentPosition());
     }
 
 

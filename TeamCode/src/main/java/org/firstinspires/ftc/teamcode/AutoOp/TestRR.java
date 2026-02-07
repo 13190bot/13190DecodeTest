@@ -212,10 +212,10 @@ public class TestRR extends LinearOpMode {
         telemetry.addData("Platform", shooting.platformServo.getPosition());
         telemetry.addData("Outtake", shooting.outtakeMotor.getPower());
         telemetry.addData("Intake", shooting.intakeMotor.getPower());
-        telemetry.addData("front left", drive.leftFront.getPower());
-        telemetry.addData("back left", drive.leftBack.getPower());
-        telemetry.addData("front right", drive.rightFront.getPower());
-        telemetry.addData("back right", drive.rightBack.getPower());
+        telemetry.addData("front left", drive.frontLeftMotor.getPower());
+        telemetry.addData("back left", drive.backLeftMotor.getPower());
+        telemetry.addData("front right", drive.frontRightMotor.getPower());
+        telemetry.addData("back right", drive.backRightMotor.getPower());
 
 
         telemetry.update();

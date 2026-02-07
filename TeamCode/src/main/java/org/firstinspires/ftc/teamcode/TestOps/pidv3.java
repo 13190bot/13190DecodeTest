@@ -32,12 +32,12 @@ public class pidv3 extends LinearOpMode {
 
         DcMotorEx outtake = (DcMotorEx) hardwareMap.dcMotor.get("outtakeMotor");
         outtake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        outtake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        outtake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         outtake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         outtake.setDirection(DcMotorSimple.Direction.REVERSE);
 
         PIDFController pidfController = new PIDFController(kP, kI, kD, 0);
-//        SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(ks, kv, 0);
+        SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(ks, kv, 0);
 
         boolean running = false;
 
@@ -58,11 +58,18 @@ public class pidv3 extends LinearOpMode {
                 }
                 sleep(200); // Debounce
             }
-
+            if (gamepad1.cross) {
+                running = !running;
+                if (!running) {
+                    outtake.setPower(0);
+                    pidfController.reset();
+                }
+                sleep(200); // Debounce
+            }
             // Update PIDF coefficients from dashboard
             pidfController.setPIDF(kP, kI, kD, 0);
             pidfController.setTolerance(TOLERANCE);
-//            feedforward = new SimpleMotorFeedforward(ks, kv, 0);
+            feedforward = new SimpleMotorFeedforward(ks, kv, 0);
 
             CURRENTRPM = (outtake.getVelocity() / TICKS_PER_REV) * 60.0;
 

@@ -1,8 +1,5 @@
 package org.firstinspires.ftc.teamcode.TestOps;
 
-
-
-
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
@@ -16,17 +13,6 @@ import org.firstinspires.ftc.teamcode.Utils.Subsystem.Shooting;
 @TeleOp
 @Config
 public class PIDTuning extends LinearOpMode {
-
-
-
-
-
-
-
-
-
-
-
 
 
     FtcDashboard dashboard = FtcDashboard.getInstance();
@@ -65,17 +51,6 @@ public class PIDTuning extends LinearOpMode {
 
             shooting.updatePID();
             shooting.updateCoeff();
-
-
-
-
-
-
-
-
-
-
-
 
 
 

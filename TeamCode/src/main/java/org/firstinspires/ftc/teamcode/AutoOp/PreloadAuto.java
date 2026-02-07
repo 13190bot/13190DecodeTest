@@ -39,6 +39,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import com.arcrobotics.ftclib.gamepad.*;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -56,34 +57,43 @@ public class PreloadAuto extends LinearOpMode {
     private DcMotor intakeMotor;
     private DcMotor outtakeMotor;
     private Servo platformServo;
+
+    private Servo hoodServo;
     @Override
     public void runOpMode() {
 
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
         platformServo = hardwareMap.get(Servo.class, "platformServo");
+        hoodServo = hardwareMap.get(Servo.class, "hoodServo");
+        outtakeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        platformServo.setPosition(0.5);
+//       platformServo.setPosition(0.5);
 
         waitForStart();
         if (isStopRequested()) return;
 
+        hoodServo.setPosition(0.03);
 
         sleep(2000);
         outtakeMotor.setPower(1.0);
         sleep(3000);
-        platformServo.setPosition(0.7);
-        sleep(4000);
+        platformServo.setPosition(1);
+        sleep(2000);
         platformServo.setPosition(0);
+        sleep(2000);
         intakeMotor.setPower(1);
-        sleep(4000);
+        sleep(3000);
         intakeMotor.setPower(0);
+        sleep(3000);
         platformServo.setPosition(0.7);
-        sleep(4000);
+        sleep(3000);
         platformServo.setPosition(0);
+        sleep(2500);
         intakeMotor.setPower(1);
-
+        sleep(2500);
         intakeMotor.setPower(0);
+        sleep(3000);
         platformServo.setPosition(0.7);
 
     }
