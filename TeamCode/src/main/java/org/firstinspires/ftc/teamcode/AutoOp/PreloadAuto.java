@@ -56,7 +56,6 @@ public class PreloadAuto extends LinearOpMode {
     private DcMotor intakeMotor;
     private DcMotor outtakeMotor;
     private Servo platformServo;
-
     @Override
     public void runOpMode() {
 
@@ -64,24 +63,28 @@ public class PreloadAuto extends LinearOpMode {
         outtakeMotor = hardwareMap.get(DcMotor.class, "outtakeMotor");
         platformServo = hardwareMap.get(Servo.class, "platformServo");
 
-        platformServo.setPosition(0);
+        platformServo.setPosition(0.5);
 
         waitForStart();
         if (isStopRequested()) return;
 
-        intakeMotor.setPower(1);
+
         sleep(2000);
         outtakeMotor.setPower(1.0);
-        sleep(2000);
-        platformServo.setPosition(1.0);
-        sleep(2000);
+        sleep(3000);
+        platformServo.setPosition(0.7);
+        sleep(4000);
         platformServo.setPosition(0);
-        sleep(2000);
-        platformServo.setPosition(1.0);
-        sleep(1000);
+        intakeMotor.setPower(1);
+        sleep(4000);
+        intakeMotor.setPower(0);
+        platformServo.setPosition(0.7);
+        sleep(4000);
         platformServo.setPosition(0);
-        sleep(2000);
-        platformServo.setPosition(1);
+        intakeMotor.setPower(1);
+
+        intakeMotor.setPower(0);
+        platformServo.setPosition(0.7);
 
     }
 }

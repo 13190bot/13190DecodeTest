@@ -69,17 +69,17 @@ public class SigmaTeleOp2pBetter2 extends LinearOpMode {
             }
 
             shooting.intakeMotor.setPower(intakeOn ? 1 : 0);
-            shooting.outtakeMotor.setPower(outtakeOn ? 0.8 : 0);
-//
-//            if (currentGamepad2.cross && !previousGamepad2.cross) {
-//                platformOn = !platformOn;
-//            }
-//
-//            if (platformOn) {
-//                shooting.platformServo.setPosition(1);
-//            } else {
-//                shooting.platformServo.setPosition(0);
-//            }
+            shooting.outtakeMotor.setPower(outtakeOn ? -1 : 0);
+
+            if (currentGamepad2.cross && !previousGamepad2.cross) {
+                platformOn = !platformOn;
+            }
+
+            if (platformOn) {
+                shooting.platformServo.setPosition(1);
+            } else {
+                shooting.platformServo.setPosition(0);
+            }
 
             if (Math.abs(shooting.outtakeMotor.getVelocity() - shooting.outtakeMotor.getPower() * MAX_TICKS) < Shooting.outtakeTolerance
                     && rumbleTime.seconds() > 1
