@@ -24,6 +24,8 @@ public class pidv3 extends LinearOpMode {
     public static double TICKS_PER_REV = 28.0;
     public static double TOLERANCE = 25.0;
 
+    public double CURRENTRPM = 0;
+
     @Override
     public void runOpMode() {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
@@ -48,8 +50,7 @@ public class pidv3 extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            // Toggle on A press
-            if (gamepad1.a && !gamepad1.start) {
+            if (gamepad1.cross && !gamepad1.start) {
                 running = !running;
                 if (!running) {
                     outtake.setPower(0);
@@ -63,27 +64,26 @@ public class pidv3 extends LinearOpMode {
             pidfController.setTolerance(TOLERANCE);
 //            feedforward = new SimpleMotorFeedforward(ks, kv, 0);
 
-            double currentRPM = (outtake.getVelocity() / TICKS_PER_REV) * 60.0;
+            CURRENTRPM = (outtake.getVelocity() / TICKS_PER_REV) * 60.0;
 
             if (running) {
 //                double ffPower = feedforward.calculate(TARGET_RPM);
-                double pidCorrection = pidfController.calculate(currentRPM, TARGET_RPM);
+                double pidCorrection = pidfController.calculate(CURRENTRPM, TARGET_RPM);
                 double power = Range.clip(pidCorrection, -1, 1);
                 outtake.setPower(power);
                 telemetry.addLine("=== RUNNING ===");
                 telemetry.addData("Power", "%.3f", power);
-
+                telemetry.addData("Current RPM", "%.0f", CURRENTRPM);
                 telemetry.addData("PID", "%.3f", pidCorrection);
             } else {
                 telemetry.addLine("=== STOPPED (Press A) ===");
             }
-
-            double error = TARGET_RPM - currentRPM;
+            double error = TARGET_RPM - CURRENTRPM;
             boolean atTarget = Math.abs(error) < TOLERANCE;
 
             telemetry.addLine();
             telemetry.addData("Target RPM", "%.0f", TARGET_RPM);
-            telemetry.addData("Current RPM", "%.0f", currentRPM);
+            telemetry.addData("Current RPM", "%.0f", CURRENTRPM);
             telemetry.addData("Error", "%.0f", error);
             telemetry.addData("At Target", atTarget ? "YES" : "NO");
             telemetry.addLine();
