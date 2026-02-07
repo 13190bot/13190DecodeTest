@@ -52,7 +52,7 @@ import java.util.List;
 
 
 @Autonomous
-public class PreloadAuto extends LinearOpMode {
+public class PreloadClose extends LinearOpMode {
 
     private DcMotor intakeMotor;
     private DcMotor outtakeMotor;
@@ -73,7 +73,7 @@ public class PreloadAuto extends LinearOpMode {
         waitForStart();
         if (isStopRequested()) return;
 
-        hoodServo.setPosition(0.05);
+        hoodServo.setPosition(0.3);
 
         sleep(2000);
         outtakeMotor.setPower(1.0);
